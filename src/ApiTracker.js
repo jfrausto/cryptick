@@ -1,23 +1,19 @@
-import React from 'react';
-import axios from "axios";
+import {useEffect, useState} from 'react';
 
 
 
 export default function ApiTracker() {
 
-//  const [apiData, setApiData] = useState([]);
- 
-axios.get("https://api.pro.coinbase.com/products", {
-})
-.then(function (response) {
- console.log(response.data);
-//  setApiData(response.data);
-//  console.log(`setApiData: ${apiData}`)
-})
-.catch(function (error) {
- console.log(error);
-})
+const [apiData, setApiData] = useState([]);
 
+useEffect(() => {
+  const fetchTasks = async () => {
+    const res = await fetch("https://api.pro.coinbase.com/products");
+    const data = await res.json();
+    console.log(data);
+  }
+  fetchTasks()
+}, []);
 
  return (
   <>
