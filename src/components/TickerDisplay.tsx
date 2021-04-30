@@ -17,15 +17,20 @@ export const TickerDisplay:React.FC<any> = () => {
   useEffect(() => {
     // create a connection to websocket current ref
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-    console.log("I'm in use effect");
+
+    // when it opens start the stream
+    webSocket.current.onopen = (e) => {
+      startStream();
+    }
     return () => {
       // cleanup/close ws
       webSocket.current!.close();
     }
   }, []);
 
-  // handle sub click
-  const handleSub = () => {
+  // send the msg to websocket to start stream of info
+  // ! right now only subscribing BTC price
+  const startStream = () => {
     let msg = {
       type: "subscribe",
       product_ids: ["BTC-USD"],
@@ -34,7 +39,7 @@ export const TickerDisplay:React.FC<any> = () => {
     let jsonMsg = JSON.stringify(msg);
     // send subscribe message
     webSocket.current?.send(jsonMsg);
-    // event listener that executes everytime we get a message from the socket
+    // event listener that executes every  time we get a message from the socket
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
       console.log(data.price);
@@ -42,14 +47,13 @@ export const TickerDisplay:React.FC<any> = () => {
     };
   };
   
-  // handle unsub click
+  // handle unsub click, unsubscribes from the BTC ticker
   const handleUnsub = () => {
     let unsub = {
       type: "unsubscribe",
       product_ids: ["BTC-USD"],
       channels: ["ticker"]
     };
-
     let jsonUnsub = JSON.stringify(unsub);
     webSocket.current!.send(jsonUnsub);
   }
@@ -61,11 +65,8 @@ export const TickerDisplay:React.FC<any> = () => {
       </Heading>
       <Text fontStyle="italic">
         {/* this actual price display area could be a separate component */}
-        {price ? price : "subscribe to watch!"}
+        {price ? price : "connecting..."}
       </Text>
-      <Button m={3} onClick={handleSub}>
-        subscribe
-      </Button>
       <Button m={3} onClick={handleUnsub}>
         unsubscribe
       </Button>
