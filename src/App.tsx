@@ -20,7 +20,7 @@ export const App = () => (
         <ColorModeSwitcher justifySelf="flex-end" />
         <VStack spacing={8}>
           <Logo h="40vmin" pointerEvents="none" />
-          <TickerDisplay/>
+          <TickerDisplay cryptoPair="BTC-USD"/>
         </VStack>
       </Grid>
     </Box>

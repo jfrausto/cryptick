@@ -1,12 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { Heading, Button, Text } from '@chakra-ui/react';
+import { PriceDisplay } from './PriceDisplay';
 
-// interface TickerDisplayProps {
-//   // some properties
-// };
+interface TickerDisplayProps {
+  cryptoPair: string
+};
 
 // prop types <any> for now
-export const TickerDisplay:React.FC<any> = () => {
+export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
 
   const [price, setPrice] = useState<number>(0.00);
   const webSocket = useRef<null | WebSocket >(null);
@@ -17,7 +18,6 @@ export const TickerDisplay:React.FC<any> = () => {
   useEffect(() => {
     // create a connection to websocket current ref
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-
     // when it opens start the stream
     webSocket.current.onopen = (e) => {
       startStream();
@@ -29,20 +29,23 @@ export const TickerDisplay:React.FC<any> = () => {
   }, []);
 
   // send the msg to websocket to start stream of info
-  // ! right now only subscribing BTC price
+  // ! right now only subscribing BTC, ETH price
   const startStream = () => {
     let msg = {
       type: "subscribe",
-      product_ids: ["BTC-USD"],
+      product_ids: [cryptoPair],
       channels: ["ticker"]
     };
     let jsonMsg = JSON.stringify(msg);
-    // send subscribe message
+    // send subscribe message if not null
     webSocket.current?.send(jsonMsg);
+    // error listener
+    webSocket.current!.onerror = (e) => {
+      console.info(e);
+    };
     // event listener that executes every  time we get a message from the socket
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log(data.price);
       setPrice(data.price);
     };
   };
@@ -51,7 +54,7 @@ export const TickerDisplay:React.FC<any> = () => {
   const handleUnsub = () => {
     let unsub = {
       type: "unsubscribe",
-      product_ids: ["BTC-USD"],
+      product_ids: [cryptoPair],
       channels: ["ticker"]
     };
     let jsonUnsub = JSON.stringify(unsub);
@@ -63,10 +66,7 @@ export const TickerDisplay:React.FC<any> = () => {
       <Heading>
         BTC-USD Ticker
       </Heading>
-      <Text fontStyle="italic">
-        {/* this actual price display area could be a separate component */}
-        {price ? price : "connecting..."}
-      </Text>
+      <PriceDisplay price={price}/>
       <Button m={3} onClick={handleUnsub}>
         unsubscribe
       </Button>
