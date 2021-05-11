@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Text } from '@chakra-ui/react';
 
 interface PriceDisplayProps {
@@ -9,8 +9,9 @@ export const  PriceDisplay:React.FC<PriceDisplayProps> = ({ price }) => {
   return (
     <>
       {/* icons can go here to represent price changes */}
-      <Text fontStyle="italic">
-        {price ? price : "connecting..."}
+      <Text fontStyle="italic" fontSize="2xl">
+        {}
+        {price ? `$${Number(price).toFixed(2)}` : "connecting..."}
       </Text>
     </>
   )
