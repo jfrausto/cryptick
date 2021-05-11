@@ -1,5 +1,6 @@
+  
 import React, {useState, useRef, useEffect} from 'react';
-import { Heading, Button, Text } from '@chakra-ui/react';
+import { Heading, Button, Center } from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
 
 interface TickerDisplayProps {
@@ -21,6 +22,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
     // when it opens start the stream
     webSocket.current.onopen = (e) => {
       startStream();
+      console.info(e);
     }
     return () => {
       // cleanup/close ws
@@ -63,13 +65,18 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
 
   return (
     <div>
-      <Heading>
-        BTC-USD Ticker
+      <Heading mb={3}>
+        BTC-USD
       </Heading>
-      <PriceDisplay price={price}/>
-      <Button m={3} onClick={handleUnsub}>
-        unsubscribe
-      </Button>
+      <Center>
+        <PriceDisplay price={price}/>
+      </Center>
+      <Center>
+        <Button m={3} onClick={handleUnsub}>
+          unsubscribe
+        </Button>
+      </Center>
+
     </div>
   )
 }
