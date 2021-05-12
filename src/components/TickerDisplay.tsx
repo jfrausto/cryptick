@@ -65,7 +65,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
 
   return (
     <div>
-      <Heading mb={3}>
+      <Heading textAlign="center" mb={3}>
         BTC-USD
       </Heading>
       <Center>
