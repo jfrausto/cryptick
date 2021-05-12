@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-
+import {
+  Heading,
+  Box,
+  Center,
+  Text,
+  Button,
+  Image
+  
+} from '@chakra-ui/react';
 
 export default function ApiTracker() {
 
@@ -39,18 +47,50 @@ const fetchCyrptoProducts = async () => {
     </h1>
     <div>
       <p>
-        Below are the api data list
+        TEMP CARD FOR CRYPTOS
       </p>
       <br/>
+
+        
+
+<Box maxW="32rem">
+
+  
+<Center>
+    <Image
+  borderRadius="full"
+  boxSize="150px"
+  src="https://img.etimg.com/thumb/msid-79280279,width-210,imgsize-678018,,resizemode-4,quality-100/bitcoin.jpg"
+  alt="Bitcoin"
+/>
+</Center>
+  
+  <Text 
+   style={{marginTop: "1%"}}
+   fontSize="60px"
+   textAlign="center">
+
+    Bitcoin <span style={{color: "red", fontSize: "40px"}}>USD</span>
+  </Text>
+  
+  <Center>
+    <Button size="lg" colorScheme="green" mt="24px">
+    Add To List
+  
+  </Button>
+  
+  </Center>
+  
+</Box>
       
-      {/* First filter data for cyrptocurrencies for USD then map the children and assigning unique key using i++ */}
+      {/* First filter data for cyrptocurrencies for USD then map the children and assigning unique key using i++
       {apiData.filter(data => data.quote_currency === "USD").map((data) => (
         <div key={i++}>
         
         <h3>{data.id}<span style={{color: "red", fontSize: "13px"}}>  {data.quote_currency} </span></h3>
         
         </div>
-      ))}
+      ))} */}
     </div>
   </>
  )
