@@ -1,5 +1,5 @@
 import {
-  Text,
+  Center,
   VStack,
   Heading,
   
@@ -17,7 +17,7 @@ const Index = () => (
   <Container height="100vh" p={2}>
 
     <VStack mt="8rem" spacing={8}>
-          <Heading>
+          <Heading as={Center}>
             crypto ticker
           </Heading>
           <motion.img 
@@ -27,7 +27,9 @@ const Index = () => (
             height="100px" 
             width="100px"
           />
-          <TickerDisplay cryptoPair="BTC-USD"/>
+          <Center>
+            <TickerDisplay cryptoPair="BTC-USD"/>
+          </Center>
     </VStack>
     
 
