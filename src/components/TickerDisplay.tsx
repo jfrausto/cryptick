@@ -11,7 +11,9 @@ interface TickerDisplayProps {
 export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
 
   const [price, setPrice] = useState<number>(0.00);
+  const [isGoingUp, setIsGoingUp] = useState<boolean>(false);
   const webSocket = useRef<null | WebSocket >(null);
+  const priceRef = useRef<number>(0.00);
 
   // const url = "https://api.pro.coinbase.com";
 
@@ -29,6 +31,21 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
       webSocket.current!.close();
     }
   }, []);
+
+  useEffect(() => {
+    // see differences
+    // console.log(price);
+    // console.log(priceRef.current )
+    if (priceRef.current >= price){
+      setIsGoingUp(false);
+    } else {
+      setIsGoingUp(true);
+    }
+    // update previous price reference
+    priceRef.current = price;
+    return () => {
+    }
+  }, [price])
 
   // send the msg to websocket to start stream of info
   // ! right now only subscribing BTC, ETH price
@@ -69,7 +86,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
         BTC-USD
       </Heading>
       <Center>
-        <PriceDisplay price={price}/>
+        <PriceDisplay price={price} isGoingUp={isGoingUp} />
       </Center>
       <Center>
         <Button m={3} onClick={handleUnsub}>
