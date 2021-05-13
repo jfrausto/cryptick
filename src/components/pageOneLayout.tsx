@@ -11,32 +11,7 @@ import {
 
 const pageOneLayout = () => {
  
-    const [apiData, setApiData] = useState([]);
-
-// Used solely to make unique Key for the children props for apiData.map() line 40
-let i = 0;
-
-useEffect(() => {
-
-  const getApiData = async () => {
-   const cryptoProductsList = await fetchCyrptoProducts();
-   setApiData(cryptoProductsList);
-   console.log(cryptoProductsList);
- }
-
- getApiData();
-
-//Occurs on mount
-}, []);
-
-// Should fetch the product information about the cryptocurrency
-const fetchCyrptoProducts = async () => {
-  const res = await fetch("https://api.pro.coinbase.com/products");
-  const data = await res.json();
-  console.log(data);
-  return data;
-}
-
+   
     return (
         <>
         <h1>PICK THE CRYPTOS YOU WANNA WATCH</h1>
@@ -45,33 +20,41 @@ const fetchCyrptoProducts = async () => {
     {/* First filter data for cyrptocurrencies for USD then map the children and assigning unique key using i++ */}
   {apiData.filter(data => data.quote_currency === "USD").map((data) => (
                 
-  <Container key={i++}>
+  <Table bg="FFFFFFEB" variant="simple" colorScheme="white">
+  <TableCaption>List of available cryptos to watch</TableCaption>
+  <Thead>
+    <Tr bg="A0AEC0">
       
-<Center>
-    <Image
+        
+            <Th><Text textColor="FFFFFFEB">Logo</Text></Th>
+            <Th><Text textColor="FFFFFFEB">Name</Text></Th>
+            <Th isNumeric><Text textColor="FFFFFFEB">Add To list</Text></Th>
+
+        
+    </Tr>
+  </Thead>
+  <Tbody>
+    <Tr>
+      <Td> 
+
+        <Center>
+            <Image
   borderRadius="full"
-  boxSize="100px"
+  boxSize="60px"
   src="https://img.etimg.com/thumb/msid-79280279,width-210,imgsize-678018,,resizemode-4,quality-100/bitcoin.jpg"
   alt="Bitcoin"
 />
-</Center>
-  
-  <Text 
-   style={{marginTop: "1%"}}
-   fontSize="25px"
-   textAlign="center">
+        </Center>
 
-    {(data.id).split("-USD")} <span style={{color: "red", fontSize: "16px"}}>USD</span>
-  </Text>
-  
-  <Center>
-    <Button size="lg" colorScheme="green" mt="24px">
-    Add To List
-  
-  </Button>
-  
-  </Center>
-  </Container>
+      </Td>
+      <Td>Bitcoin</Td>
+      <Td isNumeric><Button bgColor="green.500">Add Bitcoin</Button></Td>
+    </Tr>
+  </Tbody>
+  <Tfoot>
+    
+  </Tfoot>
+</Table>
 
       ))}
 </SimpleGrid>
