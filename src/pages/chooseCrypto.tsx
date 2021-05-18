@@ -12,7 +12,7 @@ import {
   TableCaption,
   Image,
   Center
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 interface apiDataTypes {
     id: string,
