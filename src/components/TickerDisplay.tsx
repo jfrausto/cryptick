@@ -65,6 +65,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
     // event listener that executes every  time we get a message from the socket
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
+      console.log(data);
       setPrice(data.price);
     };
   };
@@ -82,9 +83,9 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
 
   return (
     <div>
-      <Heading textAlign="center" mb={3}>
+      {/* <Heading textAlign="center" mb={3}>
         BTC-USD
-      </Heading>
+      </Heading> */}
       <Center>
         <PriceDisplay price={price} isGoingUp={isGoingUp} />
       </Center>

@@ -21,7 +21,7 @@ const Index = () => (
 
     <VStack mt="8rem" spacing={8}>
           <Heading as={Center}>
-            crypto ticker
+            BTC-USD
           </Heading>
           <motion.img 
             animate={{ rotate: 360 }}
