@@ -14,11 +14,14 @@ import { TickerDisplay} from "../components/TickerDisplay";
 import Img from "../public/logo.svg";
 
 const Index = () => (
-  <Container height="100vh" p={2}>
+  <Container 
+    height="100vh" 
+    p={2}
+  >
 
     <VStack mt="8rem" spacing={8}>
           <Heading as={Center}>
-            crypto ticker
+            BTC-USD
           </Heading>
           <motion.img 
             animate={{ rotate: 360 }}

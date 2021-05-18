@@ -50,7 +50,7 @@ export const  PriceDisplay:React.FC<PriceDisplayProps> = ({ price, isGoingUp }) 
          }
       </VStack>
       {/* onChange? something to change the state..... */}
-      <Text fontStyle="italic" pb={1} fontSize="3xl" ml="0.33rem" >
+      <Text fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
         {price ? `${Number(price).toLocaleString(undefined, 
           {
             style: "currency",
