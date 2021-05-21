@@ -5,7 +5,7 @@ import {
   
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-
+import React from 'react';
 import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 // import { CTA } from '../components/CTA';
@@ -13,31 +13,32 @@ import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import { TickerDisplay} from "../components/TickerDisplay";
 import Img from "../public/logo.svg";
 
-const Index = () => (
+
+const Index = () => {
+
+  return (
   <Container 
     height="100vh" 
     p={2}
   >
-
     <VStack mt="8rem" spacing={8}>
-          <Heading as={Center}>
-            BTC-USD
-          </Heading>
-          <motion.img 
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 5 }}
-            src={Img} 
-            height="100px" 
-            width="100px"
-          />
-          <Center>
-            <TickerDisplay cryptoPair="BTC-USD"/>
-          </Center>
+      <Heading as={Center}>
+        BTC-USD
+      </Heading>
+      <motion.img 
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 5 }}
+        src={Img} 
+        height="100px" 
+        width="100px"
+      />
+      <Center>
+        <TickerDisplay/>
+      </Center>
     </VStack>
-    
-
     <DarkModeSwitch />
   </Container>
 )
+}
 
 export default Index

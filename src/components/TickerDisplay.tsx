@@ -1,25 +1,20 @@
   
-import React, {useState, useRef, useEffect} from 'react';
-import { Heading, Button, Center } from '@chakra-ui/react';
+import React, {useContext, useRef, useEffect} from 'react';
+import { Button, Center } from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
-
-interface TickerDisplayProps {
-  cryptoPair: string
-};
+import { CryptoContext } from '../components/CryptoContext';
 
 // prop types <any> for now
-export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
+export const TickerDisplay:React.FC = () => {
 
-  const [price, setPrice] = useState<number>(0.00);
-  const [isGoingUp, setIsGoingUp] = useState<boolean>(false);
+  const {context, setContext} = useContext(CryptoContext);
   const webSocket = useRef<null | WebSocket >(null);
   const priceRef = useRef<number>(0.00);
 
   // const url = "https://api.pro.coinbase.com";
 
-  // executes on first load of this component
+  // on first load of this component
   useEffect(() => {
-    // create a connection to websocket current ref
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
     // when it opens start the stream
     webSocket.current.onopen = (e) => {
@@ -27,32 +22,32 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
       console.info(e);
     }
     return () => {
-      // cleanup/close ws
+      // cleanup/close websocket
       webSocket.current!.close();
     }
   }, []);
 
+  // on change of the price
   useEffect(() => {
-    // see differences
-    // console.log(price);
-    // console.log(priceRef.current )
-    if (priceRef.current >= price){
-      setIsGoingUp(false);
+    // ? see differences ?
+    // ? console.log(price);
+    // ? console.log(priceRef.current )
+    if (priceRef.current >= context.price){
+      setContext!({...context, isGoingUp: false});
     } else {
-      setIsGoingUp(true);
+      setContext!({...context, isGoingUp: true});
     }
     // update previous price reference
-    priceRef.current = price;
+    priceRef.current = context.price;
     return () => {
     }
-  }, [price])
+  }, [context.price])
 
-  // send the msg to websocket to start stream of info
-  // ! right now only subscribing BTC, ETH price
+  // ! right now only subscribing BTC price
   const startStream = () => {
     let msg = {
       type: "subscribe",
-      product_ids: [cryptoPair],
+      product_ids: context.userCurrentPair,
       channels: ["ticker"]
     };
     let jsonMsg = JSON.stringify(msg);
@@ -66,7 +61,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
       console.log(data);
-      setPrice(data.price);
+      setContext!({...context, price: data.price});
     };
   };
   
@@ -74,7 +69,7 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
   const handleUnsub = () => {
     let unsub = {
       type: "unsubscribe",
-      product_ids: [cryptoPair],
+      product_ids: context.userCurrentPair,
       channels: ["ticker"]
     };
     let jsonUnsub = JSON.stringify(unsub);
@@ -87,7 +82,10 @@ export const TickerDisplay:React.FC<TickerDisplayProps> = ({ cryptoPair }) => {
         BTC-USD
       </Heading> */}
       <Center>
-        <PriceDisplay price={price} isGoingUp={isGoingUp} />
+        <PriceDisplay 
+          // price={context.price} 
+          // isGoingUp={context.isGoingUp} 
+        />
       </Center>
       <Center>
         <Button m={3} onClick={handleUnsub}>
