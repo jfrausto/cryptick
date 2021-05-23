@@ -7,7 +7,7 @@ import {
 
 
 const preventDefault = f => e => {
-  e.preventDefault()
+  e.preventDefault();
   f(e)
 }
 
