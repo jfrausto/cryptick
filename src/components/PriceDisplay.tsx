@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
+import { CryptoContext } from '../components/CryptoContext';
 
-interface PriceDisplayProps {
-  price: number,
-  isGoingUp: boolean
-};
-
-export const  PriceDisplay:React.FC<PriceDisplayProps> = ({ price, isGoingUp }) => {
-
+export const  PriceDisplay:React.FC = () => {
+  const { context } = useContext(CryptoContext);
+  
   const MotionTriangleUp = motion(TriangleUpIcon);
   const MotionTriangleDown = motion(TriangleDownIcon);
   // console.log(isGoingUp);
   return (
     <>
       <VStack>
-        {isGoingUp ?  
+        {context.isGoingUp ?  
         <MotionTriangleUp 
             color="rgb(0,180,0)"
             animate={{ 
@@ -32,7 +29,7 @@ export const  PriceDisplay:React.FC<PriceDisplayProps> = ({ price, isGoingUp }) 
               duration: 0.9,
               }}
           /> : <TriangleUpIcon mt="2px"/> }
-        {isGoingUp?
+        {context.isGoingUp?
           <TriangleDownIcon mb="2px"/> : 
           <MotionTriangleDown
             color="rgb(180,0,0)"
@@ -51,7 +48,7 @@ export const  PriceDisplay:React.FC<PriceDisplayProps> = ({ price, isGoingUp }) 
       </VStack>
       {/* onChange? something to change the state..... */}
       <Text fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
-        {price ? `${Number(price).toLocaleString(undefined, 
+        {context.price ? `${Number(context.price).toLocaleString(undefined, 
           {
             style: "currency",
             currency: "USD",

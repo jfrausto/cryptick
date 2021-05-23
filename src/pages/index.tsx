@@ -16,7 +16,6 @@ const Index = () => (
     height="100vh" 
     p={2}
   >
-
     <VStack mt="8rem" spacing={8}>
           <Heading style={{fontSize: "100px", textAlign: "center"}} as={Center}>
             Who is You?
@@ -26,10 +25,9 @@ const Index = () => (
 
 
     </VStack>
-    
-
     <DarkModeSwitch />
   </NewContainer>
 )
 
-export default Index
+
+export default Index;
