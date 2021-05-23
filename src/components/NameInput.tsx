@@ -11,7 +11,7 @@ const preventDefault = f => e => {
   f(e)
 }
 
-export default () => {
+export const NameInput = () => {
    const router = useRouter()
    const [query, setQuery] = useState('')
 
