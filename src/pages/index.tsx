@@ -5,12 +5,12 @@ import {
   Heading
 } from '@chakra-ui/react';
 
-import { NewContainer } from '../components/newContainer';
+import { NewContainer } from '../components/NewContainer';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 // import { CTA } from '../components/CTA';
 // import { Footer } from '../components/Footer';
 // import { TickerDisplay} from "../components/TickerDisplay";
-import NameInput from "../components/nameInput";
+import NameInput from "../components/NameInput";
 
 const Index = () => (
   <NewContainer 

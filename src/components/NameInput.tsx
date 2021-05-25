@@ -1,23 +1,28 @@
-import React, {useState} from "react";
+import React, { useState, useRef, useEffect, BaseSyntheticEvent } from "react";
 import {useRouter} from "next/router";
-
 import {
   Input
 } from '@chakra-ui/react';
 
 
-const preventDefault = f => e => {
+const preventDefault = (f: any) => (e: any) => {
   e.preventDefault();
-  f(e)
+  f(e);
 }
 
-export default () => {
+const NameInput = () => {
    const router = useRouter()
    const [query, setQuery] = useState('')
 
-   const handleParam = setValue => e => 
-   {setValue(e.target.value);
+   const inputElement = useRef< null | HTMLInputElement >(null);
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus();
     }
+  }, []);
+
+   const handleParam = (setValue: any) => (e: BaseSyntheticEvent) => 
+   {  setValue(e.target.value);  }
 
    const handleSubmit = preventDefault(() => {
         localStorage.setItem("userName", query);
@@ -29,7 +34,7 @@ export default () => {
    return (
      <form onSubmit={handleSubmit}>
        <Input
-    isInvalid
+    ref={inputElement}
     type="text"
     name="userName"
     value={query}
@@ -38,12 +43,17 @@ export default () => {
     borderColor="none"
     focusBorderColor="none"
     border="none"
-    placeholder="(Your Name)"
+    autoFocus
+    placeholder={(query == "" ? "YourName": query)}
     _placeholder={{color: "#cf000f"}}
     fontSize="40px"
     textAlign="center"
     textColor="red"
+    autoComplete="false"
+    
   />
      </form>
    )
 }
+
+export default NameInput;
