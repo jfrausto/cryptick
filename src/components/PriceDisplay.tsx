@@ -52,8 +52,8 @@ export const  PriceDisplay:React.FC = () => {
           {
             style: "currency",
             currency: "USD",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 3
           }
           )}` : "connecting..."}
       </Text>

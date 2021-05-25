@@ -1,8 +1,9 @@
   
 import React, {useContext, useRef, useEffect} from 'react';
-import { Button, Center } from '@chakra-ui/react';
+import { Button, Center, Stat, StatHelpText, StatArrow, useColorModeValue } from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
 import { CryptoContext } from '../components/CryptoContext';
+import { use24HrPercentage } from './helpers/use24HrPercentage';
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
@@ -33,9 +34,15 @@ export const TickerDisplay:React.FC = () => {
     // ? console.log(price);
     // ? console.log(priceRef.current )
     if (priceRef.current >= context.price){
-      setContext!({...context, isGoingUp: false});
+      setContext!({
+        ...context, 
+        isGoingUp: false
+      });
     } else {
-      setContext!({...context, isGoingUp: true});
+      setContext!({
+        ...context, 
+        isGoingUp: true
+      });
     }
     // update previous price reference
     priceRef.current = context.price;
@@ -61,7 +68,12 @@ export const TickerDisplay:React.FC = () => {
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
       console.log(data);
-      setContext!({...context, price: data.price});
+      //sets price and 24h percent change
+      setContext!({
+        ...context, 
+        price: data.price,
+        dayChangePercentage: use24HrPercentage(data.open_24h, data.price)
+      });
     };
   };
   
@@ -86,6 +98,17 @@ export const TickerDisplay:React.FC = () => {
           // price={context.price} 
           // isGoingUp={context.isGoingUp} 
         />
+      </Center>
+      <Center>
+        <Stat as={Center}>
+          <StatHelpText
+          fontWeight="bold"
+            color={context.dayChangePercentage >= 0 ? useColorModeValue("green.800", "green.300") : useColorModeValue("red.900", "red.300")}
+          >
+            <StatArrow type={context.dayChangePercentage >= 0 ? "increase" : "decrease"}/>
+            {context.dayChangePercentage >= 0 ? `+${context.dayChangePercentage}% 24h` : `-${context.dayChangePercentage}% 24h`}
+          </StatHelpText>
+        </Stat>
       </Center>
       <Center>
         <Button m={3} onClick={handleUnsub}>
