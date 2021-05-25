@@ -1,44 +1,34 @@
+import React from "react";
 import {
   Center,
   VStack,
-  Heading,
-  
+  Heading
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import React from 'react';
-import { Container } from '../components/Container';
+
+import { NewContainer } from '../components/NewContainer';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 // import { CTA } from '../components/CTA';
 // import { Footer } from '../components/Footer';
-import { TickerDisplay} from "../components/TickerDisplay";
-import Img from "../public/logo.svg";
+// import { TickerDisplay} from "../components/TickerDisplay";
+import NameInput from "../components/NameInput";
 
-
-const Index = () => {
-
-  return (
-  <Container 
+const Index = () => (
+  <NewContainer 
     height="100vh" 
     p={2}
   >
     <VStack mt="8rem" spacing={8}>
-      <Heading as={Center}>
-        BTC-USD
-      </Heading>
-      <motion.img 
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 5 }}
-        src={Img} 
-        height="100px" 
-        width="100px"
-      />
-      <Center>
-        <TickerDisplay/>
-      </Center>
+          <Heading style={{fontSize: "100px", textAlign: "center"}} as={Center}>
+            Who is You?
+          </Heading>
+
+          <NameInput/>
+
+
     </VStack>
     <DarkModeSwitch />
-  </Container>
+  </NewContainer>
 )
-}
 
-export default Index
+
+export default Index;

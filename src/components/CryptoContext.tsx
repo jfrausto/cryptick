@@ -1,12 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface CryptoContextType {
+  allUserPairs: string[],
   userCurrentPair: string[],
   price: number,
   isGoingUp: boolean
 }
 export const startInApp: CryptoContextType = {
-  userCurrentPair: ["BTC-USD"],
+  allUserPairs: [],
+  userCurrentPair: [],
   price: 0.00,
   isGoingUp: true
 }
