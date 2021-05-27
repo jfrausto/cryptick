@@ -3,6 +3,7 @@ import React, {useContext, useRef, useEffect} from 'react';
 import { Button, Center, Stat, StatHelpText, StatArrow, useColorModeValue } from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
 import { CryptoContext } from '../components/CryptoContext';
+import { Display24Hr } from './Display24Hr';
 import { use24HrPercentage } from './helpers/use24HrPercentage';
 
 // prop types <any> for now
@@ -100,15 +101,7 @@ export const TickerDisplay:React.FC = () => {
         />
       </Center>
       <Center>
-        <Stat as={Center}>
-          <StatHelpText
-          fontWeight="bold"
-            color={context.dayChangePercentage >= 0 ? useColorModeValue("green.800", "green.300") : useColorModeValue("red.900", "red.300")}
-          >
-            <StatArrow type={context.dayChangePercentage >= 0 ? "increase" : "decrease"}/>
-            {context.dayChangePercentage >= 0 ? `+${context.dayChangePercentage}% 24h` : `-${context.dayChangePercentage}% 24h`}
-          </StatHelpText>
-        </Stat>
+        <Display24Hr/>
       </Center>
       <Center>
         <Button m={3} onClick={handleUnsub}>
