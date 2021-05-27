@@ -1,8 +1,10 @@
   
 import React, {useContext, useRef, useEffect} from 'react';
-import { Button, Center } from '@chakra-ui/react';
+import { Button, Center} from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
 import { CryptoContext } from '../components/CryptoContext';
+import { Display24Hr } from './Display24Hr';
+import { use24HrPercentage } from './helpers/use24HrPercentage';
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
@@ -33,9 +35,15 @@ export const TickerDisplay:React.FC = () => {
     // ? console.log(price);
     // ? console.log(priceRef.current )
     if (priceRef.current >= context.price){
-      setContext!({...context, isGoingUp: false});
+      setContext!({
+        ...context, 
+        isGoingUp: false
+      });
     } else {
-      setContext!({...context, isGoingUp: true});
+      setContext!({
+        ...context, 
+        isGoingUp: true
+      });
     }
     // update previous price reference
     priceRef.current = context.price;
@@ -43,7 +51,6 @@ export const TickerDisplay:React.FC = () => {
     }
   }, [context.price])
 
-  // ! right now only subscribing BTC price
   const startStream = () => {
     let msg = {
       type: "subscribe",
@@ -61,7 +68,12 @@ export const TickerDisplay:React.FC = () => {
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
       console.log(data);
-      setContext!({...context, price: data.price});
+      //sets price and 24h percent change
+      setContext!({
+        ...context, 
+        price: data.price,
+        dayChangePercentage: use24HrPercentage(data.open_24h, data.price)
+      });
     };
   };
   
@@ -78,14 +90,11 @@ export const TickerDisplay:React.FC = () => {
 
   return (
     <div>
-      {/* <Heading textAlign="center" mb={3}>
-        BTC-USD
-      </Heading> */}
       <Center>
-        <PriceDisplay 
-          // price={context.price} 
-          // isGoingUp={context.isGoingUp} 
-        />
+        <PriceDisplay />
+      </Center>
+      <Center>
+        <Display24Hr/>
       </Center>
       <Center>
         <Button m={3} onClick={handleUnsub}>
