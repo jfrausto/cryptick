@@ -49,7 +49,7 @@ const NameInput = () => {
     fontSize="40px"
     textAlign="center"
     textColor="red"
-    autoComplete="false"
+    autoComplete="off"
     
   />
      </form>
