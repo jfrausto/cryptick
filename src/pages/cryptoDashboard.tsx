@@ -3,6 +3,7 @@ import {
   Center,
   VStack,
   Heading,
+  Skeleton,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Container } from '../components/Container';
@@ -21,8 +22,13 @@ const CryptoDashboard :React.FC = () => {
       p={2}
     >
       <VStack mt="8rem" spacing={8}>
+        {/* ! displays current pair in view */}
         <Heading as={Center}>
-          {context.userCurrentPair[0]}
+          {
+            context.price ? 
+            context.userCurrentPair[0] :
+            <Skeleton minW="220px" height="65px" />
+          }
         </Heading>
         <motion.img 
           animate={{ rotate: 360 }}

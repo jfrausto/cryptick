@@ -1,6 +1,6 @@
   
 import React, {useContext, useRef, useEffect} from 'react';
-import { Button, Center, Stat, StatHelpText, StatArrow, useColorModeValue } from '@chakra-ui/react';
+import { Button, Center} from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
 import { CryptoContext } from '../components/CryptoContext';
 import { Display24Hr } from './Display24Hr';
@@ -51,7 +51,6 @@ export const TickerDisplay:React.FC = () => {
     }
   }, [context.price])
 
-  // ! right now only subscribing BTC price
   const startStream = () => {
     let msg = {
       type: "subscribe",
@@ -91,14 +90,8 @@ export const TickerDisplay:React.FC = () => {
 
   return (
     <div>
-      {/* <Heading textAlign="center" mb={3}>
-        BTC-USD
-      </Heading> */}
       <Center>
-        <PriceDisplay 
-          // price={context.price} 
-          // isGoingUp={context.isGoingUp} 
-        />
+        <PriceDisplay />
       </Center>
       <Center>
         <Display24Hr/>
