@@ -62,7 +62,7 @@ const ChooseCrypto:React.FC = () => {
       ...context, 
       userCurrentPair: [context.allUserPairs[0]]
     });
-    router.push("/cryptoDashboard");
+    router.push("/CryptoDashboard");
   }
 
 
