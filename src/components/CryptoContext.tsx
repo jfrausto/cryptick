@@ -4,13 +4,15 @@ export interface CryptoContextType {
   allUserPairs: string[],
   userCurrentPair: string[],
   price: number,
-  isGoingUp: boolean
+  isGoingUp: boolean,
+  dayChangePercentage: number
 }
 export const startInApp: CryptoContextType = {
   allUserPairs: [],
   userCurrentPair: [],
   price: 0.00,
-  isGoingUp: true
+  isGoingUp: true,
+  dayChangePercentage: 20
 }
 
 export interface ContextState {
