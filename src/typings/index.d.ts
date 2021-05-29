@@ -1,2 +1,1 @@
-declare module "react-window";
-declare module "react-virtualized";
+//use this to define modules 

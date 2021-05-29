@@ -1,3 +1,3 @@
-import ListData from "../components/ListData";
+import Pagination from "../components/Pagination";
 
-export default ListData;
+export default Pagination;
