@@ -5,7 +5,6 @@ import { PriceDisplay } from './PriceDisplay';
 import { CryptoContext, DispatchContext } from '../components/CryptoContext';
 import { Display24Hr } from './Display24Hr';
 import { use24HrPercentage } from './helpers/use24HrPercentage';
-import { ARROW_UP, SET_PRICE } from './helpers/reducer/actions';
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
@@ -37,17 +36,9 @@ export const TickerDisplay:React.FC = () => {
     // ? console.log(price);
     // ? console.log(priceRef.current )
     if (priceRef.current >= context.price){
-      // setContext!({
-      //   ...context, 
-      //   isGoingUp: false
-      // });
-      dispatch({ type: ARROW_UP, payload: false });
+      dispatch({ type: "arrow_up", payload: false });
     } else {
-      // setContext!({
-      //   ...context, 
-      //   isGoingUp: true
-      // });
-      dispatch({ type: ARROW_UP, payload: true });
+      dispatch({ type: "arrow_up", payload: true });
 
     }
     // update previous price reference
@@ -74,15 +65,10 @@ export const TickerDisplay:React.FC = () => {
       let data = JSON.parse(e.data);
       console.log(data);
       //sets price and 24h percent change
-      // setContext!({
-      //   ...context, 
-      //   price: data.price,
-      //   dayChangePercentage: use24HrPercentage(data.open_24h, data.price)
-      // });
       dispatch({ 
-        type: SET_PRICE, 
+        type: "set_price", 
         price: data.price, 
-        pChange: use24HrPercentage(data.open_24h, data.price)
+        percentageChange: use24HrPercentage(data.open_24h, data.price)
       });
     };
   };

@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from "next/head"
-import { useState, useMemo, useReducer } from 'react';
+import { useReducer } from 'react';
 import { ContextReducer } from '../components/helpers/reducer';
 import theme from '../theme';
 import { AppProps } from 'next/app';
