@@ -15,8 +15,9 @@ import {
   Center,
   Box
 } from "@chakra-ui/react";
-import { CryptoContext } from '../components/CryptoContext';
+import { CryptoContext, DispatchContext } from '../components/CryptoContext';
 import router from 'next/router';
+import { SET_ALL_CHOSEN_PAIRS, SET_CURRENT_PAIR } from "../components/helpers/reducer/actions";
 
 
 interface apiDataTypes {
@@ -27,7 +28,8 @@ interface apiDataTypes {
 const ChooseCrypto:React.FC = () => {
 
   const [apiData, setApiData] = useState<apiDataTypes[]>([]);
-  const { context, setContext } = useContext(CryptoContext);
+  const { context } = useContext(CryptoContext);
+  const { dispatch } = useContext(DispatchContext);
 
 
 // Used solely to make unique Key for the children props for apiData.map()
@@ -49,19 +51,29 @@ const ChooseCrypto:React.FC = () => {
   const handleAddCrypto = (e:BaseSyntheticEvent) => {
     console.log(e.target.dataset.crypto);
     const chosenPair = e.target.dataset.crypto;
+    console.log(context);
     if(context.allUserPairs.includes(chosenPair)){
       console.log("already chosen!");
       return;
     }
-    setContext!({...context, allUserPairs: context.allUserPairs.concat(chosenPair)});
+    
+    // setContext!({...context, allUserPairs: context.allUserPairs.concat(chosenPair)});
+    dispatch({ 
+      type: SET_ALL_CHOSEN_PAIRS,
+      payload: context.allUserPairs.concat(chosenPair)
+     })
   };
 
   const handleDone = (e:BaseSyntheticEvent) => {
     console.log("done");
-    setContext!({
-      ...context, 
-      userCurrentPair: [context.allUserPairs[0]]
-    });
+    // setContext!({
+    //   ...context, 
+    //   userCurrentPair: [context.allUserPairs[0]]
+    // });
+    dispatch({
+      type: SET_CURRENT_PAIR,
+      payload: [context.allUserPairs[0]]
+    })
     router.push("/cryptoDashboard");
   }
 
