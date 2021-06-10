@@ -4,6 +4,7 @@ import {
   SET_CURRENT_PAIR,
   SET_PRICE,
   ARROW_UP,
+  SWIPE_THRU,
   CryptoAction
  } from './actions';
 
@@ -33,6 +34,12 @@ export const ContextReducer = (context:CryptoContextType, action: CryptoAction):
         ...context, 
         isGoingUp: action.payload
       }
+      break;
+    case SWIPE_THRU:
+      return {
+        ...context,
+        userCurrentPair: action.payload
+      }  
       break;
     default:
       return {...context}
