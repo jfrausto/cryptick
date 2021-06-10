@@ -2,14 +2,15 @@
 import React, {useContext, useRef, useEffect} from 'react';
 import { Button, Center} from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
-import { CryptoContext } from '../components/CryptoContext';
+import { CryptoContext, DispatchContext } from '../components/CryptoContext';
 import { Display24Hr } from './Display24Hr';
 import { use24HrPercentage } from './helpers/use24HrPercentage';
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
 
-  const {context, setContext} = useContext(CryptoContext);
+  const {context} = useContext(CryptoContext);
+  const {dispatch} = useContext(DispatchContext)
   const webSocket = useRef<null | WebSocket >(null);
   const priceRef = useRef<number>(0.00);
 
@@ -35,15 +36,10 @@ export const TickerDisplay:React.FC = () => {
     // ? console.log(price);
     // ? console.log(priceRef.current )
     if (priceRef.current >= context.price){
-      setContext!({
-        ...context, 
-        isGoingUp: false
-      });
+      dispatch({ type: "arrow_up", payload: false });
     } else {
-      setContext!({
-        ...context, 
-        isGoingUp: true
-      });
+      dispatch({ type: "arrow_up", payload: true });
+
     }
     // update previous price reference
     priceRef.current = context.price;
@@ -69,10 +65,10 @@ export const TickerDisplay:React.FC = () => {
       let data = JSON.parse(e.data);
       console.log(data);
       //sets price and 24h percent change
-      setContext!({
-        ...context, 
-        price: data.price,
-        dayChangePercentage: use24HrPercentage(data.open_24h, data.price)
+      dispatch({ 
+        type: "set_price", 
+        price: data.price, 
+        percentageChange: use24HrPercentage(data.open_24h, data.price)
       });
     };
   };
