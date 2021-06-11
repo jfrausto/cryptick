@@ -19,14 +19,19 @@ export const TickerDisplay:React.FC = () => {
   // on first load of this component
   useEffect(() => {
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+    console.log("opening Websocket...")
     // when it opens start the stream
     webSocket.current.onopen = (e) => {
+      console.log("Websocket opened!")
       startStream();
       console.info(e);
+      // console.log()
     }
     return () => {
       // cleanup/close websocket
+      console.log("closing websocket...");
       webSocket.current!.close();
+      console.log("websocket closed")
     }
   }, []);
 
@@ -48,6 +53,7 @@ export const TickerDisplay:React.FC = () => {
   }, [context.price])
 
   const startStream = () => {
+    console.log(`starting stream with ${context.userCurrentPair[0]}...`);
     let msg = {
       type: "subscribe",
       product_ids: context.userCurrentPair,
@@ -63,7 +69,7 @@ export const TickerDisplay:React.FC = () => {
     // event listener that executes every  time we get a message from the socket
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log(data);
+      // console.log(data);
       //sets price and 24h percent change
       dispatch({ 
         type: "set_price", 
