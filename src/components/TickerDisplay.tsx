@@ -2,13 +2,15 @@
 import React, {useContext, useRef, useEffect} from 'react';
 import { Button, Center} from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
-import { CryptoContext, DispatchContext } from '../components/CryptoContext';
+import { CryptoContext, DispatchContext, PageContext } from '../components/CryptoContext';
 import { Display24Hr } from './Display24Hr';
 import { use24HrPercentage } from './helpers/use24HrPercentage';
+
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
 
+  const {pageContext} = useContext(PageContext);
   const {context} = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext)
   const webSocket = useRef<null | WebSocket >(null);
@@ -18,6 +20,12 @@ export const TickerDisplay:React.FC = () => {
 
   // on first load of this component
   useEffect(() => {
+
+    // dispatch({
+    //   type: "set_current_pair",
+    //   payload: [pageContext.allUserPairs[0]]
+    // });
+    // set current pair
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
     console.log("opening Websocket...")
     // when it opens start the stream
@@ -33,7 +41,7 @@ export const TickerDisplay:React.FC = () => {
       webSocket.current!.close();
       console.log("websocket closed")
     }
-  }, []);
+  }, [context.userCurrentPair]);
 
   // on change of the price
   useEffect(() => {
