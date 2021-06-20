@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Stat,
   StatHelpText,
@@ -12,15 +12,19 @@ import { CryptoContext } from '../components/CryptoContext';
 
 export const Display24Hr:React.FC = () => {
   const {context} = useContext(CryptoContext);
+
+  // useEffect(() => {
+  //   console.log("inside 24 hr display....");
+  //   return () => {
+  //     console.log("cleaning up 24 hr display....");
+  //   }
+  // }, [context.userCurrentPair])
+
+
   return (
     <>
       {
-        context.userCurrentPair.length === 0 ? <Skeleton 
-          minWidth="173px" 
-          height="30px" 
-          // startColor="red.500" 
-          // endColor="green.500" 
-          /> :
+        context.userCurrentPair ? 
           <Stat as={Center}>
             <StatHelpText
             fontWeight="bold"
@@ -40,7 +44,12 @@ export const Display24Hr:React.FC = () => {
                 `+${context.dayChangePercentage}% 24h` : 
                 `${context.dayChangePercentage}% 24h`}
             </StatHelpText>
-          </Stat>
+          </Stat> : <Skeleton 
+              minWidth="173px" 
+              height="30px" 
+              // startColor="red.500" 
+              // endColor="green.500" 
+              />
       }
     </>
   )

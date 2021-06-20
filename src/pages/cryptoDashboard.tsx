@@ -1,46 +1,48 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect, useReducer} from 'react';
 import {
   Center,
   VStack,
   Heading,
   Skeleton,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { ContextReducer } from '../components/helpers/reducer';
+import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
+import { AnimatePresence} from 'framer-motion';
 import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
-import { TickerDisplay} from "../components/TickerDisplay";
-import Img from "../public/logo.svg";
-import { CryptoContext } from '../components/CryptoContext';
+import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
+import { CryptoDisplay } from '../components/CryptoDisplay';
+
 
 const CryptoDashboard :React.FC = () => {
 
-  const { context } = useContext(CryptoContext);
+  const [context, dispatch] = useReducer(ContextReducer, startInApp);
+  const { pageContext } = useContext(PageContext);
+
+
+  useEffect(() => {
+    console.log("about to dispatch and set current pair...")
+    dispatch({
+      type: SET_CURRENT_PAIR,
+      payload: [pageContext.allUserPairs[0]]
+    });
+    return () => {
+      console.log("cleaning up in cryptoDashboard");
+    }
+  }, []);
 
   return (
     <Container 
       height="100vh" 
       p={2}
     >
-      <VStack mt="8rem" spacing={8}>
-        {/* ! displays current pair in view */}
-        <Heading as={Center}>
-          {
-            context.price ? 
-            context.userCurrentPair[0] :
-            <Skeleton minW="220px" height="65px" />
-          }
-        </Heading>
-        <motion.img 
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 5 }}
-          src={Img} 
-          height="100px" 
-          width="100px"
-        />
-        <Center>
-          <TickerDisplay/>
-        </Center>
-      </VStack>
+        <DispatchContext.Provider value={{dispatch}}>
+          <CryptoContext.Provider value={{ context }}>
+            <AnimatePresence>
+              <CryptoDisplay />
+            </AnimatePresence>
+          </CryptoContext.Provider>
+        </DispatchContext.Provider>
       <DarkModeSwitch />
     </Container>
   )

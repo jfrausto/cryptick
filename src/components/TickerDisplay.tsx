@@ -2,13 +2,15 @@
 import React, {useContext, useRef, useEffect} from 'react';
 import { Button, Center} from '@chakra-ui/react';
 import { PriceDisplay } from './PriceDisplay';
-import { CryptoContext, DispatchContext } from '../components/CryptoContext';
+import { CryptoContext, DispatchContext, PageContext } from '../components/CryptoContext';
 import { Display24Hr } from './Display24Hr';
 import { use24HrPercentage } from './helpers/use24HrPercentage';
+
 
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
 
+  const {pageContext} = useContext(PageContext);
   const {context} = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext)
   const webSocket = useRef<null | WebSocket >(null);
@@ -18,17 +20,28 @@ export const TickerDisplay:React.FC = () => {
 
   // on first load of this component
   useEffect(() => {
+
+    // dispatch({
+    //   type: "set_current_pair",
+    //   payload: [pageContext.allUserPairs[0]]
+    // });
+    // set current pair
     webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+    console.log("opening Websocket...")
     // when it opens start the stream
     webSocket.current.onopen = (e) => {
+      console.log("Websocket opened!")
       startStream();
       console.info(e);
+      // console.log()
     }
     return () => {
       // cleanup/close websocket
+      console.log("closing websocket...");
       webSocket.current!.close();
+      console.log("websocket closed")
     }
-  }, []);
+  }, [context.userCurrentPair]);
 
   // on change of the price
   useEffect(() => {
@@ -48,6 +61,7 @@ export const TickerDisplay:React.FC = () => {
   }, [context.price])
 
   const startStream = () => {
+    console.log(`starting stream with ${context.userCurrentPair[0]}...`);
     let msg = {
       type: "subscribe",
       product_ids: context.userCurrentPair,
@@ -63,7 +77,7 @@ export const TickerDisplay:React.FC = () => {
     // event listener that executes every  time we get a message from the socket
     webSocket.current!.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log(data);
+      // console.log(data);
       //sets price and 24h percent change
       dispatch({ 
         type: "set_price", 
