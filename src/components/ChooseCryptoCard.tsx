@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import { VStack, Heading, Center, useColorMode } from '@chakra-ui/react';
+import React, {useState, useEffect, MouseEventHandler} from 'react';
+import { VStack, Heading, Center, Box, useColorMode } from '@chakra-ui/react';
+import StarBadge from './StarBadge';
 
 interface CardPropType {
   crypto: string
@@ -30,9 +31,8 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
     dark: "white"
   };
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     console.log("clicked");
-    e.preventDefault();
     setSelected((priorClick)=> !priorClick );
   }
 
@@ -46,36 +46,51 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
 
   return (
     <>
-      <VStack
-      borderRadius="2xl"
-      w="150px"
-      maxW="300px"
-      p="10px"
-      px="5px"
-      m="1"
-      // mx="auto"
-      height="180px"
-      userSelect="none"
-      onClick={handleClick}
-      color={ 
-        isSelected ?
-        selectedTextColor[colorMode]
-        : colorText[colorMode]
-      }
-      bg={
-        isSelected ? 
-        bgSelectedColor[colorMode]
-        : bgColor[colorMode]
-    }
-      >
-        
-        <Heading
-        
-        >
-          {crypto}
-        </Heading>
 
-      </VStack>
+      <Box
+        position="relative"
+        borderRadius="2xl"
+        w="150px"
+        maxW="300px"
+        p="10px"
+        px="5px"
+        m="1"
+        // mx="auto"
+        height="180px"
+        userSelect="none"
+        onClick={handleClick}
+        color={ 
+          isSelected ?
+          selectedTextColor[colorMode]
+          : colorText[colorMode]
+        }
+        bg={
+          isSelected ? 
+          bgSelectedColor[colorMode]
+          : bgColor[colorMode]
+      }
+      >
+        {
+          isSelected ? 
+          <StarBadge/>
+          : ""
+        }
+        <VStack
+
+        >
+
+          <Heading
+            mb={ isSelected ?
+              "100px" : "0"
+            }
+          >
+            {crypto}
+          </Heading>
+
+        </VStack>
+
+      </Box>
+
     </>
   )
 };

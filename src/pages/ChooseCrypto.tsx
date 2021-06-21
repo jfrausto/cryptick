@@ -120,8 +120,8 @@ const ChooseCrypto:React.FC = () => {
       > */}
       <Container
         height="100vh" 
-        p={2}
-        pt={6}
+        p={1}
+        pt={12}
       >
         <Flex
           flexDir="row"
@@ -129,10 +129,11 @@ const ChooseCrypto:React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          maxWidth="500px"
+          maxWidth="200px"
           marginX="auto"
           p="4"
           px="2"
+          // bg="white"
         >
 
         {/* </Flex> */}
