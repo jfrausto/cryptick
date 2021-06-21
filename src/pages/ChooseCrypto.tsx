@@ -13,11 +13,16 @@ import {
   TableCaption,
   Image,
   Center,
-  Box
+  Box,
+  Flex
 } from "@chakra-ui/react";
 import { CryptoContext, DispatchContext, PageContext } from '../components/CryptoContext';
 import router from 'next/router';
 import { SET_ALL_CHOSEN_PAIRS, SET_CURRENT_PAIR } from "../components/helpers/reducer/actions";
+import ChooseCryptoCard from '../components/ChooseCryptoCard';
+import { Container } from '../components/Container';
+import { DarkModeSwitch } from '../components/DarkModeSwitch';
+
 
 
 interface apiDataTypes {
@@ -101,7 +106,62 @@ const ChooseCrypto:React.FC = () => {
 
     return (
     <>
-        <Heading>Hello,<span> </span> 
+
+      {/* <Flex
+        flexDir="row"
+        flexWrap="wrap"
+        justifyContent="space-evenly"
+        alignItems="center"
+        alignContent="space-around"
+        maxWidth="500px"
+        marginX="auto"
+        p="4"
+        px="2"
+      > */}
+      <Container
+        height="100vh" 
+        p={2}
+        pt={6}
+      >
+        <Flex
+          flexDir="row"
+          flexWrap="wrap"
+          justifyContent="space-evenly"
+          alignItems="center"
+          alignContent="space-around"
+          maxWidth="500px"
+          marginX="auto"
+          p="4"
+          px="2"
+        >
+
+        {/* </Flex> */}
+        <ChooseCryptoCard
+          crypto="BTC"
+        />
+        <ChooseCryptoCard
+          crypto="BTC"
+        />
+        <ChooseCryptoCard
+          crypto="BTC"
+        />
+        <ChooseCryptoCard
+          crypto="BTC"
+        />
+        <ChooseCryptoCard
+          crypto="BTC"
+        />
+        <DarkModeSwitch />
+        
+        </Flex>
+      </Container>
+
+
+
+
+
+
+        {/* <Heading>Hello,<span> </span> 
           {localStorage.getItem("userName")?
           checkForUserName(): "..."}
     </Heading>
@@ -158,7 +218,10 @@ const ChooseCrypto:React.FC = () => {
                     Done!
                   </Button>
                 </Box>
-              </Center>
+              </Center> */}
+
+
+
           </>
 
           )
