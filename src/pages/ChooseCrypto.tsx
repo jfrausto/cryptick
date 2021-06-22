@@ -129,15 +129,24 @@ const ChooseCrypto:React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          maxWidth="200px"
+          maxWidth="400px"
           marginX="auto"
           p="4"
           px="2"
           // bg="white"
         >
 
+          {
+            apiData.filter( data => data.quote_currency === "USD").map( data => (
+              <ChooseCryptoCard
+                key={i++}
+                crypto={(data.id).split("-USD")[0]}
+              />
+            ))
+          }
+
         {/* </Flex> */}
-        <ChooseCryptoCard
+        {/* <ChooseCryptoCard
           crypto="BTC"
         />
         <ChooseCryptoCard
@@ -151,7 +160,7 @@ const ChooseCrypto:React.FC = () => {
         />
         <ChooseCryptoCard
           crypto="BTC"
-        />
+        /> */}
         <DarkModeSwitch />
         
         </Flex>
