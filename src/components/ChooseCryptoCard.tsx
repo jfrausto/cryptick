@@ -1,14 +1,17 @@
-import React, {useState, useEffect, MouseEventHandler} from 'react';
+import React, {useState, useEffect, MouseEventHandler, useContext, BaseSyntheticEvent} from 'react';
 import { VStack, Heading, Center, Box, useColorMode } from '@chakra-ui/react';
 import StarBadge from './StarBadge';
+import {PageContext } from '../components/CryptoContext';
+
 
 interface CardPropType {
   crypto: string
 };
 
-const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
+const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
 
   const { colorMode } = useColorMode()
+  const { pageContext, setPageContext } = useContext(PageContext);
   const [isSelected, setSelected] = useState(false);
 
   const bgColor = {
@@ -32,9 +35,33 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
   };
 
   const handleClick = () => {
-    console.log("clicked");
-    setSelected((priorClick)=> !priorClick );
+
   }
+
+    // onclick of button
+    const handleAddCrypto = (e: BaseSyntheticEvent) => {
+      // console.log(e.target.dataset.crypto);
+      console.log("clicked");
+      setSelected((priorClick)=> !priorClick );
+
+      // const chosenPair = e.target.dataset.crypto;
+      const chosenPair = crypto+"-USD";
+      // console.log(e);
+      // return;
+      // console.log(chosenPair);
+      console.log(pageContext.allUserPairs.includes(chosenPair));
+      if(pageContext.allUserPairs.includes(chosenPair)){
+        console.log("already chosen, remove it!");
+        const arrCopy = [...pageContext.allUserPairs];
+        const index = arrCopy.indexOf(chosenPair);
+        arrCopy.splice(index, 1);
+        console.log("index of element is..." + index);
+        console.log(arrCopy)
+        setPageContext!({...pageContext, allUserPairs:arrCopy })
+        return;
+      }
+      setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(chosenPair)});
+    };
 
   // useEffect(() => {
   //   // effect
@@ -58,7 +85,8 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
         // mx="auto"
         height="180px"
         userSelect="none"
-        onClick={handleClick}
+        onClick={(e) => handleAddCrypto(e)}
+        // data-crypto={crypto+"-USD"}
         color={ 
           isSelected ?
           selectedTextColor[colorMode]
@@ -81,7 +109,7 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto} ) => {
 
           <Heading
             mb={ isSelected ?
-              "100px" : "0"
+              "100px" : "0px"
             }
           >
             {crypto}

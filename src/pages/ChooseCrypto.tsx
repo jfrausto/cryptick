@@ -1,30 +1,12 @@
 import React, { useState, useEffect, useContext, BaseSyntheticEvent} from "react";
 import {
-  Text,
-  Button,
-  Heading,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Image,
-  Center,
-  Box,
   Flex
 } from "@chakra-ui/react";
-import { CryptoContext, DispatchContext, PageContext } from '../components/CryptoContext';
 import router from 'next/router';
 import { SET_ALL_CHOSEN_PAIRS, SET_CURRENT_PAIR } from "../components/helpers/reducer/actions";
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
-
-
-
 interface apiDataTypes {
     id: string,
     quote_currency: string,
@@ -33,7 +15,6 @@ interface apiDataTypes {
 const ChooseCrypto:React.FC = () => {
 
   const [apiData, setApiData] = useState<apiDataTypes[]>([]);
-  const { pageContext, setPageContext } = useContext(PageContext);
   // const { dispatch } = useContext(DispatchContext);
 
 
@@ -52,22 +33,7 @@ const ChooseCrypto:React.FC = () => {
   //Occurs on mount
   }, []);
 
-  // onclick of button
-  const handleAddCrypto = (e:BaseSyntheticEvent) => {
-    console.log(e.target.dataset.crypto);
-    const chosenPair = e.target.dataset.crypto;
-    // ? console.log(context);
-    if(pageContext.allUserPairs.includes(chosenPair)){
-      console.log("already chosen!");
-      return;
-    }
-    
-    setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(chosenPair)});
-    // dispatch({ 
-    //   type: SET_ALL_CHOSEN_PAIRS,
-    //   payload: context.allUserPairs.concat(chosenPair)
-    //  })
-  };
+
 
   const handleDone = (e:BaseSyntheticEvent) => {
     console.log("done");
@@ -106,22 +72,11 @@ const ChooseCrypto:React.FC = () => {
 
     return (
     <>
-
-      {/* <Flex
-        flexDir="row"
-        flexWrap="wrap"
-        justifyContent="space-evenly"
-        alignItems="center"
-        alignContent="space-around"
-        maxWidth="500px"
-        marginX="auto"
-        p="4"
-        px="2"
-      > */}
       <Container
         height="100vh" 
         p={1}
         pt={12}
+        overflowY="scroll"
       >
         <Flex
           flexDir="row"
@@ -144,23 +99,6 @@ const ChooseCrypto:React.FC = () => {
               />
             ))
           }
-
-        {/* </Flex> */}
-        {/* <ChooseCryptoCard
-          crypto="BTC"
-        />
-        <ChooseCryptoCard
-          crypto="BTC"
-        />
-        <ChooseCryptoCard
-          crypto="BTC"
-        />
-        <ChooseCryptoCard
-          crypto="BTC"
-        />
-        <ChooseCryptoCard
-          crypto="BTC"
-        /> */}
         <DarkModeSwitch />
         
         </Flex>
