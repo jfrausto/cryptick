@@ -7,6 +7,7 @@ import { SET_ALL_CHOSEN_PAIRS, SET_CURRENT_PAIR } from "../components/helpers/re
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
+import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 interface apiDataTypes {
     id: string,
     quote_currency: string,
@@ -25,7 +26,7 @@ const ChooseCrypto:React.FC = () => {
 
     const getApiData = async () => {
     const cryptoProductsList = await fetchCyrptoProducts();
-    setApiData(cryptoProductsList);
+    setApiData(cryptoProductsList.filter( data => data.quote_currency === "USD"));
   }
 
   getApiData();
@@ -54,7 +55,7 @@ const ChooseCrypto:React.FC = () => {
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
-    console.log(data);
+    console.log(data.filter( data => data.quote_currency === "USD"));
     // ! this call gets all currencies, 
     // ! eventually we want to match pairs 
     // ! with their full product name ie. "ETH-USD" => "Ethereum"
@@ -92,7 +93,7 @@ const ChooseCrypto:React.FC = () => {
         >
 
           {
-            apiData.filter( data => data.quote_currency === "USD").map( data => (
+            apiData.sort(compareCryptoNames).map( data => (
               <ChooseCryptoCard
                 key={i++}
                 crypto={(data.id).split("-USD")[0]}

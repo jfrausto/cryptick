@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 
 
-const StarBadge: React.FC = ({isSelected}) => {
+const StarBadge: React.FC = () => {
   return (
     <>
       

@@ -2,6 +2,7 @@ import React, {useState, useEffect, MouseEventHandler, useContext, BaseSynthetic
 import { VStack, Heading, Center, Box, useColorMode } from '@chakra-ui/react';
 import StarBadge from './StarBadge';
 import {PageContext } from '../components/CryptoContext';
+import {useRemoveElementFromArray} from './helpers/useRemoveElementFromArray';
 
 
 interface CardPropType {
@@ -34,46 +35,21 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
     dark: "white"
   };
 
-  const handleClick = () => {
-
-  }
-
-    // onclick of button
+    // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
-      // console.log(e.target.dataset.crypto);
-      console.log("clicked");
       setSelected((priorClick)=> !priorClick );
-
-      // const chosenPair = e.target.dataset.crypto;
       const chosenPair = crypto+"-USD";
-      // console.log(e);
-      // return;
-      // console.log(chosenPair);
-      console.log(pageContext.allUserPairs.includes(chosenPair));
       if(pageContext.allUserPairs.includes(chosenPair)){
-        console.log("already chosen, remove it!");
-        const arrCopy = [...pageContext.allUserPairs];
-        const index = arrCopy.indexOf(chosenPair);
-        arrCopy.splice(index, 1);
-        console.log("index of element is..." + index);
-        console.log(arrCopy)
-        setPageContext!({...pageContext, allUserPairs:arrCopy })
+        const updatedArr = useRemoveElementFromArray(chosenPair, pageContext.allUserPairs);
+        setPageContext!({...pageContext, allUserPairs: updatedArr });
         return;
       }
       setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(chosenPair)});
     };
 
-  // useEffect(() => {
-  //   // effect
-
-  //   return () => {
-  //     // cleanup
-  //   }
-  // }, [isSelected]);
 
   return (
     <>
-
       <Box
         position="relative"
         borderRadius="2xl"
@@ -82,11 +58,9 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
         p="10px"
         px="5px"
         m="1"
-        // mx="auto"
         height="180px"
         userSelect="none"
         onClick={(e) => handleAddCrypto(e)}
-        // data-crypto={crypto+"-USD"}
         color={ 
           isSelected ?
           selectedTextColor[colorMode]
@@ -96,17 +70,14 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
           isSelected ? 
           bgSelectedColor[colorMode]
           : bgColor[colorMode]
-      }
+        }
       >
         {
           isSelected ? 
           <StarBadge/>
           : ""
         }
-        <VStack
-
-        >
-
+        <VStack>
           <Heading
             mb={ isSelected ?
               "100px" : "0px"
@@ -114,11 +85,8 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
           >
             {crypto}
           </Heading>
-
         </VStack>
-
       </Box>
-
     </>
   )
 };
