@@ -1,32 +1,25 @@
-import React, { useState, useEffect, useContext, BaseSyntheticEvent} from "react";
+import React, { useState, useEffect, BaseSyntheticEvent} from "react";
 import {
-  Flex
+  Flex,
+  Heading
 } from "@chakra-ui/react";
 import router from 'next/router';
-import { SET_ALL_CHOSEN_PAIRS, SET_CURRENT_PAIR } from "../components/helpers/reducer/actions";
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
-interface apiDataTypes {
-    id: string,
-    quote_currency: string,
-};
+import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 
 const ChooseCrypto:React.FC = () => {
 
-  const [apiData, setApiData] = useState<apiDataTypes[]>([]);
+  const [apiData, setApiData] = useState<CryptoNames[]>([]);
   // const { dispatch } = useContext(DispatchContext);
-
-
-// Used solely to make unique Key for the children props for apiData.map()
-  let i: number = 0;
 
   useEffect(() => {
 
     const getApiData = async () => {
     const cryptoProductsList = await fetchCyrptoProducts();
-    setApiData(cryptoProductsList.filter( data => data.quote_currency === "USD"));
+    setApiData(cryptoProductsList);
   }
 
   getApiData();
@@ -50,19 +43,19 @@ const ChooseCrypto:React.FC = () => {
     router.push("/cryptoDashboard");
   }
 
-
   // Should fetch the product information about the cryptocurrency
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
-    console.log(data.filter( data => data.quote_currency === "USD"));
+    // console.log(data.filter( data => data.quote_currency === "USD"));
+    const cryptoUSD = data.filter( data => data.quote_currency === "USD");
     // ! this call gets all currencies, 
     // ! eventually we want to match pairs 
     // ! with their full product name ie. "ETH-USD" => "Ethereum"
     const resCurr = await fetch("https://api.pro.coinbase.com/currencies");
     const dataCurr = await resCurr.json();
-    console.log(dataCurr);
-    return data;
+    // console.log(dataCurr);
+    return matchCryptoInfo(cryptoUSD, dataCurr);;
 
   }
     const checkForUserName = () => {
@@ -76,9 +69,17 @@ const ChooseCrypto:React.FC = () => {
       <Container
         height="100vh" 
         p={1}
-        pt={12}
+        pt={3}
         overflowY="scroll"
+        // maxWidth="420px"
       >
+        <Heading
+          size="lg"
+          alignSelf="start"
+          pl="4"
+        >
+          Choose Favorites
+        </Heading>
         <Flex
           flexDir="row"
           flexWrap="wrap"
@@ -89,25 +90,21 @@ const ChooseCrypto:React.FC = () => {
           marginX="auto"
           p="4"
           px="2"
-          // bg="white"
         >
 
           {
             apiData.sort(compareCryptoNames).map( data => (
               <ChooseCryptoCard
-                key={i++}
-                crypto={(data.id).split("-USD")[0]}
+                key={data.tickerName}
+                tickerName={data.tickerName}
+                fullName={data.fullName}
               />
             ))
           }
-        <DarkModeSwitch />
         
         </Flex>
+        <DarkModeSwitch />
       </Container>
-
-
-
-
 
 
         {/* <Heading>Hello,<span> </span> 

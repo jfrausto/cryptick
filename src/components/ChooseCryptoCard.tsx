@@ -1,15 +1,16 @@
 import React, {useState, useEffect, MouseEventHandler, useContext, BaseSyntheticEvent} from 'react';
-import { VStack, Heading, Center, Box, useColorMode } from '@chakra-ui/react';
+import { VStack, Heading, Text, Box, Center, useColorMode } from '@chakra-ui/react';
 import StarBadge from './StarBadge';
 import {PageContext } from '../components/CryptoContext';
 import {useRemoveElementFromArray} from './helpers/useRemoveElementFromArray';
 
 
 interface CardPropType {
-  crypto: string
+  tickerName: string,
+  fullName: string
 };
 
-const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
+const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName } ) => {
 
   const { colorMode } = useColorMode()
   const { pageContext, setPageContext } = useContext(PageContext);
@@ -38,7 +39,7 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
     // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
       setSelected((priorClick)=> !priorClick );
-      const chosenPair = crypto+"-USD";
+      const chosenPair = tickerName+"-USD";
       if(pageContext.allUserPairs.includes(chosenPair)){
         const updatedArr = useRemoveElementFromArray(chosenPair, pageContext.allUserPairs);
         setPageContext!({...pageContext, allUserPairs: updatedArr });
@@ -79,12 +80,14 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {crypto } ) => {
         }
         <VStack>
           <Heading
-            mb={ isSelected ?
-              "100px" : "0px"
-            }
+          size="md"
           >
-            {crypto}
+            {tickerName}
           </Heading>
+          <Text fontStyle="italic" fontSize="xs" textAlign="center">
+            {fullName}
+          </Text>
+
         </VStack>
       </Box>
     </>
