@@ -3,10 +3,11 @@ import {  VStack, Box, Button, Text, useColorMode } from '@chakra-ui/react';
 import { PageContext } from './CryptoContext';
 
 interface DoneCardProps {
-  handleDone: () => void
+  handleDone: () => void,
+  handleReset: () => void
 }
 
-const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone}) => {
+const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
 
   const { pageContext } = useContext(PageContext);
   const { colorMode } = useColorMode();
@@ -44,6 +45,15 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone}) => {
         <Box>
           <Button
             colorScheme="cyan"
+            variant="outline"
+            mr={1}
+            onClick={handleReset}
+          >
+            Reset
+          </Button>
+          <Button
+            colorScheme="cyan"
+            ml={1}
             onClick={handleDone}
           >
             Done

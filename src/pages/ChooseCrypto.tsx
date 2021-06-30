@@ -1,4 +1,4 @@
-import React, { useState, useEffect, BaseSyntheticEvent} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import {
   Flex,
   Heading
@@ -10,12 +10,12 @@ import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
+import { PageContext } from "../components/CryptoContext";
 
 const ChooseCrypto:React.FC = () => {
 
   const [apiData, setApiData] = useState<CryptoNames[]>([]);
-  // const { dispatch } = useContext(DispatchContext);
-  // const { pageContext } = useContext(PageContext);
+  const { pageContext, setPageContext } = useContext(PageContext);
 
 
   useEffect(() => {
@@ -30,49 +30,37 @@ const ChooseCrypto:React.FC = () => {
   //Occurs on mount
   }, []);
 
-
-
   const handleDone = (): void => {
-    console.log("done");
-    // setPageContext!({
-    //   ...pageContext, 
-    //   userCurrentPair: [pageContext.allUserPairs[0]]
-    // })
-    // ! set userCurrentPair inside the Dashboard!
-    // dispatch({
-    //   type: SET_CURRENT_PAIR,
-    //   payload: [context.allUserPairs[0]]
-    // })
     router.push("/cryptoDashboard");
-  }
+  };
 
-  // Should fetch the product information about the cryptocurrency
+  const handleReset = (): void => {
+    console.log("reset");
+    setPageContext!({...pageContext, allUserPairs: []});
+  };
+
+  // Should fetch the product information from coinbase
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
-    // console.log(data.filter( data => data.quote_currency === "USD"));
-    const cryptoUSD = data.filter( data => data.quote_currency === "USD");
-    // ! this call gets all currencies, 
-    // ! eventually we want to match pairs 
-    // ! with their full product name ie. "ETH-USD" => "Ethereum"
+    const cryptoUSD = data.filter( (data: { quote_currency: string; }) => data.quote_currency === "USD");
     const resCurr = await fetch("https://api.pro.coinbase.com/currencies");
     const dataCurr = await resCurr.json();
-    // console.log(dataCurr);
     return matchCryptoInfo(cryptoUSD, dataCurr);;
 
   }
-    const checkForUserName = () => {
-  const userName = localStorage.getItem("userName");
+//   const checkForUserName = () => {
+//   const userName = localStorage.getItem("userName");
 
-  return userName;
-}
+//   return userName;
+// }
 
     return (
     <>
       <Container
         height="100vh"
         pt={3}
-        pb={10}
+        pb={16}
         overflowY="scroll"
         // maxWidth="420px"
       >
@@ -109,73 +97,11 @@ const ChooseCrypto:React.FC = () => {
 
         <DoneButtonCard
           handleDone={handleDone}
+          handleReset={handleReset}
         />
         <DarkModeSwitch />
       </Container>
-
-
-        {/* <Heading>Hello,<span> </span> 
-          {localStorage.getItem("userName")?
-          checkForUserName(): "..."}
-    </Heading>
-      <Table bg="FFFFFFEB" variant="simple" colorScheme="white">
-        <Thead>
-          <Tr bg="A0AEC0">
-            
-              
-                  <Th><Text textColor="FFFFFFEB">Logo</Text></Th>
-                  <Th><Text textColor="FFFFFFEB">Name</Text></Th>
-                  <Th isNumeric><Text textColor="FFFFFFEB">Add To list</Text></Th>
-
-              
-          </Tr>
-        </Thead>
-        </Table> 
-        {apiData.filter(data => data.quote_currency === "USD").map((data) => (
-                      
-        <Table key={i++} bg="FFFFFFEB" variant="simple" colorScheme="white">
-
-        <Tbody>
-          <Tr>
-            <Td> 
-
-              <Center>
-                  <Image
-        borderRadius="full"
-        boxSize="60px"
-        src="https://img.etimg.com/thumb/msid-79280279,width-210,imgsize-678018,,resizemode-4,quality-100/bitcoin.jpg"
-        alt="Bitcoin"
-      />
-              </Center>
-
-            </Td>
-            <Td>{(data.id).split("-USD")}<div style={{color: "red", fontSize: "16px", textAlign: "left"}} > USD</div></Td>
-            <Td isNumeric><Button fontSize="16px" data-crypto={data.id} bgColor="green.500" onClick={(e) => {handleAddCrypto(e)}}>Add {(data.id).split("-USD")}</Button></Td>
-          </Tr>
-        </Tbody>
-        <Tfoot>
-          
-        </Tfoot>
-      </Table>
-
-            ))}
-              <Table>
-                  <TableCaption>
-                      Here's a list of all the crypto's you can watch!!!!
-                  </TableCaption>
-              </Table>
-
-              <Center>
-                <Box maxW="300px">
-                  <Button onClick={(e) => {handleDone(e)}}>
-                    Done!
-                  </Button>
-                </Box>
-              </Center> */}
-
-
-
-          </>
+    </>
 
           )
         

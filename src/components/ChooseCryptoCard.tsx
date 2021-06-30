@@ -16,6 +16,12 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName } ) => 
   const { pageContext, setPageContext } = useContext(PageContext);
   const [isSelected, setSelected] = useState(false);
 
+  useEffect(() => {
+    if(pageContext.allUserPairs.length === 0){
+      setSelected(false);
+    }
+  }, [pageContext.allUserPairs])
+
   const bgColor = {
     light: "green.100",
     dark: "gray.800"
