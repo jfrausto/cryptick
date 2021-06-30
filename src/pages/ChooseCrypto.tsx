@@ -9,11 +9,14 @@ import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
+import DoneButtonCard from '../components/DoneButtonCard';
 
 const ChooseCrypto:React.FC = () => {
 
   const [apiData, setApiData] = useState<CryptoNames[]>([]);
   // const { dispatch } = useContext(DispatchContext);
+  // const { pageContext } = useContext(PageContext);
+
 
   useEffect(() => {
 
@@ -29,7 +32,7 @@ const ChooseCrypto:React.FC = () => {
 
 
 
-  const handleDone = (e:BaseSyntheticEvent) => {
+  const handleDone = (): void => {
     console.log("done");
     // setPageContext!({
     //   ...pageContext, 
@@ -67,9 +70,9 @@ const ChooseCrypto:React.FC = () => {
     return (
     <>
       <Container
-        height="100vh" 
-        p={1}
+        height="100vh"
         pt={3}
+        pb={10}
         overflowY="scroll"
         // maxWidth="420px"
       >
@@ -103,6 +106,10 @@ const ChooseCrypto:React.FC = () => {
           }
         
         </Flex>
+
+        <DoneButtonCard
+          handleDone={handleDone}
+        />
         <DarkModeSwitch />
       </Container>
 
