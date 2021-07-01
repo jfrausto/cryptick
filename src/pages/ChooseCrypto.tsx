@@ -93,11 +93,13 @@ const ChooseCrypto: React.FC = () => {
                   fullName="Celo"
                 />
               }
+
               return <ChooseCryptoCard
                 key={data.tickerName}
                 tickerName={(data.tickerName)}
                 fullName={data.fullName}
               />
+
             })
           }
 
