@@ -26,10 +26,7 @@ const CryptoDashboard :React.FC = () => {
   }, []);
 
   return (
-    <Container 
-      height="100vh" 
-      p={2}
-    >
+    <>
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
             <AnimatePresence>
@@ -37,8 +34,7 @@ const CryptoDashboard :React.FC = () => {
             </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
-      <DarkModeSwitch />
-    </Container>
+    </>
   )
 }
 

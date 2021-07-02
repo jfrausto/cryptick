@@ -1,4 +1,5 @@
-import { Flex, useColorMode, FlexProps } from '@chakra-ui/react'
+import { Flex, useColorMode, FlexProps, DarkMode } from '@chakra-ui/react';
+import { DarkModeSwitch } from './DarkModeSwitch';
 
 export const Container = (props: FlexProps) => {
   const { colorMode } = useColorMode()
@@ -24,6 +25,9 @@ export const Container = (props: FlexProps) => {
       backgroundImage={bgGradient[colorMode]}
       color={color[colorMode]}
       {...props}
-    />
+    >
+      {props.children}
+      <DarkModeSwitch/>
+      </Flex>
   )
 }

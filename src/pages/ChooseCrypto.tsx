@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext} from "react";
 import {
   Flex,
-  Heading
+  Heading,
+  VStack
 } from "@chakra-ui/react";
 import router from 'next/router';
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
-import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
@@ -57,18 +57,22 @@ const ChooseCrypto:React.FC = () => {
 
     return (
     <>
-      <Container
+      {/* <Container
         height="100vh"
         pt={3}
         pb={16}
         overflowY="scroll"
         // maxWidth="420px"
+      > */}
+      <VStack
+        pb={16}
       >
+
         <Heading
           size="lg"
           alignSelf="start"
           pl="4"
-        >
+          >
           Choose Favorites
         </Heading>
         <Flex
@@ -81,26 +85,25 @@ const ChooseCrypto:React.FC = () => {
           marginX="auto"
           p="4"
           px="2"
-        >
+          >
 
           {
             apiData.sort(compareCryptoNames).map( data => (
               <ChooseCryptoCard
-                key={data.tickerName}
-                tickerName={data.tickerName}
+              key={data.tickerName}
+              tickerName={data.tickerName}
                 fullName={data.fullName}
-              />
-            ))
-          }
+                />
+                ))
+              }
         
         </Flex>
 
+      </VStack>
         <DoneButtonCard
           handleDone={handleDone}
           handleReset={handleReset}
-        />
-        <DarkModeSwitch />
-      </Container>
+          />
     </>
 
           )

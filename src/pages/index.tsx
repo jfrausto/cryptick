@@ -13,9 +13,7 @@ import {NameInput} from "../components/NameInput";
 import {Container} from '../components/Container';
 
 const Index = () => (
-  <Container
-    height="100vh"
-  >
+  <>
     <VStack mt="8rem" spacing={8}>
           <Heading style={{fontSize: "100px", textAlign: "center"}} as={Center}>
             Enter your name:
@@ -24,8 +22,7 @@ const Index = () => (
 
 
     </VStack>
-    <DarkModeSwitch />
-  </Container>
+  </>
 )
 
 
