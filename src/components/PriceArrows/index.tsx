@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import { useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { CryptoContext } from '../components/CryptoContext';
+import { CryptoContext } from '../CryptoContext';
 
 
 export const PriceArrows:React.FC = () => {

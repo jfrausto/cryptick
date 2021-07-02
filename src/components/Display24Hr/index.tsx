@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
   Stat,
   StatHelpText,
@@ -6,9 +6,8 @@ import {
   useColorModeValue,
   Center,
   Skeleton,
-  Stack
 } from '@chakra-ui/react';
-import { CryptoContext } from '../components/CryptoContext';
+import { CryptoContext } from '../CryptoContext';
 
 export const Display24Hr:React.FC = () => {
   const {context} = useContext(CryptoContext);

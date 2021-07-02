@@ -1,10 +1,4 @@
-import React, {useContext, useState, useEffect, useReducer} from 'react';
-import {
-  Center,
-  VStack,
-  Heading,
-  Skeleton,
-} from '@chakra-ui/react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import { ContextReducer } from '../components/helpers/reducer';
 import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
