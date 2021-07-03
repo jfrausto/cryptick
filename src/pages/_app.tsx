@@ -1,9 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from "next/head"
-import { useReducer, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import theme from '../theme';
 import { AppProps } from 'next/app';
-import { CryptoContext, DispatchContext, startInApp, startPage, PageContext } from '../components/CryptoContext';
+import {startPage, PageContext } from '../components/CryptoContext';
+import {Container} from '../components/Container';
 
 function MyApp({ Component, pageProps }: AppProps) {
   // const [context, setContext] = useState(startInApp);
@@ -23,7 +24,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* <DispatchContext.Provider value={{ dispatch }}> */}
         {/* <CryptoContext.Provider value={{context}}> */}
           <PageContext.Provider value={providerValue}>
-            <Component {...pageProps} />
+
+            <Container
+              p={1}
+              height="100vh"
+              overflowY="auto"
+              // style={{ scrollbarWidth: "none" }}
+              
+            >
+              <Component {...pageProps} />
+            </Container>
           </PageContext.Provider>
         {/* </CryptoContext.Provider> */}
       {/* </DispatchContext.Provider> */}

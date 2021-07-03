@@ -1,8 +1,8 @@
-import React, {useState, useEffect, MouseEventHandler, useContext, BaseSyntheticEvent} from 'react';
-import { VStack, Heading, Text, Box, Center, useColorMode } from '@chakra-ui/react';
-import StarBadge from './StarBadge';
-import {PageContext } from '../components/CryptoContext';
-import {useRemoveElementFromArray} from './helpers/useRemoveElementFromArray';
+import React, {useState, useEffect, useContext, BaseSyntheticEvent} from 'react';
+import { VStack, Heading, Text, Box, useColorMode } from '@chakra-ui/react';
+import StarBadge from '../StarBadge';
+import {PageContext } from '../CryptoContext';
+import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
 
 
 interface CardPropType {

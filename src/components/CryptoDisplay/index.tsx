@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { wrap } from 'popmotion';
-import { CryptoNameHeading } from '../components/CryptoNameHeading';
-import { CryptoContext, DispatchContext, PageContext } from '../components/CryptoContext';
-import { SWIPE_THRU, SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
+import { CryptoNameHeading } from '../CryptoNameHeading';
+import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
+import { SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
 import {
-  Center,
-  VStack,
-  Heading,
-  Skeleton,
+  VStack
 } from '@chakra-ui/react';
-import { TickerDisplay} from "../components/TickerDisplay";
-import Img from "../public/logo.svg";
+import { TickerDisplay} from "../TickerDisplay";
+import Img from "../../public/logo.svg";
 
 
 

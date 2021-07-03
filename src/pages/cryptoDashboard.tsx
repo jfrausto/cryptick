@@ -1,10 +1,4 @@
-import React, {useContext, useState, useEffect, useReducer} from 'react';
-import {
-  Center,
-  VStack,
-  Heading,
-  Skeleton,
-} from '@chakra-ui/react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import { ContextReducer } from '../components/helpers/reducer';
 import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
@@ -32,10 +26,7 @@ const CryptoDashboard :React.FC = () => {
   }, []);
 
   return (
-    <Container 
-      height="100vh" 
-      p={2}
-    >
+    <>
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
             <AnimatePresence>
@@ -43,8 +34,7 @@ const CryptoDashboard :React.FC = () => {
             </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
-      <DarkModeSwitch />
-    </Container>
+    </>
   )
 }
 

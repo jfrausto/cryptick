@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Heading, Center, Skeleton } from '@chakra-ui/react';
-import { CryptoContext } from './CryptoContext';
+import { CryptoContext } from '../CryptoContext';
 
 
 export const CryptoNameHeading = () => {

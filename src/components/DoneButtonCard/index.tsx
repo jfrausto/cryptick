@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {  VStack, Box, Button, Text, useColorMode } from '@chakra-ui/react';
-import { PageContext } from './CryptoContext';
+import { PageContext } from '../CryptoContext';
 
 interface DoneCardProps {
   handleDone: () => void,
