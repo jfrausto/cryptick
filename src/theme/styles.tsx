@@ -1,5 +1,7 @@
 const styles = {
+  
   global: {
+    
     // styles for the `body`
     // body: {
     // },

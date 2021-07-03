@@ -5,6 +5,7 @@ import theme from '../theme';
 import { AppProps } from 'next/app';
 import {startPage, PageContext } from '../components/CryptoContext';
 import {Container} from '../components/Container';
+import "./ContainerHomepage.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // const [context, setContext] = useState(startInApp);
