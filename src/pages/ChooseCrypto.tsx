@@ -62,14 +62,10 @@ const ChooseCrypto: React.FC = () => {
         pt={3}
         pb={16}
         overflowY="scroll"
-<<<<<<< HEAD
-      // maxWidth="420px"
-=======
         // maxWidth="420px"
       > */}
       <VStack
         pb={16}
->>>>>>> f65c05fc25088341e7f7f62e289d59ae43eb6ea0
       >
 
         <Heading
@@ -91,17 +87,16 @@ const ChooseCrypto: React.FC = () => {
           px="2"
           >
 
-          {
-<<<<<<< HEAD
+         {
             apiData.sort(compareCryptoNames).map(data => {
 
-              if (data.fullName === "Celo") {
-                return <ChooseCryptoCard
-                  key="CELO"
-                  tickerName="CELO"
-                  fullName="Celo"
-                />
-              }
+              // if (data.fullName === "Celo") {
+              //   return <ChooseCryptoCard
+              //     key="CELO"
+              //     tickerName="CELO"
+              //     fullName="Celo"
+              //   />
+              // }
 
               return <ChooseCryptoCard
                 key={data.tickerName}
@@ -111,18 +106,7 @@ const ChooseCrypto: React.FC = () => {
 
             })
           }
-
-=======
-            apiData.sort(compareCryptoNames).map( data => (
-              <ChooseCryptoCard
-              key={data.tickerName}
-              tickerName={data.tickerName}
-                fullName={data.fullName}
-                />
-                ))
-              }
-        
->>>>>>> f65c05fc25088341e7f7f62e289d59ae43eb6ea0
+          
         </Flex>
 
       </VStack>
