@@ -65,7 +65,7 @@ export const CryptoDisplay = () => {
     console.log("page changed side effect");
     console.log(`tickerIndex: ${tickerIndex}: PRE DISPATCH`);
     console.table(context);
-    dispatch({ type: SWIPE_THRU, payload: [pageContext.allUserPairs[tickerIndex]]});
+    dispatch({ type: SWIPE_THRU, payload: [JSON.parse(pageContext.allUserPairs[tickerIndex])]});
     console.table(context);
     return () => {
       // cleanup
@@ -97,8 +97,9 @@ export const CryptoDisplay = () => {
               }
               }}
           >
-            <VStack mt="8rem" spacing={8}>
-              <CryptoNameHeading/>
+            <VStack mt="8rem" spacing={2}>
+              <CryptoNameHeading
+              />
               <motion.img 
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 5 }}

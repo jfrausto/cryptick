@@ -61,10 +61,10 @@ export const TickerDisplay:React.FC = () => {
   }, [context.price])
 
   const startStream = () => {
-    console.log(`starting stream with ${context.userCurrentPair[0]}...`);
+    // console.log(`starting stream with ${context.userCurrentPair[0]}...`);
     let msg = {
       type: "subscribe",
-      product_ids: context.userCurrentPair,
+      product_ids: [context.userCurrentPair[0].tickerName+"-USD"],
       channels: ["ticker"]
     };
     let jsonMsg = JSON.stringify(msg);
@@ -91,7 +91,7 @@ export const TickerDisplay:React.FC = () => {
   const handleUnsub = () => {
     let unsub = {
       type: "unsubscribe",
-      product_ids: context.userCurrentPair,
+      product_ids: [context.userCurrentPair[0].tickerName+"-USD"],
       channels: ["ticker"]
     };
     let jsonUnsub = JSON.stringify(unsub);

@@ -22,8 +22,18 @@ export const CryptoNameHeading = () => {
       <Heading as={Center}>
         {
           context.price ? 
-          context.userCurrentPair[0] :
+          context.userCurrentPair[0].tickerName :
           <Skeleton minW="220px" height="65px" />
+        }
+      </Heading>
+      <Heading
+        size="sm"
+        marginBottom="10"
+      >
+        {
+          context.price ? 
+          context.userCurrentPair[0].fullName :
+          <Skeleton minW="150px" height="55px" />
         }
       </Heading>
     </>
