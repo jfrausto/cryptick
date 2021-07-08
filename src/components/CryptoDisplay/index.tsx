@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import { wrap } from 'popmotion';
 import { CryptoNameHeading } from '../CryptoNameHeading';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
-import { SWIPE_THRU } from '../helpers/reducer/actions';
+import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
 import {
   VStack
@@ -18,20 +18,20 @@ export const CryptoDisplay = () => {
   const variants = {
     enter: (direction: number) => {
       return {
-        x: direction > 0 ? 1000 : -1000,
+        x: direction > 0 ? 500 : -500,
         opacity: 0
       };
     },
     center: {
       zIndex: 1,
       x: 0,
-      y:0,
+      // y:0,
       opacity: 1
     },
     exit: (direction: number) => {
       return {
         zIndex: 0,
-        x: direction < 0 ? 1000 : -1000,
+        x: direction < 0 ? 500 : -500,
         opacity: 0
       };
     }
@@ -39,8 +39,8 @@ export const CryptoDisplay = () => {
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
-};
+    return Math.abs(offset) * velocity;
+  };
 
 
 
@@ -88,6 +88,9 @@ export const CryptoDisplay = () => {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
+            onDragOver={(e) => {
+              dispatch({type: ON_DRAG, isSwiping: true});
+            }}
             onDragEnd={ (e, {offset, velocity}) => {
               const swipe = swipePower(offset.x, velocity.x);
               if(swipe < -swipeConfidenceThreshold){

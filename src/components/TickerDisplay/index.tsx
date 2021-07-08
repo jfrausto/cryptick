@@ -5,6 +5,7 @@ import { PriceDisplay } from '../PriceDisplay';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
 import { Display24Hr } from '../Display24Hr';
 import { use24HrPercentage } from '../helpers/use24HrPercentage';
+import { ON_DRAG } from '../helpers/reducer/actions';
 
 
 // prop types <any> for now
@@ -21,16 +22,18 @@ export const TickerDisplay:React.FC = () => {
   // on first load of this component
   useEffect(() => {
 
+    
     // dispatch({
-    //   type: "set_current_pair",
-    //   payload: [pageContext.allUserPairs[0]]
-    // });
-    // set current pair
-    webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-    console.log("opening Websocket...")
-    // when it opens start the stream
-    webSocket.current.onopen = (e) => {
-      console.log("Websocket opened!")
+      //   type: "set_current_pair",
+      //   payload: [pageContext.allUserPairs[0]]
+      // });
+      // set current pair
+      webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+      console.log("opening Websocket...")
+      // when it opens start the stream
+      webSocket.current.onopen = (e) => {
+        console.log("Websocket opened!")
+        dispatch({type: ON_DRAG, isSwiping: false})
       startStream();
       console.info(e);
       // console.log()

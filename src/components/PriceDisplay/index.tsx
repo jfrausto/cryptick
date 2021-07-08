@@ -18,7 +18,7 @@ export const  PriceDisplay:React.FC = () => {
       </VStack>
       {/* onChange? something to change the state..... */}
       <Box fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
-        {context.price ? `${Number(context.price).toLocaleString(undefined, 
+        {context.price && !context.isSwiping ? `${Number(context.price).toLocaleString(undefined, 
           {
             style: "currency",
             currency: "USD",
