@@ -90,16 +90,6 @@ export const TickerDisplay:React.FC = () => {
     };
   };
   
-  // handle unsub click, unsubscribes from the BTC ticker
-  const handleUnsub = () => {
-    let unsub = {
-      type: "unsubscribe",
-      product_ids: [context.userCurrentPair[0].tickerName+"-USD"],
-      channels: ["ticker"]
-    };
-    let jsonUnsub = JSON.stringify(unsub);
-    webSocket.current!.send(jsonUnsub);
-  }
 
   return (
     <div>
@@ -109,12 +99,6 @@ export const TickerDisplay:React.FC = () => {
       <Center>
         <Display24Hr/>
       </Center>
-      <Center>
-        <Button m={3} onClick={handleUnsub}>
-          unsubscribe
-        </Button>
-      </Center>
-
     </div>
   )
 }

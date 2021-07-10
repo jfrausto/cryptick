@@ -23,7 +23,7 @@ export const Display24Hr:React.FC = () => {
   return (
     <>
       {
-        context.userCurrentPair ? 
+        context.price && !context.isSwiping ? 
           <Stat as={Center}>
             <StatHelpText
             fontWeight="bold"
@@ -45,7 +45,8 @@ export const Display24Hr:React.FC = () => {
             </StatHelpText>
           </Stat> : <Skeleton 
               minWidth="173px" 
-              height="30px" 
+              height="32px" 
+              borderRadius="2xl"
               // startColor="red.500" 
               // endColor="green.500" 
               />

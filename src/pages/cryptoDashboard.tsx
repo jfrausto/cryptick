@@ -6,6 +6,8 @@ import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
 import { CryptoDisplay } from '../components/CryptoDisplay';
+import { VStack, HStack, Box } from '@chakra-ui/react';
+import SwipeIndexCircle from '../components/SwipeIndexCircle';
 
 
 const CryptoDashboard :React.FC = () => {
@@ -29,9 +31,22 @@ const CryptoDashboard :React.FC = () => {
     <>
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
-            <AnimatePresence>
-              <CryptoDisplay />
-            </AnimatePresence>
+              <AnimatePresence>
+                <CryptoDisplay />
+              </AnimatePresence>
+              <HStack
+                mt={6}
+              >
+                {
+                  pageContext.allUserPairs.map( (pair) => <Box>{
+                    
+                    JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
+                    <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
+                    
+                    }
+                  </Box>)
+                }
+              </HStack>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
     </>

@@ -26,7 +26,7 @@ export const CryptoNameHeading = () => {
         {
           context.price && !context.isSwiping ? 
           context.userCurrentPair[0].tickerName :
-          <Skeleton minW="220px" height="65px" />
+          <Skeleton minW="220px" height="60px" borderRadius="2xl" />
         }
       </Heading>
       <Heading
@@ -36,7 +36,7 @@ export const CryptoNameHeading = () => {
         {
           context.price && !context.isSwiping ? 
           context.userCurrentPair[0].fullName :
-          <Skeleton minW="150px" height="55px" />
+          <Skeleton minW="150px" height="25px" borderRadius="2xl" />
         }
       </Heading>
     </>

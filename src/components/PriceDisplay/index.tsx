@@ -11,9 +11,9 @@ export const  PriceDisplay:React.FC = () => {
     <>
       <VStack>
         {
-        context.price ? 
+        context.price && !context.isSwiping ? 
         <PriceArrows/> :
-        <SkeletonCircle size="9" />
+        <SkeletonCircle size="9"/>
         }
       </VStack>
       {/* onChange? something to change the state..... */}
@@ -25,7 +25,7 @@ export const  PriceDisplay:React.FC = () => {
             minimumFractionDigits: 3,
             maximumFractionDigits: 3
           }
-          )}` : <Skeleton minW="230px" height="40px" mb="10px" />}
+          )}` : <Skeleton minW="230px" height="51px" mb="10px" borderRadius="2xl" />}
       </Box>
     </>
   )

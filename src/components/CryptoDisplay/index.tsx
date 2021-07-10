@@ -5,10 +5,13 @@ import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
 import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
 import {
-  VStack
+  HStack,
+  VStack,
+  Box,
 } from '@chakra-ui/react';
 import { TickerDisplay} from "../TickerDisplay";
 import Img from "../../public/logo.svg";
+import SwipeIndexCircle from '../SwipeIndexCircle';
 
 
 
@@ -41,9 +44,6 @@ export const CryptoDisplay = () => {
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
-
-
-
 
 
   const { context } = useContext(CryptoContext);
@@ -88,6 +88,7 @@ export const CryptoDisplay = () => {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
+
             onDragOver={(e) => {
               dispatch({type: ON_DRAG, isSwiping: true});
             }}
@@ -99,8 +100,13 @@ export const CryptoDisplay = () => {
                 paginate(-1);
               }
               }}
+            
           >
-            <VStack mt="8rem" spacing={2}>
+            <VStack pt="8rem" spacing={2}
+              _hover={{ 
+                cursor: "grab"
+               }}
+            >
               <CryptoNameHeading
               />
               <motion.img 
@@ -111,8 +117,11 @@ export const CryptoDisplay = () => {
                 width="100px"
               />
               <TickerDisplay/>
+              
             </VStack>
         </motion.div>
+
+
     </>
   )
 }
