@@ -1,13 +1,16 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
-import { CryptoAction } from '../components/helpers/reducer/actions'
+import { CryptoAction } from '../components/helpers/reducer/actions';
+import { CryptoNames } from './helpers/buildCryptoCard';
 export interface CryptoContextType {
-  userCurrentPair: string[],
+  userCurrentPair: CryptoNames[],
+  isSwiping: boolean
   price: number,
   isGoingUp: boolean,
   dayChangePercentage: number
 }
 export const startInApp: CryptoContextType = {
   userCurrentPair: [],
+  isSwiping: false,
   price: 0.00,
   isGoingUp: true,
   dayChangePercentage: 0

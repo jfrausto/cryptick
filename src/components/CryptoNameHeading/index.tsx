@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Heading, Center, Skeleton } from '@chakra-ui/react';
-import { CryptoContext } from '../CryptoContext';
+import { CryptoContext, DispatchContext } from '../CryptoContext';
+import { ON_DRAG } from '../helpers/reducer/actions';
 
 
 export const CryptoNameHeading = () => {
   
   const { context } = useContext(CryptoContext);
+  const {dispatch} = useContext(DispatchContext);
 
   useEffect(() => {
     // 
@@ -13,6 +15,7 @@ export const CryptoNameHeading = () => {
     return () => {
       // cleanup
       console.log(`cleaning up CryptoNameHeading: ${context.userCurrentPair[0]}`);
+      dispatch({type:ON_DRAG, isSwiping: true});
     }
   }, [context.userCurrentPair])
 
@@ -21,9 +24,19 @@ export const CryptoNameHeading = () => {
       {/* ! displays current pair in view */}
       <Heading as={Center}>
         {
-          context.price ? 
-          context.userCurrentPair[0] :
-          <Skeleton minW="220px" height="65px" />
+          context.price && !context.isSwiping ? 
+          context.userCurrentPair[0].tickerName :
+          <Skeleton minW="220px" height="60px" borderRadius="2xl" />
+        }
+      </Heading>
+      <Heading
+        size="sm"
+        marginBottom="10"
+      >
+        {
+          context.price && !context.isSwiping ? 
+          context.userCurrentPair[0].fullName :
+          <Skeleton minW="150px" height="25px" borderRadius="2xl" />
         }
       </Heading>
     </>

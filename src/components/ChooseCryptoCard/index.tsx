@@ -45,13 +45,16 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName } ) => 
     // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
       setSelected((priorClick)=> !priorClick );
-      const chosenPair = tickerName+"-USD";
-      if(pageContext.allUserPairs.includes(chosenPair)){
-        const updatedArr = useRemoveElementFromArray(chosenPair, pageContext.allUserPairs);
+      const chosenPair = {
+        tickerName: tickerName,
+        fullName: fullName
+      };
+      if(pageContext.allUserPairs.includes(JSON.stringify(chosenPair))){
+        const updatedArr = useRemoveElementFromArray(JSON.stringify(chosenPair), pageContext.allUserPairs);
         setPageContext!({...pageContext, allUserPairs: updatedArr });
         return;
       }
-      setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(chosenPair)});
+      setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(JSON.stringify(chosenPair))});
     };
 
 

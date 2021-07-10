@@ -6,6 +6,8 @@ import { Container } from '../components/Container';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
 import { CryptoDisplay } from '../components/CryptoDisplay';
+import { VStack, HStack, Box } from '@chakra-ui/react';
+import SwipeIndexCircle from '../components/SwipeIndexCircle';
 
 
 const CryptoDashboard :React.FC = () => {
@@ -18,7 +20,7 @@ const CryptoDashboard :React.FC = () => {
     console.log("about to dispatch and set current pair...")
     dispatch({
       type: SET_CURRENT_PAIR,
-      payload: [pageContext.allUserPairs[0]]
+      payload: [JSON.parse(pageContext.allUserPairs[0])]
     });
     return () => {
       console.log("cleaning up in cryptoDashboard");
@@ -29,9 +31,9 @@ const CryptoDashboard :React.FC = () => {
     <>
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
-            <AnimatePresence>
-              <CryptoDisplay />
-            </AnimatePresence>
+              <AnimatePresence>
+                <CryptoDisplay />
+              </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
     </>
