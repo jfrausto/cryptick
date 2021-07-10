@@ -9,7 +9,7 @@ export interface CryptoContextType {
   dayChangePercentage: number
 }
 export const startInApp: CryptoContextType = {
-  userCurrentPair: [{tickerName: "BTC", fullName: "Bitcoin"}],
+  userCurrentPair: [],
   isSwiping: false,
   price: 0.00,
   isGoingUp: true,

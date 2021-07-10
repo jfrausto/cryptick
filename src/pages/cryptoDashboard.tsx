@@ -34,19 +34,6 @@ const CryptoDashboard :React.FC = () => {
               <AnimatePresence>
                 <CryptoDisplay />
               </AnimatePresence>
-              <HStack
-                mt={6}
-              >
-                {
-                  pageContext.allUserPairs.map( (pair) => <Box>{
-                    
-                    JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
-                    <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
-                    
-                    }
-                  </Box>)
-                }
-              </HStack>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
     </>

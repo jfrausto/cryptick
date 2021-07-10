@@ -8,6 +8,7 @@ import {
   HStack,
   VStack,
   Box,
+  Skeleton,
 } from '@chakra-ui/react';
 import { TickerDisplay} from "../TickerDisplay";
 import Img from "../../public/logo.svg";
@@ -102,7 +103,7 @@ export const CryptoDisplay = () => {
               }}
             
           >
-            <VStack pt="8rem" spacing={2}
+            <VStack pt="15vh" spacing={2}
               _hover={{ 
                 cursor: "grab"
                }}
@@ -120,6 +121,25 @@ export const CryptoDisplay = () => {
               
             </VStack>
         </motion.div>
+        <HStack
+                mt={6}
+              >
+                {
+                  context.userCurrentPair[0] ? 
+                  (
+                    pageContext.allUserPairs.map( (pair) => <Box
+                    key={JSON.parse(pair).tickerName}
+                    
+                    >{
+                      
+                      JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
+                      <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
+                      
+                    }
+                    </Box>)
+                  ) : <Skeleton w="md" height="20px" />
+                }
+              </HStack>
 
 
     </>

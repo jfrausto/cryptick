@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Stat,
   StatHelpText,
   StatArrow,
-  useColorModeValue,
+  useColorMode,
   Center,
   Skeleton,
 } from '@chakra-ui/react';
@@ -11,13 +11,24 @@ import { CryptoContext } from '../CryptoContext';
 
 export const Display24Hr:React.FC = () => {
   const {context} = useContext(CryptoContext);
+  const {colorMode} = useColorMode();
 
-  // useEffect(() => {
-  //   console.log("inside 24 hr display....");
-  //   return () => {
-  //     console.log("cleaning up 24 hr display....");
-  //   }
-  // }, [context.userCurrentPair])
+  const statTextGreen = {
+    light: "green.800",
+    dark: "green.300"
+  };
+  const statTextRed = {
+    light: "red.800",
+    dark: "red.300"
+  };
+  const statArrowGreen = {
+    light: "green.800",
+    dark: "green.300"
+  };
+  const statArrowRed = {
+    light: "red.800",
+    dark: "red.300"
+  };
 
 
   return (
@@ -28,13 +39,13 @@ export const Display24Hr:React.FC = () => {
             <StatHelpText
             fontWeight="bold"
               color={context.dayChangePercentage >= 0 ? 
-                useColorModeValue("green.800", "green.300") : 
-                useColorModeValue("red.900", "red.300")}
+                statTextGreen[colorMode] : 
+                statTextRed[colorMode]}
             >
               <StatArrow 
                 color={context.dayChangePercentage >= 0 ? 
-                  useColorModeValue("green.800", "green.300") : 
-                  useColorModeValue("red.900", "red.300")}
+                  statArrowGreen[colorMode] : 
+                  statArrowRed[colorMode]}
                 type={context.dayChangePercentage >= 0 ? 
                 "increase" : 
                 "decrease"}
@@ -45,7 +56,7 @@ export const Display24Hr:React.FC = () => {
             </StatHelpText>
           </Stat> : <Skeleton 
               minWidth="173px" 
-              height="32px" 
+              height="36px" 
               borderRadius="2xl"
               // startColor="red.500" 
               // endColor="green.500" 
