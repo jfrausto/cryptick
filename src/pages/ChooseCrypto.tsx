@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Flex,
   Heading,
@@ -7,12 +7,12 @@ import {
 import router from 'next/router';
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
-import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
+import { compareCryptoNames } from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
 
-const ChooseCrypto:React.FC = () => {
+const ChooseCrypto: React.FC = () => {
 
   const [apiData, setApiData] = useState<CryptoNames[]>([]);
   const { pageContext, setPageContext } = useContext(PageContext);
@@ -21,13 +21,13 @@ const ChooseCrypto:React.FC = () => {
   useEffect(() => {
 
     const getApiData = async () => {
-    const cryptoProductsList = await fetchCyrptoProducts();
-    setApiData(cryptoProductsList);
-  }
+      const cryptoProductsList = await fetchCyrptoProducts();
+      setApiData(cryptoProductsList);
+    }
 
-  getApiData();
+    getApiData();
 
-  //Occurs on mount
+    //Occurs on mount
   }, []);
 
   const handleDone = (): void => {
@@ -36,26 +36,26 @@ const ChooseCrypto:React.FC = () => {
 
   const handleReset = (): void => {
     console.log("reset");
-    setPageContext!({...pageContext, allUserPairs: []});
+    setPageContext!({ ...pageContext, allUserPairs: [] });
   };
 
   // Should fetch the product information from coinbase
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
-    const cryptoUSD = data.filter( (data: { quote_currency: string; }) => data.quote_currency === "USD");
+    const cryptoUSD = data.filter((data: { quote_currency: string; }) => data.quote_currency === "USD");
     const resCurr = await fetch("https://api.pro.coinbase.com/currencies");
     const dataCurr = await resCurr.json();
     return matchCryptoInfo(cryptoUSD, dataCurr);;
 
   }
-//   const checkForUserName = () => {
-//   const userName = localStorage.getItem("userName");
+  //   const checkForUserName = () => {
+  //   const userName = localStorage.getItem("userName");
 
-//   return userName;
-// }
+  //   return userName;
+  // }
 
-    return (
+  return (
     <>
       {/* <Container
         height="100vh"
@@ -87,16 +87,26 @@ const ChooseCrypto:React.FC = () => {
           px="2"
           >
 
-          {
-            apiData.sort(compareCryptoNames).map( data => (
-              <ChooseCryptoCard
-              key={data.tickerName}
-              tickerName={data.tickerName}
+         {
+            apiData.sort(compareCryptoNames).map(data => {
+
+              // if (data.fullName === "Celo") {
+              //   return <ChooseCryptoCard
+              //     key="CELO"
+              //     tickerName="CELO"
+              //     fullName="Celo"
+              //   />
+              // }
+
+              return <ChooseCryptoCard
+                key={data.tickerName}
+                tickerName={(data.tickerName)}
                 fullName={data.fullName}
-                />
-                ))
-              }
-        
+              />
+
+            })
+          }
+          
         </Flex>
 
       </VStack>
@@ -106,8 +116,8 @@ const ChooseCrypto:React.FC = () => {
           />
     </>
 
-          )
-        
+  )
+
 }
 
 export default ChooseCrypto;
