@@ -4,9 +4,9 @@ import {
   Heading,
   VStack
 } from "@chakra-ui/react";
-import router from 'next/router';
+// import router from 'next/router';
+import { useRouter } from "next/router";
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
-import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
@@ -16,10 +16,11 @@ const ChooseCrypto:React.FC = () => {
 
   const [apiData, setApiData] = useState<CryptoNames[]>([]);
   const { pageContext, setPageContext } = useContext(PageContext);
+  const router = useRouter();
+
 
 
   useEffect(() => {
-
     const getApiData = async () => {
     const cryptoProductsList = await fetchCyrptoProducts();
     setApiData(cryptoProductsList);
@@ -57,21 +58,12 @@ const ChooseCrypto:React.FC = () => {
 
     return (
     <>
-      {/* <Container
-        height="100vh"
-        pt={3}
-        pb={16}
-        overflowY="scroll"
-        // maxWidth="420px"
-      > */}
       <VStack
         pb={16}
       >
-
         <Heading
           size="lg"
-          alignSelf="start"
-          pl="4"
+          alignSelf="center"
           >
           Choose Favorites
         </Heading>
@@ -86,7 +78,6 @@ const ChooseCrypto:React.FC = () => {
           p="4"
           px="2"
           >
-
           {
             apiData.sort(compareCryptoNames).map( data => (
               <ChooseCryptoCard
@@ -98,7 +89,6 @@ const ChooseCrypto:React.FC = () => {
               }
         
         </Flex>
-
       </VStack>
         <DoneButtonCard
           handleDone={handleDone}
