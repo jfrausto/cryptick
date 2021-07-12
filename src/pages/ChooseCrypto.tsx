@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Flex,
   Heading,
@@ -12,7 +12,7 @@ import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoC
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
 
-const ChooseCrypto:React.FC = () => {
+const ChooseCrypto: React.FC = () => {
 
   const [apiData, setApiData] = useState<CryptoNames[]>([]);
   const { pageContext, setPageContext } = useContext(PageContext);
@@ -22,13 +22,13 @@ const ChooseCrypto:React.FC = () => {
 
   useEffect(() => {
     const getApiData = async () => {
-    const cryptoProductsList = await fetchCyrptoProducts();
-    setApiData(cryptoProductsList);
-  }
+      const cryptoProductsList = await fetchCyrptoProducts();
+      setApiData(cryptoProductsList);
+    }
 
-  getApiData();
+    getApiData();
 
-  //Occurs on mount
+    //Occurs on mount
   }, []);
 
   const handleDone = (): void => {
@@ -37,26 +37,26 @@ const ChooseCrypto:React.FC = () => {
 
   const handleReset = (): void => {
     console.log("reset");
-    setPageContext!({...pageContext, allUserPairs: []});
+    setPageContext!({ ...pageContext, allUserPairs: [] });
   };
 
   // Should fetch the product information from coinbase
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
-    const cryptoUSD = data.filter( (data: { quote_currency: string; }) => data.quote_currency === "USD");
+    const cryptoUSD = data.filter((data: { quote_currency: string; }) => data.quote_currency === "USD");
     const resCurr = await fetch("https://api.pro.coinbase.com/currencies");
     const dataCurr = await resCurr.json();
     return matchCryptoInfo(cryptoUSD, dataCurr);;
 
   }
-//   const checkForUserName = () => {
-//   const userName = localStorage.getItem("userName");
+  //   const checkForUserName = () => {
+  //   const userName = localStorage.getItem("userName");
 
-//   return userName;
-// }
+  //   return userName;
+  // }
 
-    return (
+  return (
     <>
       <VStack
         pb={16}
@@ -84,10 +84,11 @@ const ChooseCrypto:React.FC = () => {
               key={data.tickerName}
               tickerName={data.tickerName}
                 fullName={data.fullName}
-                />
-                ))
-              }
-        
+              />
+
+            ))
+          }
+          
         </Flex>
       </VStack>
         <DoneButtonCard
@@ -96,8 +97,8 @@ const ChooseCrypto:React.FC = () => {
           />
     </>
 
-          )
-        
+  )
+
 }
 
 export default ChooseCrypto;
