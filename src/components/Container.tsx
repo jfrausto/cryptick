@@ -1,5 +1,6 @@
 import { Flex, useColorMode, FlexProps, DarkMode } from '@chakra-ui/react';
 import { DarkModeSwitch } from './DarkModeSwitch';
+import EditButton from './EditButton';
 
 export const Container = (props: FlexProps) => {
   const { colorMode } = useColorMode()
@@ -27,7 +28,8 @@ export const Container = (props: FlexProps) => {
       {...props}
     >
       {props.children}
-      <DarkModeSwitch/>
+      <EditButton />
+      <DarkModeSwitch />
       </Flex>
   )
 }
