@@ -40,6 +40,16 @@ const ChooseCrypto: React.FC = () => {
     setPageContext!({ ...pageContext, allUserPairs: [] });
   };
 
+  const hasBeenSelected = (tName: string): boolean => {
+    let result = false;
+    for (const stringyObj of pageContext.allUserPairs){
+      if (JSON.parse(stringyObj).tickerName === tName){
+        result = true;
+      }
+    }
+    return result;
+  };
+
   // Should fetch the product information from coinbase
   const fetchCyrptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
@@ -80,12 +90,19 @@ const ChooseCrypto: React.FC = () => {
           >
           {
             apiData.sort(compareCryptoNames).map( data => (
+              hasBeenSelected(data.tickerName) ?
               <ChooseCryptoCard
-              key={data.tickerName}
-              tickerName={data.tickerName}
+                key={data.tickerName}
+                tickerName={data.tickerName}
                 fullName={data.fullName}
+                prevSelected={true}
+              /> :
+              <ChooseCryptoCard
+                key={data.tickerName}
+                tickerName={data.tickerName}
+                fullName={data.fullName}
+                prevSelected={false}
               />
-
             ))
           }
           
