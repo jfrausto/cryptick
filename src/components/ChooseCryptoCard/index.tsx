@@ -7,15 +7,22 @@ import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
 
 interface CardPropType {
   tickerName: string,
-  fullName: string
+  fullName: string,
+  prevSelected: boolean
 };
 
-const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName } ) => {
+const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSelected } ) => {
 
   const { colorMode } = useColorMode()
   const { pageContext, setPageContext } = useContext(PageContext);
   const [isSelected, setSelected] = useState(false);
 
+  // onMount check if we have been selected before
+  useEffect(() => {
+    if (prevSelected) setSelected(true);
+  }, []);
+
+  // anytime we change any of our pairs, check if we reset user choices
   useEffect(() => {
     if(pageContext.allUserPairs.length === 0){
       setSelected(false);
