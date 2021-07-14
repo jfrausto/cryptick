@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <PageContext.Provider value={providerValue}>
 
             <Container
-              p={1}
+              p={0}
               height="100vh"
               overflowY="auto"
               // style={{ scrollbarWidth: "none" }}
