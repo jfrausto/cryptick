@@ -17,14 +17,16 @@ const Index = () => (
 
 
     <motion.div
-    style={{opacity: 0}}
+    style={{opacity: 0, scaleY: 0}}
 
     animate={{
-        opacity: 1
+        opacity: 1,
+        scaleY: 1,
+        transformOrigin: "bottom"
       }}
 
     transition={{
-        delay: 1.3,
+        delay: 1.1,
         duration: 0.66,
         ease: "easeInOut",
         //To be able to keep seeing the animation 
