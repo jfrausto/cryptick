@@ -29,7 +29,7 @@ export const NameInput = () => {
    return (
      <form onSubmit={handleSubmit}>
        <Input
-    isInvalid
+     isInvalid
     type="text"
     name="userName"
     value={query}
