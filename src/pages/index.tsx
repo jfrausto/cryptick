@@ -12,16 +12,18 @@ import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import {NameInput} from "../components/NameInput";
 import {Container} from '../components/Container';
 import {Transition} from "../components/Transition";
+import { motion } from "framer-motion";
 
 
 const Index = () => (
+  
   <>
   
   <Transition/>
 
 
-{/*   
-    <VStack mt="8rem" spacing={8}>
+    
+    <VStack mt="8rem" spacing={8} >
           <Heading style={{fontSize: "100px", textAlign: "center"}} as={Center}>
             Enter your name:
           </Heading>
@@ -29,7 +31,7 @@ const Index = () => (
 
 
     </VStack>
-     */}
+
   </>
 )
 
