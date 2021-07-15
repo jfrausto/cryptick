@@ -13,6 +13,7 @@ import {
 import { TickerDisplay} from "../TickerDisplay";
 import Img from "../../public/logo.svg";
 import SwipeIndexCircle from '../SwipeIndexCircle';
+import ChartDisplay from '../ChartDisplay';
 
 
 
@@ -119,27 +120,29 @@ export const CryptoDisplay = () => {
               />
               <TickerDisplay/>
               
+              <ChartDisplay/>
+
             </VStack>
         </motion.div>
         <HStack
-                mt={6}
-              >
-                {
-                  context.userCurrentPair[0] ? 
-                  (
-                    pageContext.allUserPairs.map( (pair) => <Box
-                    key={JSON.parse(pair).tickerName}
-                    
-                    >{
-                      
-                      JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
-                      <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
-                      
-                    }
-                    </Box>)
-                  ) : <Skeleton w="md" height="20px" />
-                }
-              </HStack>
+          mt={6}
+        >
+          {
+            context.userCurrentPair[0] ? 
+            (
+              pageContext.allUserPairs.map( (pair) => <Box
+              key={JSON.parse(pair).tickerName}
+              
+              >{
+                
+                JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
+                <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
+                
+              }
+              </Box>)
+            ) : <Skeleton w="md" height="20px" />
+          }
+        </HStack>
 
 
     </>
