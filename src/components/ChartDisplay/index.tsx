@@ -1,3 +1,4 @@
+import { useColorModeValue } from '@chakra-ui/color-mode';
 import React, {useEffect, useContext, useState} from 'react';
 import {VictoryLine} from 'victory';
 import { CryptoContext } from '../CryptoContext';
@@ -12,6 +13,7 @@ const ChartDisplay = () => {
 
   const { context } = useContext(CryptoContext);
   const [lineData, setLineData] = useState<lineDataCoordinates[]>([{x: 0, y: 0}]);
+  const lineColor = useColorModeValue("#000000", "#FFFFFF")
 
   useEffect(() => {
     // result is an array of arrays [[]]
@@ -50,6 +52,7 @@ const ChartDisplay = () => {
   return (
     <>
       <VictoryLine
+      style={{ data: { stroke: lineColor} }}
         data={lineData}
       />
     </>
