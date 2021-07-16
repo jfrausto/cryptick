@@ -104,10 +104,10 @@ export const CryptoDisplay = () => {
               }}
             
           >
-            <VStack pt="15vh" spacing={2}
+            <VStack pt="10vh" spacing={2}
               _hover={{ 
                 cursor: "grab"
-               }}
+              }}
             >
               <CryptoNameHeading
               />
@@ -121,6 +121,7 @@ export const CryptoDisplay = () => {
               <TickerDisplay/>
               
               <ChartDisplay/>
+              
 
             </VStack>
         </motion.div>
