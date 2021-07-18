@@ -16,10 +16,28 @@ import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
 
 
-
-
 export const CryptoDisplay = () => {
 
+  const { context } = useContext(CryptoContext);
+  const { pageContext } = useContext(PageContext);
+  const { dispatch } = useContext(DispatchContext);
+  const [[page, direction], setPage] = useState([0, 0]);
+
+  
+  useEffect(() => {
+    // effect
+    console.log("page changed side effect");
+    console.log(`tickerIndex: ${tickerIndex}: PRE DISPATCH`);
+    console.table(context);
+    dispatch({ type: SWIPE_THRU, payload: [JSON.parse(pageContext.allUserPairs[tickerIndex])]});
+    console.table(context);
+    return () => {
+      // cleanup
+    }
+  }, [page]);
+
+
+  
   const variants = {
     enter: (direction: number) => {
       return {
@@ -46,13 +64,6 @@ export const CryptoDisplay = () => {
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
-
-
-  const { context } = useContext(CryptoContext);
-  const { pageContext } = useContext(PageContext);
-  const { dispatch } = useContext(DispatchContext);
-
-  const [[page, direction], setPage] = useState([0, 0]);
   const tickerIndex = wrap(0, pageContext.allUserPairs.length, page);
   const paginate = ( newDirection: number) => {
     // setPage( (currentPage ) => {
@@ -62,17 +73,6 @@ export const CryptoDisplay = () => {
     setPage([page+newDirection, newDirection]);
   };
 
-  useEffect(() => {
-    // effect
-    console.log("page changed side effect");
-    console.log(`tickerIndex: ${tickerIndex}: PRE DISPATCH`);
-    console.table(context);
-    dispatch({ type: SWIPE_THRU, payload: [JSON.parse(pageContext.allUserPairs[tickerIndex])]});
-    console.table(context);
-    return () => {
-      // cleanup
-    }
-  }, [page]);
 
   return (
     <>
