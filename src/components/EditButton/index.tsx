@@ -11,8 +11,9 @@ const Index = () => {
       <IconButton
         variant="ghost"
         position="fixed"
-        top="1rem"
-        left="1rem"
+        top="0.6rem"
+        left="0.6rem"
+        zIndex="overlay"
         size="md"
         aria-label="edit favorites"
         icon={<EditIcon/>}
