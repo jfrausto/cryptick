@@ -32,18 +32,25 @@ const ChartDisplay = () => {
   const lineColor = useColorModeValue("#000000", "#FFFFFF");
 
   useEffect(() => {
+    // define api call
     const getHistoricalApi = async () => {
       const results = await fetchHistoricalData();
       const extractedInfo = [];
+      // prevent operating on "N/A data"
       if (results.length===0){
         return;
       }
       for (const bucket of results){
-        // take the average of the high and low of that time interval to get y: price
+        // bucket[0] contains x-axis Time data in Number ISO 8601 format
+        // take the average of the high and low of that time interval to get y-axis: price
         extractedInfo.push({x: bucket[0], y: ((bucket[2]+bucket[1])/2)})
       }
       // remember to reverse!
-      setLineData(extractedInfo.reverse());
+      // cutting the amount of data points in half
+      // instead of max 300 candles, we get max 150
+      let removedExtractedInfo = extractedInfo.reverse().splice(0, Math.round(extractedInfo.length/2));
+      // update state of our line chart data
+      setLineData(extractedInfo);
     }
     getHistoricalApi();
     console.log(`granularity is ${granularity}`);
@@ -77,22 +84,21 @@ const ChartDisplay = () => {
   ];
 
   const fetchHistoricalData = async () => {
-    // catch undefined react updating error
     if(context.userCurrentPair[0]===undefined){
+      // return array length 0 for error catch
       return [];
     }
     const productName = `${context.userCurrentPair[0].tickerName}-USD`;
     // use current state of granularity
     const res = await fetch(`https://api.pro.coinbase.com/products/${productName}/candles?granularity=${granularity}`);
     const data = await res.json();
-    // console.table(data);
     return data;
   }
 
   return (
     <>
       <VictoryLine
-      style={{ data: { stroke: lineColor} }}
+        style={{ data: { stroke: lineColor} }}
         data={lineData}
       />
 
@@ -104,8 +110,8 @@ const ChartDisplay = () => {
           size="sm"
           isActive={interval.gran === granularity ? true : false}
           _focus={{ 
-            outline: "none"
-           }}
+              outline: "none"
+            }}
           onClick={ (e) => {
             e.preventDefault()
             setGranularity(interval.gran)
