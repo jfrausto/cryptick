@@ -13,8 +13,9 @@ export const DarkModeSwitch = () => {
       size="md"
       color="current"
       position="fixed"
-      top="1rem"
-      right="1rem"
+      top="0.6rem"
+      right="0.6rem"
+      zIndex="overlay"
       variant="ghost"
       onClick={toggleColorMode}
       icon={<SwitchIcon />}

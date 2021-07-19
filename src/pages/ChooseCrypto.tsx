@@ -57,7 +57,7 @@ const ChooseCrypto: React.FC = () => {
     const cryptoUSD = data.filter((data: { quote_currency: string; }) => data.quote_currency === "USD");
     const resCurr = await fetch("https://api.pro.coinbase.com/currencies");
     const dataCurr = await resCurr.json();
-    return matchCryptoInfo(cryptoUSD, dataCurr);;
+    return matchCryptoInfo(cryptoUSD, dataCurr);
 
   }
   //   const checkForUserName = () => {
