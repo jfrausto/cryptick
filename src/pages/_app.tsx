@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               height="100vh"
               overflowY="auto"
               // style={{ scrollbarWidth: "none" }}
-              
+              overflowX="hidden"
             >
               <Component {...pageProps} />
             </Container>
