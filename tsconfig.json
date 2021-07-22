@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "next.config.js", "src/components/helpers/use24HrPercent"]
+  "include": ["**/*.ts", "**/*.tsx", "next.config.js", "src/components/helpers/use24HrPercent", "additional.d.ts"]
 }

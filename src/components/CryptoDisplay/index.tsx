@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef} from 'react';
 import { wrap } from 'popmotion';
 import { CryptoNameHeading } from '../CryptoNameHeading';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
-import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
+import { ON_DRAG, SWIPE_THRU, SET_CURRENT_PAIR } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
 import {
   HStack,
@@ -11,24 +11,48 @@ import {
   Skeleton,
 } from '@chakra-ui/react';
 import { TickerDisplay} from "../TickerDisplay";
-import Img from "../../public/logo.svg";
+// import Img from "../../public/logo.svg";
 import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
+import CryptoDashIcon from '../CryptoDashIcon';
 
 
 export const CryptoDisplay = () => {
 
-  const { context } = useContext(CryptoContext);
   const { pageContext } = useContext(PageContext);
-  const { dispatch } = useContext(DispatchContext);
   const [[page, direction], setPage] = useState([0, 0]);
-
+  const { dispatch } = useContext(DispatchContext);
+  const { context } = useContext(CryptoContext);
+  // const tickerIndexRef = useRef(wrap(0, pageContext.allUserPairs.length, page));
   
+  // useEffect(() => {
+    
+  //   return () => {
+  //   console.log("about to dispatch and set current pair...");
+  //   console.table(pageContext.allUserPairs);
+  //   dispatch({
+  //     type: SET_CURRENT_PAIR,
+  //     payload: [JSON.parse(pageContext.allUserPairs[0])]
+  //   });
+  //   }
+  // }, []);
+
   useEffect(() => {
     // effect
     console.log("page changed side effect");
+    const tickerIndex = isNaN(wrap(0, pageContext.allUserPairs.length, page)) ? 0 : wrap(0, pageContext.allUserPairs.length, page)
     console.log(`tickerIndex: ${tickerIndex}: PRE DISPATCH`);
     console.table(context);
+    // if (isNaN(tickerIndexRef.current)){
+    //   console.log("its NAN!!!");
+    //   return;
+    // }
+    // console.table(pageContext.allUserPairs);
+    if(pageContext.allUserPairs[0]===undefined){
+      console.log("pagecontext undefined~~~~~~~~~~");
+      return;
+    }
+    console.log("made if after the undefined check: cryptoDisplay");
     dispatch({ type: SWIPE_THRU, payload: [JSON.parse(pageContext.allUserPairs[tickerIndex])]});
     console.table(context);
     return () => {
@@ -64,7 +88,6 @@ export const CryptoDisplay = () => {
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
   };
-  const tickerIndex = wrap(0, pageContext.allUserPairs.length, page);
   const paginate = ( newDirection: number) => {
     // setPage( (currentPage ) => {
     //  return [currentPage[0] + newDirection, newDirection]
@@ -111,13 +134,15 @@ export const CryptoDisplay = () => {
             >
               <CryptoNameHeading
               />
-              <motion.img 
+              {/* <motion.img 
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 5 }}
                 src={Img} 
                 height="100px" 
                 width="100px"
-              />
+              /> */}
+              <CryptoDashIcon />
+
               <TickerDisplay/>
               
               <ChartDisplay/>

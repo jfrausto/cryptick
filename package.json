@@ -12,6 +12,7 @@
     "@chakra-ui/theme-tools": "1.1.2",
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",
+    "cryptocurrency-icons": "^0.18.0",
     "framer-motion": "^4.0.3",
     "next": "^10.2.3",
     "next-images": "^1.7.0",

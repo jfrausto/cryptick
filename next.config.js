@@ -1,2 +1,11 @@
-const withImages = require("next-images");
-module.exports = withImages();
+// const withImages = require("next-images");
+module.exports = {
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      use: [{loader: 'url-loader'}]
+    });
+
+    return config;
+  }
+};
