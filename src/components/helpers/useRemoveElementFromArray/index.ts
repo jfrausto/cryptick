@@ -1,4 +1,6 @@
-export const useRemoveElementFromArray = ( elem: string, arr: string[]) : string[] => {
+import { CryptoNames } from "../buildCryptoCard";
+
+export const useRemoveElementFromArray = ( elem: CryptoNames, arr: CryptoNames[]) : CryptoNames[] => {
   const arrShallowCopy = [...arr];
   const index = arrShallowCopy.indexOf(elem);
   arrShallowCopy.splice(index, 1);

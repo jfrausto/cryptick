@@ -53,7 +53,7 @@ export const CryptoDisplay = () => {
       return;
     }
     console.log("made if after the undefined check: cryptoDisplay");
-    dispatch({ type: SWIPE_THRU, payload: [JSON.parse(pageContext.allUserPairs[tickerIndex])]});
+    dispatch({ type: SWIPE_THRU, payload: [pageContext.allUserPairs[tickerIndex]]});
     console.table(context);
     return () => {
       // cleanup
@@ -157,11 +157,10 @@ export const CryptoDisplay = () => {
             context.userCurrentPair[0] ? 
             (
               pageContext.allUserPairs.map( (pair) => <Box
-              key={JSON.parse(pair).tickerName}
-              
+              key={pair.tickerName}
               >{
                 
-                JSON.parse(pair).tickerName === context.userCurrentPair[0].tickerName ?
+                pair.tickerName === context.userCurrentPair[0].tickerName ?
                 <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
                 
               }

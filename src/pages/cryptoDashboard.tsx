@@ -20,7 +20,7 @@ const CryptoDashboard :React.FC = () => {
     console.log("about to dispatch and set current pair...")
     dispatch({
       type: SET_CURRENT_PAIR,
-      payload: [JSON.parse(pageContext.allUserPairs[0])]
+      payload: [pageContext.allUserPairs[0]]
     });
     return () => {
       console.log("cleaning up in cryptoDashboard");

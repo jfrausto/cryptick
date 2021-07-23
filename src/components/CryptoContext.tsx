@@ -17,9 +17,8 @@ export const startInApp: CryptoContextType = {
 }
 
 // ABOUT TO ADD A CONTEXT
-
 export interface PageContextType {
-  allUserPairs: string[],
+  allUserPairs: CryptoNames[],
 }
 
 export const startPage: PageContextType = {

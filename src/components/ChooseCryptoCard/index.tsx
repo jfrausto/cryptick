@@ -3,6 +3,9 @@ import { VStack, Heading, Text, Box, useColorMode } from '@chakra-ui/react';
 import StarBadge from '../StarBadge';
 import {PageContext } from '../CryptoContext';
 import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
+// import { CryptoNames } from './helpers/buildCryptoCard';
+import { CryptoNames } from '../helpers/buildCryptoCard';
+
 
 
 interface CardPropType {
@@ -52,16 +55,16 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
     // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
       setSelected((priorClick)=> !priorClick );
-      const chosenPair = {
+      const chosenPair:CryptoNames = {
         tickerName: tickerName,
         fullName: fullName
       };
-      if(pageContext.allUserPairs.includes(JSON.stringify(chosenPair))){
-        const updatedArr = useRemoveElementFromArray(JSON.stringify(chosenPair), pageContext.allUserPairs);
+      if(pageContext.allUserPairs.includes(chosenPair)){
+        const updatedArr = useRemoveElementFromArray(chosenPair, pageContext.allUserPairs);
         setPageContext!({...pageContext, allUserPairs: updatedArr });
         return;
       }
-      setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat(JSON.stringify(chosenPair))});
+      setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat([chosenPair])});
     };
 
 
