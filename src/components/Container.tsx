@@ -1,9 +1,15 @@
+import React, {useState, useMemo} from 'react';
 import { Flex, useColorMode, FlexProps, DarkMode } from '@chakra-ui/react';
 import { DarkModeSwitch } from './DarkModeSwitch';
 import EditButton from './EditButton';
+import { PageContext, startPage } from './CryptoContext';
 
 export const Container = (props: FlexProps) => {
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
+  const [pageContext, setPageContext] = useState(startPage);
+  // const providerValue = useMemo(() => ({ context, dispatch}), [context, dispatch])
+
+  const providerValue = useMemo(() => ({ pageContext, setPageContext}), [pageContext, setPageContext])
 
   const bgGradient = { 
     light: 'linear-gradient(217deg, rgba(215,0,0,.4), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,215,0,.4), rgba(0,255,0,0) 70.71%),linear-gradient(336deg, rgba(0,0,215,.5), rgba(0,0,255,0) 70.71%);', 
@@ -27,7 +33,10 @@ export const Container = (props: FlexProps) => {
       color={color[colorMode]}
       {...props}
     >
-      {props.children}
+      <PageContext.Provider value={providerValue}>
+
+        {props.children}
+      </PageContext.Provider>
       <EditButton />
       <DarkModeSwitch />
       </Flex>

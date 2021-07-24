@@ -11,6 +11,7 @@ import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
+// import { CryptoNames } from "../components/helpers/buildCryptoCard";
 
 const ChooseCrypto: React.FC = () => {
 
@@ -42,8 +43,8 @@ const ChooseCrypto: React.FC = () => {
 
   const hasBeenSelected = (tName: string): boolean => {
     let result = false;
-    for (const stringyObj of pageContext.allUserPairs){
-      if (JSON.parse(stringyObj).tickerName === tName){
+    for (const cryptoName of pageContext.allUserPairs){
+      if (cryptoName.tickerName === tName){
         result = true;
       }
     }
