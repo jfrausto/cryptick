@@ -59,7 +59,7 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
         tickerName: tickerName,
         fullName: fullName
       };
-      if(pageContext.allUserPairs.includes(chosenPair)){
+      if(pageContext.allUserPairs.some( crypto => crypto.tickerName === chosenPair.tickerName)){
         const updatedArr = useRemoveElementFromArray(chosenPair, pageContext.allUserPairs);
         setPageContext!({...pageContext, allUserPairs: updatedArr });
         return;

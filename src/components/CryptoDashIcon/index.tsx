@@ -6,6 +6,7 @@ import Generic from 'cryptocurrency-icons/128/color/generic.png'
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CryptoContext} from '../CryptoContext';
+import getCryptoPng from '../helpers/getCryptoPng';
 
 
 
@@ -16,31 +17,22 @@ const CryptoDashIcon: React.FC = () => {
   const { context } = useContext(CryptoContext);
 
   useEffect(() => {
-
     const dynamicImport = async () => {
-      console.log(`lower casing ticker name: ${context.userCurrentPair[0].tickerName.toLowerCase()}`);
-      try{
-        const icon = (await import(`cryptocurrency-icons/128/color/${context.userCurrentPair[0].tickerName.toLowerCase()}.png`)).default
-        console.table(icon);
-        console.log("Setting it to the dynamic import.............");
-        setCryptoIcon(icon);
-        return;
-      } catch (err) {
-        console.error("lmao");
+      // send current tickerName to grab the png
+      const icon = await getCryptoPng(context.userCurrentPair[0].tickerName.toLowerCase());
+      if (icon === "generic") {
         setCryptoIcon(Generic);
+        return;
       }
-      // console.log("falling back..........")
+      setCryptoIcon(icon);
     };
+
     dynamicImport();
+    
     return () => {
       setCryptoIcon(Generic);
     }
   }, [context.userCurrentPair]);
-
-
-  // const MotionImage = motion(Image, {forwardMotionProps: true});
-  // const MotionCenter = motion(Center, {forwardMotionProps: true});
-  
 
   return (
     <>

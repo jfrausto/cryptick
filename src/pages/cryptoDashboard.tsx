@@ -2,12 +2,8 @@ import React, {useContext, useEffect, useReducer} from 'react';
 import { ContextReducer } from '../components/helpers/reducer';
 import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
-import { Container } from '../components/Container';
-import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
 import { CryptoDisplay } from '../components/CryptoDisplay';
-import { VStack, HStack, Box } from '@chakra-ui/react';
-import SwipeIndexCircle from '../components/SwipeIndexCircle';
 
 
 const CryptoDashboard :React.FC = () => {
