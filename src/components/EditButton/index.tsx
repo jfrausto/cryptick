@@ -9,11 +9,11 @@ const Index = () => {
   return (
     <>
       <IconButton
-        variant="ghost"
         position="absolute"
         top="0rem"
         left="0.5rem"
         zIndex="overlay"
+        variant="ghost"
         size="sm"
         aria-label="edit favorites"
         icon={<EditIcon/>}

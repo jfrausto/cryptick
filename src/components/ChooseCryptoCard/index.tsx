@@ -69,13 +69,11 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
   return (
     <>
       <Box
-        position="relative"
-        w="150px"
-        maxW="300px"
-        p="10px"
-        px="5px"
-        m="1"
+        // position="static"
+        w="135px"
         height="150px"
+        p={2}
+        m={1}
         userSelect="none"
         onClick={(e) => handleAddCrypto(e)}
         borderRadius="2xl"
@@ -83,18 +81,15 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
           "2px solid green"
           : "none"
         }
-        // color={ 
-        //   isSelected ?
-        //   selectedTextColor[colorMode]
-        //   : colorText[colorMode]
-        // }
         bg={bgColor[colorMode]}
         _hover={{ 
           cursor: "pointer"
          }}
       >
 
-        <VStack>
+        <VStack
+          textAlign="center"
+        >
           <Heading
             size="sm"
           >
@@ -103,7 +98,6 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
           <Text 
             fontStyle="italic" 
             fontSize="xs" 
-            textAlign="center"
             color={colorSubtext[colorMode]}
           >
             {fullName}

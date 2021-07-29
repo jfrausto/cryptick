@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Container
               p={1}
               height="100vh"
+              // width="100%"
               overflowY="auto"
               // style={{ scrollbarWidth: "none" }}
               overflowX="hidden"

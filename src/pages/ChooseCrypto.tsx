@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   Flex,
   Heading,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 // import router from 'next/router';
 import { useRouter } from "next/router";
@@ -73,12 +73,12 @@ const ChooseCrypto: React.FC = () => {
     <>
       <VStack
         pb={16}
-        w="375px"
-        position="relative"
+        // bg="red"
+        // w="375px"
       >
         <Heading
           size="md"
-          alignSelf="center"
+          // alignSelf="center"
           pt="13px"
           >
           choose favorites
@@ -89,11 +89,13 @@ const ChooseCrypto: React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          maxWidth="400px"
-          marginX="auto"
+          w="375px"
+          // maxWidth="375px"
+          // overflowY="auto"
+          // marginX="auto"
           // py={3}
-          pt={2}
-          px={1}
+          // pt={2}
+          // px={1}
           >
           {
             apiData.sort(compareCryptoNames).map( data => (
@@ -114,13 +116,11 @@ const ChooseCrypto: React.FC = () => {
           }
           
         </Flex>
-      <EditButton />
-      <DarkModeSwitch />
       </VStack>
-        <DoneButtonCard
-          handleDone={handleDone}
-          handleReset={handleReset}
-          />
+      <DoneButtonCard
+        handleDone={handleDone}
+        handleReset={handleReset}
+      />
       
     </>
 

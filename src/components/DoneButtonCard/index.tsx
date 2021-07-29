@@ -30,7 +30,7 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
         w="300px"
         zIndex="overlay"
         position="fixed"
-        bottom="0"
+        bottom="0rem"
         bg={themeBg[colorMode]}
         color={themeText[colorMode]}
       >

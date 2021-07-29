@@ -107,7 +107,7 @@ const ChartDisplay = () => {
         timeIntervalArray.map( (interval) => <Button
           key={interval.gran}
           variant="ghost"
-          size="sm"
+          size="xs"
           isActive={interval.gran === granularity ? true : false}
           _focus={{ 
               outline: "none"

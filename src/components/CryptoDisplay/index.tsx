@@ -15,6 +15,8 @@ import { TickerDisplay} from "../TickerDisplay";
 import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
 import CryptoDashIcon from '../CryptoDashIcon';
+import { DarkModeSwitch } from '../DarkModeSwitch';
+import EditButton from '../EditButton';
 
 
 export const CryptoDisplay = () => {
@@ -99,59 +101,45 @@ export const CryptoDisplay = () => {
 
   return (
     <>
-      <motion.div
-            key={page}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ 
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
+        <motion.div
+          key={page}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ 
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={1}
+          onDragOver={(e) => {
+            dispatch({type: ON_DRAG, isSwiping: true});
+          }}
+          onDragEnd={ (e, {offset, velocity}) => {
+            const swipe = swipePower(offset.x, velocity.x);
+            if(swipe < -swipeConfidenceThreshold){
+              paginate(1);
+            } else if (swipe > swipeConfidenceThreshold){
+              paginate(-1);
+            }
+          }}
+        >
+          <VStack 
+            pt="5vh"
+            // bg="blue"
+            spacing={2}
+            _hover={{ 
+              cursor: "grab"
             }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-
-            onDragOver={(e) => {
-              dispatch({type: ON_DRAG, isSwiping: true});
-            }}
-            onDragEnd={ (e, {offset, velocity}) => {
-              const swipe = swipePower(offset.x, velocity.x);
-              if(swipe < -swipeConfidenceThreshold){
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold){
-                paginate(-1);
-              }
-              }}
-            
           >
-            <VStack 
-              pt="10vh"
-              bg="red"
-              spacing={2}
-              _hover={{ 
-                cursor: "grab"
-              }}
-            >
-              <CryptoNameHeading
-              />
-              {/* <motion.img 
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 5 }}
-                src={Img} 
-                height="100px" 
-                width="100px"
-              /> */}
-              <CryptoDashIcon />
-
-              <TickerDisplay/>
-              
-              <ChartDisplay/>
-              
-
-            </VStack>
+            <CryptoNameHeading/>
+            <CryptoDashIcon />
+            <TickerDisplay/>
+            <ChartDisplay/>
+          </VStack>
         </motion.div>
         <HStack
           mt={6}
@@ -171,6 +159,7 @@ export const CryptoDisplay = () => {
             ) : <Skeleton w="md" height="20px" />
           }
         </HStack>
+      
 
 
     </>
