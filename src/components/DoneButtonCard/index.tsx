@@ -27,6 +27,7 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
         p={3}
         borderTopRightRadius="2xl"
         borderTopLeftRadius="2xl"
+        boxShadow="lg"
         w="260px"
         zIndex="overlay"
         position="fixed"
