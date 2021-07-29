@@ -5,6 +5,7 @@ import {
   SET_PRICE,
   ARROW_UP,
   SWIPE_THRU,
+  ON_DRAG,
   CryptoAction
  } from './actions';
 
@@ -38,9 +39,16 @@ export const ContextReducer = (context:CryptoContextType, action: CryptoAction):
     case SWIPE_THRU:
       return {
         ...context,
+        // isSwiping: action.isSwiping,
         userCurrentPair: action.payload
       }  
       break;
+      case ON_DRAG:
+        return {
+          ...context,
+          isSwiping: action.isSwiping,
+        }  
+        break;
     default:
       return {...context}
       break;

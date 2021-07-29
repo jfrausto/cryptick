@@ -2,8 +2,6 @@ import React, {useContext, useEffect, useReducer} from 'react';
 import { ContextReducer } from '../components/helpers/reducer';
 import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
-import { Container } from '../components/Container';
-import { DarkModeSwitch } from '../components/DarkModeSwitch';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
 import { CryptoDisplay } from '../components/CryptoDisplay';
 
@@ -29,9 +27,9 @@ const CryptoDashboard :React.FC = () => {
     <>
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
-            <AnimatePresence>
-              <CryptoDisplay />
-            </AnimatePresence>
+              <AnimatePresence>
+                <CryptoDisplay />
+              </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
     </>
