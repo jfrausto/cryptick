@@ -27,10 +27,17 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Container
               p={1}
               height="100vh"
-              // width="100%"
-              overflowY="auto"
+              overflowY="scroll"
+              // css={{ 
+              //   '&::-webkit-scrollbar': {
+              //     width: '4px',
+              //   },
+              //   '&::-webkit-scrollbar-track': {
+              //     width: '6px',
+              //   },
+              //  }}
               // style={{ scrollbarWidth: "none" }}
-              overflowX="hidden"
+              overflowX="clip"
             >
                   <Component {...pageProps} />
             </Container>
