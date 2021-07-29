@@ -4,6 +4,7 @@ import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
 import { CryptoDisplay } from '../components/CryptoDisplay';
+import { VStack } from '@chakra-ui/react';
 
 
 const CryptoDashboard :React.FC = () => {
@@ -25,13 +26,17 @@ const CryptoDashboard :React.FC = () => {
 
   return (
     <>
+      <VStack
+        maxW="375px"
+      >
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
               <AnimatePresence>
-                <CryptoDisplay />
+                  <CryptoDisplay />
               </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
+      </VStack>
     </>
   )
 }

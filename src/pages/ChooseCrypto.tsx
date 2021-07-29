@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   Flex,
   Heading,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 // import router from 'next/router';
 import { useRouter } from "next/router";
@@ -11,6 +11,8 @@ import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
+import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import EditButton from '../components/EditButton';
 // import { CryptoNames } from "../components/helpers/buildCryptoCard";
 
 const ChooseCrypto: React.FC = () => {
@@ -71,12 +73,15 @@ const ChooseCrypto: React.FC = () => {
     <>
       <VStack
         pb={16}
+        // bg="red"
+        // w="375px"
       >
         <Heading
-          size="lg"
-          alignSelf="center"
+          size="md"
+          // alignSelf="center"
+          pt="13px"
           >
-          Choose Favorites
+          choose favorites
         </Heading>
         <Flex
           flexDir="row"
@@ -84,10 +89,13 @@ const ChooseCrypto: React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          maxWidth="400px"
-          marginX="auto"
-          p="4"
-          px="2"
+          w="375px"
+          // maxWidth="375px"
+          // overflowY="auto"
+          // marginX="auto"
+          // py={3}
+          // pt={2}
+          // px={1}
           >
           {
             apiData.sort(compareCryptoNames).map( data => (
@@ -109,10 +117,11 @@ const ChooseCrypto: React.FC = () => {
           
         </Flex>
       </VStack>
-        <DoneButtonCard
-          handleDone={handleDone}
-          handleReset={handleReset}
-          />
+      <DoneButtonCard
+        handleDone={handleDone}
+        handleReset={handleReset}
+      />
+      
     </>
 
   )

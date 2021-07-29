@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {  VStack, Box, Button, Text, useColorMode } from '@chakra-ui/react';
+import {  VStack, Box, Button, Text, useColorMode, Code } from '@chakra-ui/react';
 import { PageContext } from '../CryptoContext';
 
 interface DoneCardProps {
@@ -13,7 +13,7 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
   const { colorMode } = useColorMode();
   const themeBg = {
     light: "white",
-    dark: "blue.900"
+    dark: "gray.800"
   };
   const themeText = {
     light: "blue.900",
@@ -24,39 +24,50 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
   return (
     <>
       <VStack
-        p={4}
+        p={3}
         borderTopRightRadius="2xl"
         borderTopLeftRadius="2xl"
+        boxShadow="lg"
+        w="260px"
         zIndex="overlay"
         position="fixed"
-        bottom="0"
+        bottom="0rem"
         bg={themeBg[colorMode]}
         color={themeText[colorMode]}
       >
 
-        <Box>
+        <Box
+          mb="3px"
+        >
           <Text
-            fontStyle="italic"
+            fontStyle="bold"
           >
-            {pageContext.allUserPairs.length} Favorites
+            <Code mr={1} py={1} px={2}>{pageContext.allUserPairs.length}</Code> favorites
           </Text>
         </Box>
 
         <Box>
           <Button
-            colorScheme="cyan"
-            variant="outline"
-            mr={1}
+            // colorScheme="red"
+            variant="ghost"
+            mr={3}
             onClick={handleReset}
+            _focus={{ 
+              outline: "none"
+            }}
           >
-            Reset
+            reset
           </Button>
           <Button
-            colorScheme="cyan"
-            ml={1}
+            colorScheme="green"
+            ml={3}
             onClick={handleDone}
+            isDisabled={pageContext.allUserPairs.length === 0}
+            _focus={{ 
+              outline: "none"
+            }}
           >
-            Done
+            done
           </Button>
         </Box>
 

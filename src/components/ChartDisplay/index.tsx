@@ -1,5 +1,5 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { HStack, Button } from '@chakra-ui/react';
+import { HStack, Button, VStack, useColorMode } from '@chakra-ui/react';
 import React, {useEffect, useContext, useState, MouseEventHandler} from 'react';
 // import { MouseEventHandler } from 'react';
 import {VictoryLine} from 'victory';
@@ -30,6 +30,7 @@ const ChartDisplay = () => {
   const [lineData, setLineData] = useState<lineDataCoordinates[]>([{x: 0, y: 0}]);
   const [granularity, setGranularity] = useState<number>(900);
   const lineColor = useColorModeValue("#000000", "#FFFFFF");
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     // define api call
@@ -83,6 +84,11 @@ const ChartDisplay = () => {
     }
   ];
 
+  const bgColor = {
+    light: "gray.300",
+    dark: "gray.800"
+  }
+
   const fetchHistoricalData = async () => {
     if(context.userCurrentPair[0]===undefined){
       // return array length 0 for error catch
@@ -97,32 +103,39 @@ const ChartDisplay = () => {
 
   return (
     <>
-      <VictoryLine
-        style={{ data: { stroke: lineColor} }}
-        data={lineData}
-      />
-
-      <HStack>
-      {
-        timeIntervalArray.map( (interval) => <Button
-          key={interval.gran}
-          variant="ghost"
-          size="sm"
-          isActive={interval.gran === granularity ? true : false}
-          _focus={{ 
-              outline: "none"
-            }}
-          onClick={ (e) => {
-            e.preventDefault()
-            setGranularity(interval.gran)
-          }}
+      
+        <VStack
+          maxW="350px"
+          bg={bgColor[colorMode]}
+          borderRadius="lg"
+          boxShadow="lg"
         >
-          {interval.timeDisplay}
-        </Button>
-            
-        )
-      }
-      </HStack>
+          <VictoryLine
+            style={{ data: { stroke: lineColor} }}
+            data={lineData}
+            />
+        </VStack>
+        <HStack>
+        {
+          timeIntervalArray.map( (interval) => <Button
+            key={interval.gran}
+            variant="ghost"
+            size="xs"
+            isActive={interval.gran === granularity ? true : false}
+            _focus={{ 
+                outline: "none"
+              }}
+            onClick={ (e) => {
+              e.preventDefault()
+              setGranularity(interval.gran)
+            }}
+          >
+            {interval.timeDisplay}
+          </Button>
+              
+          )
+        }
+        </HStack>
     </>
   )
 };

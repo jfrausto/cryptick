@@ -9,15 +9,18 @@ export const DarkModeSwitch = () => {
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
   return (
     <IconButton
-      aria-label={`Switch to ${text} mode`}
-      size="md"
-      color="current"
-      position="fixed"
-      top="0.6rem"
-      right="0.6rem"
-      zIndex="overlay"
-      variant="ghost"
-      onClick={toggleColorMode}
+    position="absolute"
+    top="0rem"
+    right="0.5rem"
+    zIndex="overlay"
+    // color="current"
+    variant="ghost"
+    size="sm"
+    aria-label={`Switch to ${text} mode`}
+    onClick={toggleColorMode}
+      _focus={{ 
+        outline: "none"
+      }}
       icon={<SwitchIcon />}
     />
   )
