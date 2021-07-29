@@ -10,11 +10,11 @@ const Index = () => {
     <>
       <IconButton
         variant="ghost"
-        position="fixed"
-        top="0.6rem"
-        left="0.6rem"
+        position="absolute"
+        top="0rem"
+        left="0.5rem"
         zIndex="overlay"
-        size="md"
+        size="sm"
         aria-label="edit favorites"
         icon={<EditIcon/>}
         isDisabled={ router.pathname === "/ChooseCrypto" ? 
@@ -23,6 +23,9 @@ const Index = () => {
         onClick={ (e) => {
           e.preventDefault();
           router.push("/ChooseCrypto");
+        }}
+        _focus={{ 
+          outline: "none"
         }}
       />
     </>

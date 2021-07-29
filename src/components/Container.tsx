@@ -1,7 +1,6 @@
 import React, {useState, useMemo} from 'react';
 import { Flex, useColorMode, FlexProps, DarkMode } from '@chakra-ui/react';
-import { DarkModeSwitch } from './DarkModeSwitch';
-import EditButton from './EditButton';
+
 import { PageContext, startPage } from './CryptoContext';
 
 export const Container = (props: FlexProps) => {
@@ -29,7 +28,7 @@ export const Container = (props: FlexProps) => {
       alignItems="center"
       justifyContent="flex-start"
       bg={bgColor[colorMode]}
-      backgroundImage={bgGradient[colorMode]}
+      // backgroundImage={bgGradient[colorMode]}
       color={color[colorMode]}
       {...props}
     >
@@ -37,8 +36,6 @@ export const Container = (props: FlexProps) => {
 
         {props.children}
       </PageContext.Provider>
-      <EditButton />
-      <DarkModeSwitch />
       </Flex>
   )
 }

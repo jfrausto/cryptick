@@ -6,8 +6,6 @@ import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
 // import { CryptoNames } from './helpers/buildCryptoCard';
 import { CryptoNames } from '../helpers/buildCryptoCard';
 
-
-
 interface CardPropType {
   tickerName: string,
   fullName: string,
@@ -33,13 +31,13 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
   }, [pageContext.allUserPairs])
 
   const bgColor = {
-    light: "green.100",
-    dark: "gray.800"
+    light: "gray.300",
+    dark: "gray.700"
   };
   
-  const colorText = {
-    light: "gray.800",
-    dark: "white"
+  const colorSubtext = {
+    light: "gray.600",
+    dark: "gray.100"
   }
   
   const bgSelectedColor = {
@@ -72,38 +70,42 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
     <>
       <Box
         position="relative"
-        borderRadius="2xl"
         w="150px"
         maxW="300px"
         p="10px"
         px="5px"
         m="1"
-        height="180px"
+        height="150px"
         userSelect="none"
         onClick={(e) => handleAddCrypto(e)}
-        color={ 
-          isSelected ?
-          selectedTextColor[colorMode]
-          : colorText[colorMode]
+        borderRadius="2xl"
+        border={ isSelected ? 
+          "2px solid green"
+          : "none"
         }
-        bg={
-          isSelected ? 
-          bgSelectedColor[colorMode]
-          : bgColor[colorMode]
-        }
+        // color={ 
+        //   isSelected ?
+        //   selectedTextColor[colorMode]
+        //   : colorText[colorMode]
+        // }
+        bg={bgColor[colorMode]}
+        _hover={{ 
+          cursor: "pointer"
+         }}
       >
-        {
-          isSelected ? 
-          <StarBadge/>
-          : ""
-        }
+
         <VStack>
           <Heading
-          size="md"
+            size="sm"
           >
             {tickerName}
           </Heading>
-          <Text fontStyle="italic" fontSize="xs" textAlign="center">
+          <Text 
+            fontStyle="italic" 
+            fontSize="xs" 
+            textAlign="center"
+            color={colorSubtext[colorMode]}
+          >
             {fullName}
           </Text>
 

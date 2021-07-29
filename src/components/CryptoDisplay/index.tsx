@@ -127,7 +127,10 @@ export const CryptoDisplay = () => {
               }}
             
           >
-            <VStack pt="10vh" spacing={2}
+            <VStack 
+              pt="10vh"
+              bg="red"
+              spacing={2}
               _hover={{ 
                 cursor: "grab"
               }}

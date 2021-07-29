@@ -11,6 +11,8 @@ import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
+import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import EditButton from '../components/EditButton';
 // import { CryptoNames } from "../components/helpers/buildCryptoCard";
 
 const ChooseCrypto: React.FC = () => {
@@ -71,12 +73,15 @@ const ChooseCrypto: React.FC = () => {
     <>
       <VStack
         pb={16}
+        w="375px"
+        position="relative"
       >
         <Heading
-          size="lg"
+          size="md"
           alignSelf="center"
+          pt="13px"
           >
-          Choose Favorites
+          choose favorites
         </Heading>
         <Flex
           flexDir="row"
@@ -86,8 +91,9 @@ const ChooseCrypto: React.FC = () => {
           alignContent="space-around"
           maxWidth="400px"
           marginX="auto"
-          p="4"
-          px="2"
+          // py={3}
+          pt={2}
+          px={1}
           >
           {
             apiData.sort(compareCryptoNames).map( data => (
@@ -108,11 +114,14 @@ const ChooseCrypto: React.FC = () => {
           }
           
         </Flex>
+      <EditButton />
+      <DarkModeSwitch />
       </VStack>
         <DoneButtonCard
           handleDone={handleDone}
           handleReset={handleReset}
           />
+      
     </>
 
   )
