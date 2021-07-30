@@ -34,7 +34,7 @@ export const Display24Hr:React.FC = () => {
   return (
     <>
       {
-        context.price && !context.isSwiping ? 
+        context.price !== 0.00 && !context.isSwiping ? 
           <Stat as={Center}>
             <StatHelpText
             fontWeight="bold"

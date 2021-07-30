@@ -86,7 +86,7 @@ const ChartDisplay = () => {
 
   const bgColor = {
     light: "gray.300",
-    dark: "gray.800"
+    dark: "#21293b"
   }
 
   const fetchHistoricalData = async () => {

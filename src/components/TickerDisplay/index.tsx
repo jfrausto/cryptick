@@ -5,7 +5,7 @@ import { PriceDisplay } from '../PriceDisplay';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
 import { Display24Hr } from '../Display24Hr';
 import { use24HrPercentage } from '../helpers/use24HrPercentage';
-import { ON_DRAG } from '../helpers/reducer/actions';
+import { ON_DRAG, CLEAN_UP } from '../helpers/reducer/actions';
 
 
 // prop types <any> for now
@@ -42,7 +42,11 @@ export const TickerDisplay:React.FC = () => {
       // cleanup/close websocket
       console.log("closing websocket...");
       webSocket.current!.close();
-      console.log("websocket closed")
+      console.log("websocket closed");
+
+      // ! reset price context here???
+      dispatch({ type: CLEAN_UP, price: 0.00});
+
     }
   }, [context.userCurrentPair]);
 

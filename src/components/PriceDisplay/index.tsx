@@ -11,21 +11,21 @@ export const  PriceDisplay:React.FC = () => {
     <>
       <VStack>
         {
-        context.price && !context.isSwiping ? 
+        context.price !== 0.00 && !context.isSwiping ? 
         <PriceArrows/> :
         <SkeletonCircle size="9"/>
         }
       </VStack>
       {/* onChange? something to change the state..... */}
       <Box fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
-        {context.price && !context.isSwiping ? `${Number(context.price).toLocaleString(undefined, 
+        {context.price !== 0.00 && !context.isSwiping ? `${Number(context.price).toLocaleString(undefined, 
           {
             style: "currency",
             currency: "USD",
             minimumFractionDigits: 3,
             maximumFractionDigits: 3
           }
-          )}` : <Skeleton minW="230px" height="51px" mb="10px" borderRadius="2xl" />}
+          )}` : <Skeleton minW="230px" height="54px" mb="10px" borderRadius="2xl" />}
       </Box>
     </>
   )
