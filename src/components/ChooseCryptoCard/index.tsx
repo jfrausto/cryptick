@@ -1,18 +1,21 @@
 import React, {useState, useEffect, useContext, BaseSyntheticEvent} from 'react';
-import { VStack, Heading, Text, Box, useColorMode } from '@chakra-ui/react';
-import StarBadge from '../StarBadge';
+import { VStack, Heading, Text, Box, useColorMode, Center } from '@chakra-ui/react';
+// import StarBadge from '../StarBadge';
 import {PageContext } from '../CryptoContext';
 import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
 // import { CryptoNames } from './helpers/buildCryptoCard';
 import { CryptoNames } from '../helpers/buildCryptoCard';
+import Image from 'next/image';
+
 
 interface CardPropType {
   tickerName: string,
   fullName: string,
-  prevSelected: boolean
+  prevSelected: boolean,
+  iconSrc: any
 };
 
-const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSelected } ) => {
+const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSelected, iconSrc } ) => {
 
   const { colorMode } = useColorMode()
   const { pageContext, setPageContext } = useContext(PageContext);
@@ -72,7 +75,8 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
         // position="static"
         w="135px"
         height="150px"
-        p={2}
+        py={1}
+        px="5px"
         m={1}
         userSelect="none"
         onClick={(e) => handleAddCrypto(e)}
@@ -87,19 +91,29 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
           cursor: "pointer"
         }}
       >
-        <VStack
+
+          <VStack
           textAlign="center"
-        >
+          >
           <Heading
             size="sm"
+            pb={3}
           >
             {tickerName}
           </Heading>
+          <Image 
+            src={iconSrc}
+            // blurDataURL={Img}
+            // placeholder="blur"
+            width="32px"
+            height="32px"
+            />
+
           <Text 
             fontStyle="italic" 
-            fontSize="xs" 
+            fontSize="15px" 
             color={colorSubtext[colorMode]}
-          >
+            >
             {fullName}
           </Text>
         </VStack>

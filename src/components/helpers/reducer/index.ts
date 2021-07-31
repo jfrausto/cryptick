@@ -6,6 +6,7 @@ import {
   ARROW_UP,
   SWIPE_THRU,
   ON_DRAG,
+  CLEAN_UP,
   CryptoAction
  } from './actions';
 
@@ -41,6 +42,13 @@ export const ContextReducer = (context:CryptoContextType, action: CryptoAction):
         ...context,
         // isSwiping: action.isSwiping,
         userCurrentPair: action.payload
+      }  
+      break;
+    case CLEAN_UP:
+      return {
+        ...context,
+        // isSwiping: action.isSwiping,
+        price: action.price
       }  
       break;
       case ON_DRAG:
