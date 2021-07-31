@@ -1,6 +1,7 @@
 export interface CryptoNames {
   tickerName: string,
-  fullName: string
+  fullName: string,
+  iconSrc?: any
 }
 
 export const matchCryptoInfo = (arr1: any, arr2: any) => {

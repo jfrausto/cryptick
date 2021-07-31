@@ -13,6 +13,7 @@ import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import EditButton from '../components/EditButton';
+import getCryptoIcon from "../components/helpers/getCryptoIcon";
 // import { CryptoNames } from "../components/helpers/buildCryptoCard";
 
 const ChooseCrypto: React.FC = () => {
@@ -26,7 +27,31 @@ const ChooseCrypto: React.FC = () => {
   useEffect(() => {
     const getApiData = async () => {
       const cryptoProductsList = await fetchCyrptoProducts();
-      setApiData(cryptoProductsList);
+      // ! import all the icons and map add them to the matching crypto object 
+      // for loop
+      // create a new array that 
+      // iterate through the crypto products list;
+      // import the appropriate icon that matches this product
+      // add the icon, along with the ticker name and full name to the new array
+      // set this newly built array as the apiData.
+      // ! then you can pass the props to the crypto card component
+      const appendIconArray:any  = [];
+      // using newArray as the appended array makes it into type Promise.
+      const newArray = cryptoProductsList.map( async (tickerInfo) => {
+        const icon = getCryptoIcon(tickerInfo.tickerName.toLowerCase());
+        console.table({
+          tickerName: tickerInfo.tickerName,
+          fullName: tickerInfo.fullName,
+          iconSrc: icon
+        });
+        appendIconArray.push({
+          tickerName: tickerInfo.tickerName,
+          fullName: tickerInfo.fullName,
+          iconSrc: icon
+        })
+      });
+      console.table(appendIconArray);
+      setApiData(appendIconArray);
     }
 
     getApiData();
@@ -72,7 +97,7 @@ const ChooseCrypto: React.FC = () => {
   return (
     <>
       <VStack
-        pb={16}
+        pb={20}
         // bg="red"
         // w="375px"
       >
@@ -105,12 +130,16 @@ const ChooseCrypto: React.FC = () => {
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={true}
+                iconSrc={data.iconSrc}
+
               /> :
               <ChooseCryptoCard
                 key={data.tickerName}
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={false}
+                iconSrc={data.iconSrc}
+
               />
             ))
           }

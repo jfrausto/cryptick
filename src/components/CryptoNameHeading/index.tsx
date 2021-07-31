@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Heading, Center, Skeleton } from '@chakra-ui/react';
+import { Heading, Center, Skeleton, useColorMode } from '@chakra-ui/react';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { ON_DRAG } from '../helpers/reducer/actions';
 
@@ -8,6 +8,7 @@ export const CryptoNameHeading = () => {
   
   const { context } = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     // 
@@ -17,7 +18,12 @@ export const CryptoNameHeading = () => {
       console.log(`cleaning up CryptoNameHeading: ${context.userCurrentPair[0]}`);
       dispatch({type:ON_DRAG, isSwiping: true});
     }
-  }, [context.userCurrentPair])
+  }, [context.userCurrentPair]);
+
+  const colorSubtext = {
+    light: "gray.600",
+    dark: "gray.200"
+  }
 
   return (
     <>
@@ -32,6 +38,7 @@ export const CryptoNameHeading = () => {
       <Heading
         size="sm"
         marginBottom="10"
+        color={colorSubtext[colorMode]}
       >
         {
           context.price && !context.isSwiping ? 
