@@ -35,23 +35,23 @@ const ChooseCrypto: React.FC = () => {
       // add the icon, along with the ticker name and full name to the new array
       // set this newly built array as the apiData.
       // ! then you can pass the props to the crypto card component
-      const appendIconArray:any  = [];
-      // using newArray as the appended array makes it into type Promise.
-      const newArray = cryptoProductsList.map( async (tickerInfo) => {
-        const icon = getCryptoIcon(tickerInfo.tickerName.toLowerCase());
-        console.table({
-          tickerName: tickerInfo.tickerName,
-          fullName: tickerInfo.fullName,
-          iconSrc: icon
-        });
-        appendIconArray.push({
-          tickerName: tickerInfo.tickerName,
-          fullName: tickerInfo.fullName,
-          iconSrc: icon
-        })
-      });
-      console.table(appendIconArray);
-      setApiData(appendIconArray);
+      // const appendIconArray:any  = [];
+      // // using newArray as the appended array makes it into type Promise.
+      // const newArray = cryptoProductsList.map( (tickerInfo) => {
+      //   const icon = getCryptoIcon(tickerInfo.tickerName.toLowerCase());
+      //   console.table({
+      //     tickerName: tickerInfo.tickerName,
+      //     fullName: tickerInfo.fullName,
+      //     iconSrc: icon
+      //   });
+      //   appendIconArray.push({
+      //     tickerName: tickerInfo.tickerName,
+      //     fullName: tickerInfo.fullName,
+      //     iconSrc: icon
+      //   })
+      // });
+      // console.table(appendIconArray);
+      setApiData(cryptoProductsList);
     }
 
     getApiData();
@@ -100,6 +100,7 @@ const ChooseCrypto: React.FC = () => {
         pb={20}
         // bg="red"
         // w="375px"
+        
       >
         <Heading
           size="md"
@@ -114,7 +115,9 @@ const ChooseCrypto: React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          w="375px"
+          // w="375px"
+          w={["375px", "100%", "100%", "100%"]}
+          maxW={["375px", "600px", "600px", "600px"]}
           // maxWidth="375px"
           // overflowY="auto"
           // marginX="auto"
@@ -130,7 +133,7 @@ const ChooseCrypto: React.FC = () => {
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={true}
-                iconSrc={data.iconSrc}
+                // iconSrc={data.iconSrc}
 
               /> :
               <ChooseCryptoCard
@@ -138,7 +141,7 @@ const ChooseCrypto: React.FC = () => {
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={false}
-                iconSrc={data.iconSrc}
+                // iconSrc={data.iconSrc}
 
               />
             ))
