@@ -40,8 +40,9 @@ export const Container = (props: FlexProps) => {
           <VStack
             position="relative"
             // h="1000px"
-            w="375px"
-            maxW="375px"
+            w={["375px", "100%", "100%", "100%"]}
+            maxW={["375px", "600px", "600px", "600px"]}
+            // bg="purple"
             // overflowY="auto"
             // top="0"
             // bottom="0"
