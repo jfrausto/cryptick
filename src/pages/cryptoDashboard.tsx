@@ -10,14 +10,21 @@ import { VStack } from '@chakra-ui/react';
 const CryptoDashboard :React.FC = () => {
 
   const [context, dispatch] = useReducer(ContextReducer, startInApp);
-  const { pageContext } = useContext(PageContext);
+  const { pageContext, setPageContext } = useContext(PageContext);
 
 
   useEffect(() => {
-    console.log("about to dispatch and set current pair...")
+    let localStore;
+    if(localStorage.getItem("savedPairs")){
+      localStore = JSON.parse(localStorage.getItem("savedPairs")!)
+      // console.table(localStore);
+      setPageContext!({ ...pageContext, allUserPairs: localStore });
+    }
+
+    console.log("about to dispatch and set current pair...");
     dispatch({
       type: SET_CURRENT_PAIR,
-      payload: [pageContext.allUserPairs[0]]
+      payload: localStore ? [localStore[0]] : [pageContext.allUserPairs[0]]
     });
     return () => {
       console.log("cleaning up in cryptoDashboard");
