@@ -111,8 +111,8 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
             icon ? 
             <Image 
               src={icon}
-              // loading="eager"
-              priority={true}
+              loading="eager"
+              // priority={true}
               width="32px"
               height="32px"
             /> 

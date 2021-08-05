@@ -56,10 +56,19 @@ const ChooseCrypto: React.FC = () => {
 
     getApiData();
 
+    if(localStorage.getItem("savedPairs")){
+      const localStore = JSON.parse(localStorage.getItem("savedPairs")!)
+      console.table(localStore);
+
+      setPageContext!({ ...pageContext, allUserPairs: localStore });
+    }
+
     //Occurs on mount
   }, []);
 
   const handleDone = (): void => {
+    // local storage here
+    localStorage.setItem("savedPairs", JSON.stringify(pageContext.allUserPairs));
     router.push("/cryptoDashboard");
   };
 
