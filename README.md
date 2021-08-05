@@ -1,33 +1,57 @@
-# Example app with [chakra-ui](https://github.com/chakra-ui/chakra-ui) and Typescript
+# CrypTick
 
-This example features how to use [chakra-ui](https://github.com/chakra-ui/chakra-ui) as the component library within a Next.js app with typescript.
+![GitHub](https://img.shields.io/github/license/JOCECODE/PucMan_Chase?style=plastic)
 
-Next.js and chakra-ui have built-in TypeScript declarations, so we'll get autocompletion for their modules straight away.
+## Table Of Contents
 
-We are connecting the Next.js `_app.js` with `chakra-ui`'s Provider and theme so the pages can have app-wide dark/light mode. We are also creating some components which shows the usage of `chakra-ui`'s style props.
+- [Description](#Description)
+- [User Story](#User-Story)
+- [Demo](#Demo)
+- [Installation & Resources](#Installation-&-Usage)
+- [License](#License)
+- [Questions](#Questions)
 
-## Deploy your own
+## Description
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+A minimalistic web application built using [Next.js](https://nextjs.org/), [Chakra UI](https://github.com/chakra-ui/chakra-ui), and TypeScript. Save and follow your favorite crypto currency's activity in the market like you are looking up the weather. This was built to present a simpler, more de-cluttered interface than most crypto currency apps. Designed for beginners in the crypto currency space and for people that want to quickly get a glance at the market.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-chakra-ui-typescript&project-name=with-chakra-ui-typescript&repository-name=with-chakra-ui-typescript)
+_\*You cannot buy or trade cryptos with this application. Prices are in USD. Listed cryptos are from [Coinbase's](https://www.coinbase.com/) current listings._
 
-## How to use
+## User-Story
 
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-chakra-ui-typescript with-chakra-ui-typescript-app
-# or
-yarn create next-app --example with-chakra-ui-typescript with-chakra-ui-typescript-app
+```
+AS A USER,
+I want to quickly and intuitively view the recent prices of my favorite crypto currencies, without navigating too much, so that I may get a simple, clear, and de-cluttered impression of the market
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Demo
 
-## Notes
+![CrypTick Dashboard](/screenshots/cryptick_demo_1.PNG?raw=true "CrypTick Dashboard")
 
-Chakra has supported Gradients and RTL in `v1.1`. To utilize RTL, [add RTL direction and swap](https://chakra-ui.com/docs/features/rtl-support).
+<!-- ![Vibee Homepage](./client/public/assets/images/README/Vibee1.PNG) -->
 
-If you don't have multi-direction app, you should make `<Html lang="ar" dir="rtl">` inside `_document.ts`.
+## Installation-&-Usage
+
+Developed using Next.js, a [React](https://reactjs.org/) framework, on the [Node.js](https://nodejs.org/) environment. After you clone this repository you must run `npm install` in `bash` to make sure all the dependencies, such as the crypto icon images, work properly.
+
+Some resources used to build this app include:
+
+- [Coinbase Pro API](https://docs.pro.coinbase.com/)
+  - Current list of their supported crypto currencies
+  - Websocket API to access the real-time price ticker of each crypto
+  - Historical data to display on a chart
+- [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons)
+  - npm package providing icons of varying styles and sizes for almost 500 crypto currencies
+- [Framer Motion](https://www.framer.com/motion/)
+  - open source motion library for React. Allows you to swipe!
+- [Victory](https://formidable.com/open-source/victory/)
+  - React component library for data visualization. Displays price information in customizable ways
+
+## License
+
+This project is covered under the **MIT** license -- see more info [here](https://opensource.org/licenses/MIT).
+
+## Questions
+
+- GitHub: [jfrausto](https://github.com/jfrausto)
+- If you have any further questions, you can reach me at _fraustojesse24@gmail.com_
