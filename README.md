@@ -21,7 +21,7 @@ _\*You cannot buy or trade cryptos with this application. Prices are in USD. Lis
 
 ```
 AS A USER,
-I want to quickly and intuitively view the recent prices of my favorite crypto currencies, without navigating too much, 
+I want to quickly and intuitively view the recent prices of my favorite crypto currencies 
 so that I may get a simple, clear, and de-cluttered impression of the market
 ```
 
