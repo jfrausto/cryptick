@@ -22,7 +22,7 @@ const Index = () => {
         }
         onClick={ (e) => {
           e.preventDefault();
-          router.push("/ChooseCrypto");
+          router.push("/");
         }}
         _focus={{ 
           outline: "none"
