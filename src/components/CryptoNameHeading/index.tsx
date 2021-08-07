@@ -29,25 +29,24 @@ const CryptoNameHeading = () => {
     <>
       {/* ! displays current pair in view */}
       <Heading as={Center}>
-        {
-          context.price && !context.isSwiping ? 
-          context.userCurrentPair[0].tickerName :
-          <Skeleton minW="220px" height="60px" borderRadius="2xl" />
-        }
+        
+          {/* context.price && !context.isSwiping ?  */}
+          {context.userCurrentPair[0].tickerName}
+          {/* <Skeleton minW="220px" height="58px" borderRadius="2xl" /> */}
+        
       </Heading>
       <Heading
         size="sm"
-        marginBottom="10"
         color={colorSubtext[colorMode]}
       >
-        {
-          context.price && !context.isSwiping ? 
-          context.userCurrentPair[0].fullName :
-          <Skeleton minW="150px" height="25px" borderRadius="2xl" />
-        }
+        
+          {/* context.price && !context.isSwiping ?  */}
+          {context.userCurrentPair[0].fullName}
+          {/* <Skeleton minW="150px" height="24px" borderRadius="2xl" /> */}
+        
       </Heading>
     </>
   )
 }
 
-export default CryptoNameHeading;
+export default CryptoNameHeading

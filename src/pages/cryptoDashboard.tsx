@@ -33,9 +33,7 @@ const CryptoDashboard :React.FC = () => {
 
   return (
     <>
-      <VStack
-        maxW="375px"
-      >
+
         <DispatchContext.Provider value={{dispatch}}>
           <CryptoContext.Provider value={{ context }}>
               <AnimatePresence>
@@ -43,7 +41,6 @@ const CryptoDashboard :React.FC = () => {
               </AnimatePresence>
           </CryptoContext.Provider>
         </DispatchContext.Provider>
-      </VStack>
     </>
   )
 }

@@ -124,7 +124,7 @@ const CryptoDisplay = () => {
           }}
         >
           <VStack 
-            pt="5vh"
+            mt="5vh"
             // bg="blue"
             spacing={2}
             _hover={{ 
@@ -137,9 +137,7 @@ const CryptoDisplay = () => {
             <ChartDisplay/>
           </VStack>
         </motion.div>
-        <HStack
-          mt={6}
-        >
+        <HStack>
           {
             context.userCurrentPair[0] ? 
             (
@@ -155,9 +153,6 @@ const CryptoDisplay = () => {
             ) : <Skeleton w="md" height="20px" />
           }
         </HStack>
-      
-
-
     </>
   )
 }
