@@ -4,7 +4,7 @@ import {
   VStack,
   Heading
 } from '@chakra-ui/react';
-import {NameInput} from "../components/NameInput";
+import NameInput from "../components/NameInput";
 
 const IntroName = () => (
   <>

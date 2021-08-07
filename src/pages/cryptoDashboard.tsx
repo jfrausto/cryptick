@@ -3,7 +3,7 @@ import { ContextReducer } from '../components/helpers/reducer';
 import { SET_CURRENT_PAIR } from '../components/helpers/reducer/actions';
 import { AnimatePresence} from 'framer-motion';
 import { CryptoContext, DispatchContext, PageContext ,startInApp } from '../components/CryptoContext';
-import { CryptoDisplay } from '../components/CryptoDisplay';
+import CryptoDisplay from '../components/CryptoDisplay';
 import { VStack } from '@chakra-ui/react';
 
 

@@ -11,24 +11,24 @@ const preventDefault = f => e => {
   f(e)
 }
 
-export const NameInput = () => {
-   const router = useRouter()
-   const [query, setQuery] = useState('')
+const NameInput = () => {
+  const router = useRouter()
+  const [query, setQuery] = useState('')
 
-   const handleParam = setValue => e => 
-   {setValue(e.target.value);
+  const handleParam = setValue => e => 
+  {setValue(e.target.value);
     }
 
-   const handleSubmit = preventDefault(() => {
+  const handleSubmit = preventDefault(() => {
         localStorage.setItem("userName", query);
-     router.push(
-       "/ChooseCrypto"
-     )
-   })
+    router.push(
+      "/ChooseCrypto"
+    )
+  })
 
-   return (
-     <form onSubmit={handleSubmit}>
-       <Input
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
     isInvalid
     type="text"
     name="userName"
@@ -44,6 +44,8 @@ export const NameInput = () => {
     textAlign="center"
     textColor="red"
   />
-     </form>
-   )
+    </form>
+  )
 }
+
+export default NameInput;

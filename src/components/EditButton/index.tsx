@@ -3,7 +3,7 @@ import { EditIcon } from '@chakra-ui/icons';
 import { IconButton } from '@chakra-ui/react';
 import { useRouter } from "next/router";
 
-const Index = () => {
+const EditButton = () => {
   const router = useRouter();
   return (
     <>
@@ -31,4 +31,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default EditButton;

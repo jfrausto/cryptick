@@ -3,13 +3,13 @@ import React, {useContext, useRef, useEffect} from 'react';
 import { Center} from '@chakra-ui/react';
 import { PriceDisplay } from '../PriceDisplay';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
-import { Display24Hr } from '../Display24Hr';
+import Display24Hr from '../Display24Hr';
 import { use24HrPercentage } from '../helpers/use24HrPercentage';
 import { ON_DRAG, CLEAN_UP } from '../helpers/reducer/actions';
 
 
 // prop types <any> for now
-export const TickerDisplay:React.FC = () => {
+const TickerDisplay:React.FC = () => {
 
   const {context} = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext)
@@ -105,3 +105,5 @@ export const TickerDisplay:React.FC = () => {
     </div>
   )
 }
+
+export default TickerDisplay;

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { CryptoContext } from '../CryptoContext';
 
 
-export const PriceArrows:React.FC = () => {
+const PriceArrows:React.FC = () => {
   
   const {context} = useContext(CryptoContext);
   const MotionTriangleUp = motion(TriangleUpIcon);
@@ -45,7 +45,9 @@ export const PriceArrows:React.FC = () => {
               duration: 0.9
             }}
           />
-         }
+        }
     </>
   )
 }
+
+export default PriceArrows;

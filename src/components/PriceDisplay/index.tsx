@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { VStack, Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import { CryptoContext } from '../CryptoContext';
-import { PriceArrows } from '../PriceArrows';
+import PriceArrows from '../PriceArrows';
 
 export const  PriceDisplay:React.FC = () => {
   const { context } = useContext(CryptoContext);

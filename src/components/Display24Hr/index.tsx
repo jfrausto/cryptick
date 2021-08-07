@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { CryptoContext } from '../CryptoContext';
 
-export const Display24Hr:React.FC = () => {
+const Display24Hr:React.FC = () => {
   const {context} = useContext(CryptoContext);
   const {colorMode} = useColorMode();
 
@@ -65,3 +65,5 @@ export const Display24Hr:React.FC = () => {
     </>
   )
 }
+
+export default Display24Hr;

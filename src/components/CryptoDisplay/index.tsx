@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef} from 'react';
 import { wrap } from 'popmotion';
-import { CryptoNameHeading } from '../CryptoNameHeading';
+import CryptoNameHeading from '../CryptoNameHeading';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
 import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
@@ -10,12 +10,12 @@ import {
   Box,
   Skeleton,
 } from '@chakra-ui/react';
-import { TickerDisplay} from "../TickerDisplay";
+import TickerDisplay from "../TickerDisplay";
 import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
 import CryptoDashIcon from '../CryptoDashIcon';
 
-export const CryptoDisplay = () => {
+const CryptoDisplay = () => {
 
   const { pageContext } = useContext(PageContext);
   const [[page, direction], setPage] = useState([0, 0]);
@@ -161,3 +161,5 @@ export const CryptoDisplay = () => {
     </>
   )
 }
+
+export default CryptoDisplay;

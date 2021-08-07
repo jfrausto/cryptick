@@ -4,7 +4,7 @@ import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { ON_DRAG } from '../helpers/reducer/actions';
 
 
-export const CryptoNameHeading = () => {
+const CryptoNameHeading = () => {
   
   const { context } = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext);
@@ -49,3 +49,5 @@ export const CryptoNameHeading = () => {
     </>
   )
 }
+
+export default CryptoNameHeading;
