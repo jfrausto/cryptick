@@ -4,13 +4,7 @@ import {
   VStack,
   Heading
 } from '@chakra-ui/react';
-
-import { DarkModeSwitch } from '../components/DarkModeSwitch';
-// import { CTA } from '../components/CTA';
-// import { Footer } from '../components/Footer';
-// import { TickerDisplay} from "../components/TickerDisplay";
 import {NameInput} from "../components/NameInput";
-import {Container} from '../components/Container';
 
 const IntroName = () => (
   <>
@@ -19,11 +13,8 @@ const IntroName = () => (
             Enter your name:
           </Heading>
           <NameInput/>
-
-
     </VStack>
   </>
 )
-
 
 export default IntroName;

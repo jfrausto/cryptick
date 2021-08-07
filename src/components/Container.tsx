@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react';
-import { Flex, useColorMode, FlexProps, VStack, Box, Center } from '@chakra-ui/react';
+import { Flex, useColorMode, FlexProps, VStack} from '@chakra-ui/react';
 
 import { PageContext, startPage } from './CryptoContext';
 import { DarkModeSwitch } from './DarkModeSwitch';

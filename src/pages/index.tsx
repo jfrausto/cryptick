@@ -4,17 +4,12 @@ import {
   Heading,
   VStack,
 } from "@chakra-ui/react";
-// import router from 'next/router';
 import { useRouter } from "next/router";
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
 import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import EditButton from '../components/EditButton';
-import getCryptoIcon from "../components/helpers/getCryptoIcon";
-// import { CryptoNames } from "../components/helpers/buildCryptoCard";
 
 const ChooseCrypto: React.FC = () => {
 

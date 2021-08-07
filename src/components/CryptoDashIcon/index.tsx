@@ -1,15 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Center} from '@chakra-ui/react';
-// chakra bolt svg as fallback
 import Generic from 'cryptocurrency-icons/128/color/generic.png'
-// import cryptoIcon from 'cryptocurrency-icons/128/color/ada.png';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CryptoContext} from '../CryptoContext';
 import getCryptoPng from '../helpers/getCryptoPng';
-
-
-
 
 const CryptoDashIcon: React.FC = () => {
 

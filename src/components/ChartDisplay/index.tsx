@@ -1,12 +1,9 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { HStack, Button, VStack, useColorMode } from '@chakra-ui/react';
-import React, {useEffect, useContext, useState, MouseEventHandler} from 'react';
-// import { MouseEventHandler } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import {VictoryLine} from 'victory';
-// import ChartButton from '../ChartButton';
 import { CryptoContext } from '../CryptoContext';
-// import {ButtonProps} from '@chakra-ui/react' 
-// import {} from '';
+
 
 interface lineDataCoordinates {
   x: number,
@@ -17,12 +14,6 @@ interface TimeIntervalBuckets {
   gran: number,
   timeDisplay: string
 }
-
-// interface timeEvent extends MouseEventHandler<ButtonProps> {
-//   sGranularity: number
-// }
-
-
 
 const ChartDisplay = () => {
 

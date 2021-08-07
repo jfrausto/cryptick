@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import { wrap } from 'popmotion';
 import { CryptoNameHeading } from '../CryptoNameHeading';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
-import { ON_DRAG, SWIPE_THRU, SET_CURRENT_PAIR } from '../helpers/reducer/actions';
+import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
 import {
   HStack,
@@ -11,13 +11,9 @@ import {
   Skeleton,
 } from '@chakra-ui/react';
 import { TickerDisplay} from "../TickerDisplay";
-// import Img from "../../public/logo.svg";
 import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
 import CryptoDashIcon from '../CryptoDashIcon';
-import { DarkModeSwitch } from '../DarkModeSwitch';
-import EditButton from '../EditButton';
-
 
 export const CryptoDisplay = () => {
 

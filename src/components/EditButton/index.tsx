@@ -1,7 +1,6 @@
 import React from 'react';
 import { EditIcon } from '@chakra-ui/icons';
 import { IconButton } from '@chakra-ui/react';
-// import router from 'next/router';
 import { useRouter } from "next/router";
 
 const Index = () => {

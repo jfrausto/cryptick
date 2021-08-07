@@ -1,15 +1,10 @@
 import React, {useState, useEffect, useContext, BaseSyntheticEvent} from 'react';
 import { VStack, Heading, Text, Box, useColorMode, SkeletonCircle  } from '@chakra-ui/react';
-// import StarBadge from '../StarBadge';
 import {PageContext } from '../CryptoContext';
 import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
-// import { CryptoNames } from './helpers/buildCryptoCard';
 import { CryptoNames } from '../helpers/buildCryptoCard';
 import Image from 'next/image';
-import Generic from 'cryptocurrency-icons/32/color/generic.png';
 import getCryptoIcon from '../helpers/getCryptoIcon';
-
-
 
 interface CardPropType {
   tickerName: string,

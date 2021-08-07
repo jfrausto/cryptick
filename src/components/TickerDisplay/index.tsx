@@ -1,8 +1,8 @@
   
 import React, {useContext, useRef, useEffect} from 'react';
-import { Button, Center} from '@chakra-ui/react';
+import { Center} from '@chakra-ui/react';
 import { PriceDisplay } from '../PriceDisplay';
-import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
+import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { Display24Hr } from '../Display24Hr';
 import { use24HrPercentage } from '../helpers/use24HrPercentage';
 import { ON_DRAG, CLEAN_UP } from '../helpers/reducer/actions';
@@ -11,7 +11,6 @@ import { ON_DRAG, CLEAN_UP } from '../helpers/reducer/actions';
 // prop types <any> for now
 export const TickerDisplay:React.FC = () => {
 
-  const {pageContext} = useContext(PageContext);
   const {context} = useContext(CryptoContext);
   const {dispatch} = useContext(DispatchContext)
   const webSocket = useRef<null | WebSocket >(null);
