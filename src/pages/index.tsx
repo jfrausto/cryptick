@@ -21,7 +21,7 @@ const ChooseCrypto: React.FC = () => {
 
   useEffect(() => {
     const getApiData = async () => {
-      const cryptoProductsList = await fetchCyrptoProducts();
+      const cryptoProductsList = await fetchCryptoProducts();
       // ! import all the icons and map add them to the matching crypto object 
       // for loop
       // create a new array that 
@@ -83,7 +83,7 @@ const ChooseCrypto: React.FC = () => {
   };
 
   // Should fetch the product information from coinbase
-  const fetchCyrptoProducts = async () => {
+  const fetchCryptoProducts = async () => {
     const res = await fetch("https://api.pro.coinbase.com/products");
     const data = await res.json();
     const cryptoUSD = data.filter((data: { quote_currency: string; }) => data.quote_currency === "USD");
