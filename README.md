@@ -5,9 +5,8 @@
 ## Table Of Contents
 
 - [Description](#Description)
-- [User Story](#User-Story)
 - [Demo](#Demo)
-- [Installation & Resources](#Installation-&-Usage)
+- [Installation & Resources](#Installation-&-Resources)
 - [License](#License)
 - [Questions](#Questions)
 
@@ -17,21 +16,13 @@ A minimalistic web application built using [Next.js](https://nextjs.org/), [Chak
 
 _\*You cannot buy or trade cryptos with this application. Prices are in USD. Listed cryptos are from [Coinbase's](https://www.coinbase.com/) current listings._
 
-## User-Story
-
-```
-AS A USER,
-I want to quickly and intuitively view the recent prices of my favorite crypto currencies 
-so that I may get a simple, clear, and de-cluttered impression of the market
-```
-
 ## Demo
 
 ![CrypTick Dashboard](/screenshots/cryptick_demo_1.PNG?raw=true "CrypTick Dashboard")
 
 <!-- ![Vibee Homepage](./client/public/assets/images/README/Vibee1.PNG) -->
 
-## Installation-&-Usage
+## Installation-&-Resources
 
 Developed using Next.js, a [React](https://reactjs.org/) framework, on the [Node.js](https://nodejs.org/) environment. After you clone this repository you must run `npm install` in `bash` to make sure all the dependencies, such as the crypto icon images, work properly.
 

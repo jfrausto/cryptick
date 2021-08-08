@@ -21,7 +21,6 @@ const ChartDisplay = () => {
   const { context } = useContext(CryptoContext);
   const { dispatch } = useContext(DispatchContext);
   const [lineData, setLineData] = useState<lineDataCoordinates[]>([{x: 0, y: 0}]);
-  // const [granularity, setGranularity] = useState<number>(900);
   const lineColor = useColorModeValue("#000000", "#FFFFFF");
   const { colorMode } = useColorMode();
 
