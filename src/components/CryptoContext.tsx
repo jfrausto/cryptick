@@ -6,14 +6,17 @@ export interface CryptoContextType {
   isSwiping: boolean
   price: number,
   isGoingUp: boolean,
-  dayChangePercentage: number
+  dayChangePercentage: number,
+  granularity: number
 }
 export const startInApp: CryptoContextType = {
   userCurrentPair: [{tickerName: "BTC", fullName: "Bitcoin"}],
   isSwiping: false,
   price: 0.00,
   isGoingUp: true,
-  dayChangePercentage: 0
+  dayChangePercentage: 0,
+  // 15 minute interval buckets
+  granularity: 900
 }
 
 // ABOUT TO ADD A CONTEXT

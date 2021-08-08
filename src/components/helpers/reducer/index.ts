@@ -7,7 +7,8 @@ import {
   SWIPE_THRU,
   ON_DRAG,
   CLEAN_UP,
-  CryptoAction
+  CryptoAction,
+  SET_GRAN
  } from './actions';
 
 export const ContextReducer = (context:CryptoContextType, action: CryptoAction):any => {
@@ -40,14 +41,18 @@ export const ContextReducer = (context:CryptoContextType, action: CryptoAction):
     case SWIPE_THRU:
       return {
         ...context,
-        // isSwiping: action.isSwiping,
         userCurrentPair: action.payload
+      }  
+      break;
+    case SET_GRAN:
+      return {
+        ...context,
+        granularity: action.granularity
       }  
       break;
     case CLEAN_UP:
       return {
         ...context,
-        // isSwiping: action.isSwiping,
         price: action.price
       }  
       break;

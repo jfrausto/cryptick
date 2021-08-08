@@ -2,7 +2,8 @@ import { useColorModeValue } from '@chakra-ui/color-mode';
 import { HStack, Button, VStack, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useContext, useState } from 'react';
 import {VictoryLine} from 'victory';
-import { CryptoContext } from '../CryptoContext';
+import { CryptoContext, DispatchContext } from '../CryptoContext';
+import { SET_GRAN } from '../helpers/reducer/actions';
 
 
 interface lineDataCoordinates {
@@ -18,8 +19,9 @@ interface TimeIntervalBuckets {
 const ChartDisplay = () => {
 
   const { context } = useContext(CryptoContext);
+  const { dispatch } = useContext(DispatchContext);
   const [lineData, setLineData] = useState<lineDataCoordinates[]>([{x: 0, y: 0}]);
-  const [granularity, setGranularity] = useState<number>(900);
+  // const [granularity, setGranularity] = useState<number>(900);
   const lineColor = useColorModeValue("#000000", "#FFFFFF");
   const { colorMode } = useColorMode();
 
@@ -45,8 +47,8 @@ const ChartDisplay = () => {
       setLineData(extractedInfo);
     }
     getHistoricalApi();
-    console.log(`granularity is ${granularity}`);
-  }, [context.userCurrentPair, granularity]);
+    console.log(`granularity is ${context.granularity}`);
+  }, [context.userCurrentPair, context.granularity]);
   
   const timeIntervalArray: TimeIntervalBuckets[] = [
     {
@@ -87,14 +89,13 @@ const ChartDisplay = () => {
     }
     const productName = `${context.userCurrentPair[0].tickerName}-USD`;
     // use current state of granularity
-    const res = await fetch(`https://api.pro.coinbase.com/products/${productName}/candles?granularity=${granularity}`);
+    const res = await fetch(`https://api.pro.coinbase.com/products/${productName}/candles?granularity=${context.granularity}`);
     const data = await res.json();
     return data;
   }
 
   return (
     <>
-      
         <VStack
           maxW="350px"
           bg={bgColor[colorMode]}
@@ -112,18 +113,17 @@ const ChartDisplay = () => {
             key={interval.gran}
             variant="ghost"
             size="xs"
-            isActive={interval.gran === granularity ? true : false}
+            isActive={interval.gran === context.granularity ? true : false}
             _focus={{ 
                 outline: "none"
               }}
             onClick={ (e) => {
               e.preventDefault()
-              setGranularity(interval.gran)
+              dispatch({type: SET_GRAN, granularity: interval.gran})
             }}
           >
             {interval.timeDisplay}
           </Button>
-              
           )
         }
         </HStack>
