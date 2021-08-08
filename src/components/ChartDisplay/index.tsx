@@ -1,14 +1,17 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { HStack, Button, VStack, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useContext, useState } from 'react';
-import {VictoryLine} from 'victory';
+import {VictoryAxis, VictoryCandlestick, VictoryChart} from 'victory';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { SET_GRAN } from '../helpers/reducer/actions';
 
 
-interface lineDataCoordinates {
+interface CandleStickData {
   x: number,
-  y: number
+  low: number,
+  high: number,
+  open: number,
+  close: number
 }
 
 interface TimeIntervalBuckets {
@@ -20,7 +23,7 @@ const ChartDisplay = () => {
 
   const { context } = useContext(CryptoContext);
   const { dispatch } = useContext(DispatchContext);
-  const [lineData, setLineData] = useState<lineDataCoordinates[]>([{x: 0, y: 0}]);
+  const [candleData, setCandleData] = useState<CandleStickData[]>([]);
   const lineColor = useColorModeValue("#000000", "#FFFFFF");
   const { colorMode } = useColorMode();
 
@@ -28,22 +31,28 @@ const ChartDisplay = () => {
     // define api call
     const getHistoricalApi = async () => {
       const results = await fetchHistoricalData();
-      const extractedInfo = [];
+      const extractedInfo: CandleStickData[] = [];
       // prevent operating on "N/A data"
       if (results.length===0){
         return;
       }
+      console.table(results);
       for (const bucket of results){
         // bucket[0] contains x-axis Time data in Number ISO 8601 format
         // take the average of the high and low of that time interval to get y-axis: price
-        extractedInfo.push({x: bucket[0], y: ((bucket[2]+bucket[1])/2)})
+        extractedInfo.push({
+          x: bucket[0],
+          low: bucket[1],
+          high: bucket[2],
+          open: bucket[3],
+          close: bucket[4]
+        })
       }
       // remember to reverse!
-      // cutting the amount of data points in half
-      // instead of max 300 candles, we get max 150
-      let removedExtractedInfo = extractedInfo.reverse().splice(0, Math.round(extractedInfo.length/2));
+      // removing 90% of retrieved data so candle stick chart looks good
+      let removedExtractedInfo = extractedInfo.reverse().splice(0, Math.round(extractedInfo.length*9/10));
       // update state of our line chart data
-      setLineData(extractedInfo);
+      setCandleData(extractedInfo);
     }
     getHistoricalApi();
     console.log(`granularity is ${context.granularity}`);
@@ -96,15 +105,27 @@ const ChartDisplay = () => {
   return (
     <>
         <VStack
-          maxW="350px"
+          maxW="375px"
           bg={bgColor[colorMode]}
           borderRadius="lg"
           boxShadow="lg"
+          pr="5"
+          pl="0"
         >
-          <VictoryLine
-            style={{ data: { stroke: lineColor} }}
-            data={lineData}
+          <VictoryChart
+            domainPadding={{ x: 5 }}
+          >
+            <VictoryCandlestick
+              data={candleData}
+              // padding={{ right:20 }}
             />
+            <VictoryAxis
+              dependentAxis
+              orientation="right"
+              offsetX={46}
+              style={{ tickLabels: {fontSize: 13, padding: 3} }}
+            />
+          </VictoryChart>
         </VStack>
         <HStack>
         {
