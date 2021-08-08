@@ -88,6 +88,20 @@ const ChartDisplay = () => {
   const bgColor = {
     light: "gray.300",
     dark: "#21293b"
+  };
+
+  const candleColorPos = {
+    light: "#276749",
+    dark: "#276749",
+  }
+  const candleColorNeg = {
+    light: "#9B2C2C",
+    dark: "#E53E3E",
+  }
+
+  const wickColor = {
+    light: "black",
+    dark: "#e6e6e6"
   }
 
   const fetchHistoricalData = async () => {
@@ -116,14 +130,30 @@ const ChartDisplay = () => {
             domainPadding={{ x: 5 }}
           >
             <VictoryCandlestick
+              candleColors={{ positive: candleColorPos[colorMode], negative: candleColorNeg[colorMode]}}
               data={candleData}
-              // padding={{ right:20 }}
+              style={{ 
+                data: {
+                  stroke: wickColor[colorMode]
+                }
+               }}
             />
             <VictoryAxis
               dependentAxis
               orientation="right"
               offsetX={46}
-              style={{ tickLabels: {fontSize: 13, padding: 3} }}
+              style={{ 
+                tickLabels: {
+                  fontSize: 14, 
+                  padding: 3,
+                  stroke: "gray",
+                  strokeWidth: 1
+                },
+                axis: {
+                  stroke: wickColor[colorMode],
+                  strokeWidth: 2
+                } 
+              }}
             />
           </VictoryChart>
         </VStack>
