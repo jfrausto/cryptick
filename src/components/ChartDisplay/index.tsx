@@ -128,6 +128,7 @@ const ChartDisplay = () => {
         >
           <VictoryChart
             domainPadding={{ x: 5 }}
+            animate={{ duration: 200 }}
           >
             <VictoryCandlestick
               candleColors={{ positive: candleColorPos[colorMode], negative: candleColorNeg[colorMode]}}
