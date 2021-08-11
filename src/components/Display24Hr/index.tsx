@@ -8,28 +8,11 @@ import {
   Skeleton,
 } from '@chakra-ui/react';
 import { CryptoContext } from '../CryptoContext';
+import { statTextGreen, statTextRed, statArrowGreen, statArrowRed } from './colors';
 
 const Display24Hr:React.FC = () => {
   const {context} = useContext(CryptoContext);
   const {colorMode} = useColorMode();
-
-  const statTextGreen = {
-    light: "green.800",
-    dark: "green.300"
-  };
-  const statTextRed = {
-    light: "red.800",
-    dark: "red.300"
-  };
-  const statArrowGreen = {
-    light: "green.800",
-    dark: "green.300"
-  };
-  const statArrowRed = {
-    light: "red.800",
-    dark: "red.300"
-  };
-
 
   return (
     <>

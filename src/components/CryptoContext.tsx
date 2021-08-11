@@ -1,14 +1,13 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
-import { CryptoAction } from '../components/helpers/reducer/actions';
-import { CryptoNames } from './helpers/buildCryptoCard';
-export interface CryptoContextType {
-  userCurrentPair: CryptoNames[],
-  isSwiping: boolean
-  price: number,
-  isGoingUp: boolean,
-  dayChangePercentage: number,
-  granularity: number
-}
+import { createContext } from 'react';
+// import { CryptoNames } from './helpers/buildCryptoCard';
+import { 
+  CryptoContextType, 
+  PageContextType ,
+  PageContextState,
+  ContextState,
+  DispatchState
+} from '../types';
+
 export const startInApp: CryptoContextType = {
   userCurrentPair: [{tickerName: "BTC", fullName: "Bitcoin"}],
   isSwiping: false,
@@ -19,34 +18,16 @@ export const startInApp: CryptoContextType = {
   granularity: 900
 }
 
-// ABOUT TO ADD A CONTEXT
-export interface PageContextType {
-  allUserPairs: CryptoNames[],
-}
-
 export const startPage: PageContextType = {
   allUserPairs: [],
 };
 
-export interface PageContextState {
-  pageContext: PageContextType,
-  setPageContext?: Dispatch<SetStateAction<PageContextType>>
-}
-
 const startPageContext: PageContextState = {
   pageContext: startPage
 }
-export interface ContextState {
-  context: CryptoContextType,
-  setContext?: Dispatch<SetStateAction<CryptoContextType>>
-}
+
 const startContext: ContextState = {
   context: startInApp
-}
-
-interface DispatchState {
-  dispatch: Dispatch<CryptoAction>,
-  setDispatch?: Dispatch<SetStateAction<Dispatch<CryptoAction>>>
 }
 
 const startDispatch: DispatchState = {

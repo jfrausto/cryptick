@@ -7,9 +7,10 @@ import {
 import { useRouter } from "next/router";
 import ChooseCryptoCard from '../components/ChooseCryptoCard';
 import {compareCryptoNames} from '../components/helpers/cryptoNameSort';
-import { matchCryptoInfo, CryptoNames } from '../components/helpers/buildCryptoCard';
+import { matchCryptoInfo } from '../components/helpers/buildCryptoCard';
 import DoneButtonCard from '../components/DoneButtonCard';
 import { PageContext } from "../components/CryptoContext";
+import { CryptoNames } from "../types";
 
 const ChooseCrypto: React.FC = () => {
 

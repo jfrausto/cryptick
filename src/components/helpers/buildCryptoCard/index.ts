@@ -1,8 +1,4 @@
-export interface CryptoNames {
-  tickerName: string,
-  fullName: string,
-  iconSrc?: any
-}
+import { CryptoNames } from "../../../types";
 
 export const matchCryptoInfo = (arr1: any, arr2: any) => {
   const cryptoInfo: CryptoNames[] = []

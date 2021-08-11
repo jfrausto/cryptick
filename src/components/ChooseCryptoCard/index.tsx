@@ -5,20 +5,16 @@ import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
 import { CryptoNames } from '../helpers/buildCryptoCard';
 import Image from 'next/image';
 import getCryptoIcon from '../helpers/getCryptoIcon';
+import { CryptoCardPropType } from '../../types';
+import { bgColor, colorSubtext } from './colors';
 
-interface CardPropType {
-  tickerName: string,
-  fullName: string,
-  prevSelected: boolean,
-  iconSrc?: any
-};
 
-const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSelected } ) => {
+const ChooseCryptoCard: React.FC<CryptoCardPropType> = ( {tickerName, fullName, prevSelected } ) => {
 
-  const { colorMode } = useColorMode()
   const { pageContext, setPageContext } = useContext(PageContext);
   const [isSelected, setSelected] = useState(false);
   const [icon, setIcon] = useState<string>();
+  const { colorMode } = useColorMode()
 
   // onMount check if we have been selected before,
   // and grab the icon; to lowercase to match the file path
@@ -33,27 +29,7 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
     if(pageContext.allUserPairs.length === 0){
       setSelected(false);
     }
-  }, [pageContext.allUserPairs])
-
-  const bgColor = {
-    light: "gray.300",
-    dark: "gray.700"
-  };
-  
-  const colorSubtext = {
-    light: "gray.600",
-    dark: "gray.100"
-  }
-  
-  const bgSelectedColor = {
-    light: "green.600",
-    dark: "green.500"
-  };
-
-  const selectedTextColor = {
-    light: "red.100",
-    dark: "white"
-  };
+  }, [pageContext.allUserPairs]);
 
     // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
@@ -69,7 +45,6 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
       }
       setPageContext!({...pageContext, allUserPairs: pageContext.allUserPairs.concat([chosenPair])});
     };
-
 
   return (
     <>
@@ -92,10 +67,9 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
           cursor: "pointer"
         }}
       >
-
-          <VStack
+        <VStack
           textAlign="center"
-          >
+        >
           <Heading
             size="sm"
             pb={3}
@@ -110,16 +84,13 @@ const ChooseCryptoCard: React.FC<CardPropType> = ( {tickerName, fullName, prevSe
               // priority={true}
               width="32px"
               height="32px"
-            /> 
-            :
-            <SkeletonCircle size="5" />
+            /> : <SkeletonCircle size="5" />
           }
-
           <Text 
             fontStyle="italic" 
             fontSize="15px" 
             color={colorSubtext[colorMode]}
-            >
+          >
             {fullName}
           </Text>
         </VStack>

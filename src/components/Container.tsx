@@ -12,10 +12,6 @@ const Container = (props: FlexProps) => {
 
   const providerValue = useMemo(() => ({ pageContext, setPageContext}), [pageContext, setPageContext])
 
-  const bgGradient = { 
-    light: 'linear-gradient(217deg, rgba(215,0,0,.4), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,215,0,.4), rgba(0,255,0,0) 70.71%),linear-gradient(336deg, rgba(0,0,215,.5), rgba(0,0,255,0) 70.71%);', 
-    dark: 'linear-gradient(217deg, rgba(215,0,0,.4), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,215,0,.4), rgba(0,255,0,0) 70.71%), linear-gradient(336deg, rgba(0,0,215,.5), rgba(0,0,255,0) 70.71%);' 
-  }
   const bgColor={
     light: 'gray.50', 
     dark: 'gray.900' 
@@ -31,7 +27,6 @@ const Container = (props: FlexProps) => {
       justifyContent="flex-start"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
-      // position="relative"
       {...props}
       >
       <PageContext.Provider value={providerValue}>
@@ -39,15 +34,13 @@ const Container = (props: FlexProps) => {
 
           <VStack
             position="relative"
-            // h="1000px"
             w={["375px", "100%", "100%", "100%"]}
             maxW={["375px", "600px", "600px", "600px"]}
-            // bg="purple"
-            // overflowY="auto"
-            // top="0"
-            // bottom="0"
           >
+            {/* each page goes here */}
             {props.children}
+
+            {/* absolutely positioned buttons fitted to this VStack */}
             <DarkModeSwitch/>
             <EditButton/>
 

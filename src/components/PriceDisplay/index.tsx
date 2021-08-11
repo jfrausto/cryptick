@@ -4,9 +4,9 @@ import { CryptoContext } from '../CryptoContext';
 import PriceArrows from '../PriceArrows';
 
 export const  PriceDisplay:React.FC = () => {
+  
   const { context } = useContext(CryptoContext);
   
-
   return (
     <>
       <VStack>

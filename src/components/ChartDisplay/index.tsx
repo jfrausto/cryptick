@@ -1,30 +1,17 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import { HStack, Button, VStack, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useContext, useState } from 'react';
 import {VictoryAxis, VictoryCandlestick, VictoryChart} from 'victory';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { SET_GRAN } from '../helpers/reducer/actions';
-
-
-interface CandleStickData {
-  x: number,
-  low: number,
-  high: number,
-  open: number,
-  close: number
-}
-
-interface TimeIntervalBuckets {
-  gran: number,
-  timeDisplay: string
-}
+import { CandleStickData } from '../../types';
+import { timeIntervalArray } from './time';
+import { bgColor, candleColorPos, candleColorNeg, wickColor } from './colors';
 
 const ChartDisplay = () => {
 
   const { context } = useContext(CryptoContext);
   const { dispatch } = useContext(DispatchContext);
   const [candleData, setCandleData] = useState<CandleStickData[]>([]);
-  const lineColor = useColorModeValue("#000000", "#FFFFFF");
   const { colorMode } = useColorMode();
 
   useEffect(() => {
@@ -54,55 +41,11 @@ const ChartDisplay = () => {
       // update state of our line chart data
       setCandleData(extractedInfo);
     }
+    // execute
     getHistoricalApi();
-    console.log(`granularity is ${context.granularity}`);
+
   }, [context.userCurrentPair, context.granularity]);
   
-  const timeIntervalArray: TimeIntervalBuckets[] = [
-    {
-      gran: 60,
-      timeDisplay: "1m"
-    },
-    {
-      gran: 300,
-      timeDisplay: "5m"
-    },
-    {
-      gran: 900,
-      timeDisplay: "15m"
-    },
-    {
-      gran: 3600,
-      timeDisplay: "1h"
-    },
-    {
-      gran: 21600,
-      timeDisplay: "6h"
-    },
-    {
-      gran: 86400,
-      timeDisplay: "1d"
-    }
-  ];
-
-  const bgColor = {
-    light: "gray.300",
-    dark: "#21293b"
-  };
-
-  const candleColorPos = {
-    light: "#276749",
-    dark: "#276749",
-  }
-  const candleColorNeg = {
-    light: "#9B2C2C",
-    dark: "#E53E3E",
-  }
-
-  const wickColor = {
-    light: "black",
-    dark: "#e6e6e6"
-  }
 
   const fetchHistoricalData = async () => {
     if(context.userCurrentPair[0]===undefined){
@@ -137,7 +80,7 @@ const ChartDisplay = () => {
                 data: {
                   stroke: wickColor[colorMode]
                 }
-               }}
+              }}
             />
             <VictoryAxis
               dependentAxis

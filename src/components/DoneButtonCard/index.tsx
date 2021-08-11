@@ -1,25 +1,13 @@
 import React, {useContext} from 'react';
 import {  VStack, Box, Button, Text, useColorMode, Code } from '@chakra-ui/react';
 import { PageContext } from '../CryptoContext';
-
-interface DoneCardProps {
-  handleDone: () => void,
-  handleReset: () => void
-}
+import { DoneCardProps } from '../../types';
+import { themeBg, themeText } from './colors';
 
 const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
 
   const { pageContext } = useContext(PageContext);
   const { colorMode } = useColorMode();
-  const themeBg = {
-    light: "white",
-    dark: "gray.800"
-  };
-  const themeText = {
-    light: "blue.900",
-    dark: "white"
-  }
-
 
   return (
     <>
@@ -35,7 +23,6 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
         bg={themeBg[colorMode]}
         color={themeText[colorMode]}
       >
-
         <Box
           mb="3px"
         >
@@ -45,10 +32,8 @@ const DoneButtonCard: React.FC<DoneCardProps> = ({handleDone, handleReset}) => {
             <Code mr={1} py={1} px={2}>{pageContext.allUserPairs.length}</Code> favorites
           </Text>
         </Box>
-
         <Box>
           <Button
-            // colorScheme="red"
             variant="ghost"
             mr={3}
             onClick={handleReset}

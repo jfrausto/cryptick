@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Heading, Center, Skeleton, useColorMode } from '@chakra-ui/react';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { ON_DRAG } from '../helpers/reducer/actions';
+import { colorSubtext } from './colors';
 
 
 const CryptoNameHeading = () => {
@@ -19,11 +20,6 @@ const CryptoNameHeading = () => {
       dispatch({type:ON_DRAG, isSwiping: true});
     }
   }, [context.userCurrentPair]);
-
-  const colorSubtext = {
-    light: "gray.600",
-    dark: "gray.200"
-  }
 
   return (
     <>

@@ -4,13 +4,11 @@ import { useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { CryptoContext } from '../CryptoContext';
 
-
 const PriceArrows:React.FC = () => {
   
   const {context} = useContext(CryptoContext);
   const MotionTriangleUp = motion(TriangleUpIcon);
   const MotionTriangleDown = motion(TriangleDownIcon);
-  // console.log(isGoingUp);
 
   return (
     <>
