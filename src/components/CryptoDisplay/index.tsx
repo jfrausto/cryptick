@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { wrap } from 'popmotion';
-import CryptoNameHeading from '../CryptoNameHeading';
 import { CryptoContext, DispatchContext, PageContext } from '../CryptoContext';
 import { ON_DRAG, SWIPE_THRU } from '../helpers/reducer/actions';
 import { motion } from 'framer-motion';
@@ -11,9 +10,11 @@ import {
   Skeleton,
 } from '@chakra-ui/react';
 import TickerDisplay from "../TickerDisplay";
+import CryptoNameHeading from '../CryptoNameHeading';
 import SwipeIndexCircle from '../SwipeIndexCircle';
 import ChartDisplay from '../ChartDisplay';
 import CryptoDashIcon from '../CryptoDashIcon';
+import NavigationCircles from '../NavigationCircles';
 import { variants, swipeConfidenceThreshold, swipePower } from './animate';
 
 const CryptoDisplay = () => {
@@ -79,20 +80,9 @@ const CryptoDisplay = () => {
             <ChartDisplay/>
           </VStack>
         </motion.div>
-        <HStack>
-          {
-            context.userCurrentPair[0] ? 
-            (
-              pageContext.allUserPairs.map( (pair) => <Box
-              key={pair.tickerName}
-              >{
-                pair.tickerName === context.userCurrentPair[0].tickerName ?
-                <SwipeIndexCircle isSelected={true}/> : <SwipeIndexCircle isSelected={false}/>
-              }
-              </Box>)
-            ) : <Skeleton w="md" height="20px" />
-          }
-        </HStack>
+        
+        <NavigationCircles />
+
     </>
   )
 }
