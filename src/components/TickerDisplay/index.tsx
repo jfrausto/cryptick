@@ -1,14 +1,13 @@
   
-import React, {useContext, useRef, useEffect} from 'react';
+import React, {useContext, useRef, useEffect, useMemo} from 'react';
 import { Center} from '@chakra-ui/react';
 import { PriceDisplay } from '../PriceDisplay';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import Display24Hr from '../Display24Hr';
 import { use24HrPercentage } from '../helpers/use24HrPercentage';
 import { ON_DRAG, CLEAN_UP } from '../helpers/reducer/actions';
+import { throttle } from 'lodash';
 
-
-// prop types <any> for now
 const TickerDisplay:React.FC = () => {
 
   const {context} = useContext(CryptoContext);
@@ -18,47 +17,49 @@ const TickerDisplay:React.FC = () => {
 
   // const url = "https://api.pro.coinbase.com";
 
+  const messageHandler = (e: { data: string; }) => {
+    let data = JSON.parse(e.data);
+    // console.log(data);
+    //sets price and 24h percent change
+    dispatch({ 
+      type: "set_price", 
+      price: data.price, 
+      percentageChange: use24HrPercentage(data.open_24h, data.price)
+    });
+  };
+
+  const throttledMessageHandler = useMemo( 
+    () => throttle(messageHandler, 400, { leading: false})
+    , [context.price, dispatch]
+  )
+
+
   // on first load of this component
   useEffect(() => {
 
-    
-    // dispatch({
-      //   type: "set_current_pair",
-      //   payload: [pageContext.allUserPairs[0]]
-      // });
-      // set current pair
       webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
       console.log("opening Websocket...")
       // when it opens start the stream
       webSocket.current.onopen = (e) => {
         console.log("Websocket opened!")
         dispatch({type: ON_DRAG, isSwiping: false})
-      startStream();
-      console.info(e);
-      // console.log()
+        startStream();
     }
     return () => {
       // cleanup/close websocket
-      console.log("closing websocket...");
       webSocket.current!.close();
-      console.log("websocket closed");
-
+      throttledMessageHandler.cancel();
       // ! reset price context here???
       dispatch({ type: CLEAN_UP, price: 0.00});
-
     }
   }, [context.userCurrentPair]);
 
   // on change of the price
   useEffect(() => {
-    // ? see differences ?
-    // ? console.log(price);
-    // ? console.log(priceRef.current )
     if (priceRef.current >= context.price){
       dispatch({ type: "arrow_up", payload: false });
     } else {
       dispatch({ type: "arrow_up", payload: true });
-
     }
     // update previous price reference
     priceRef.current = context.price;
@@ -80,20 +81,11 @@ const TickerDisplay:React.FC = () => {
     webSocket.current!.onerror = (e) => {
       console.info(e);
     };
-    // event listener that executes every  time we get a message from the socket
-    webSocket.current!.onmessage = (e) => {
-      let data = JSON.parse(e.data);
-      // console.log(data);
-      //sets price and 24h percent change
-      dispatch({ 
-        type: "set_price", 
-        price: data.price, 
-        percentageChange: use24HrPercentage(data.open_24h, data.price)
-      });
-    };
-  };
-  
 
+    // event listener that executes every  time we get a message from the socket
+    // make this onmessage event handler point to a throttled function
+    webSocket.current!.onmessage = throttledMessageHandler;
+  };
   return (
     <div>
       <Center>

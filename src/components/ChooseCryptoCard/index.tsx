@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext, BaseSyntheticEvent} from 'react'
 import { VStack, Heading, Text, Box, useColorMode, SkeletonCircle  } from '@chakra-ui/react';
 import {PageContext } from '../CryptoContext';
 import {useRemoveElementFromArray} from '../helpers/useRemoveElementFromArray';
-import { CryptoNames } from '../helpers/buildCryptoCard';
+import { CryptoNames } from '../../types';
 import Image from 'next/image';
 import getCryptoIcon from '../helpers/getCryptoIcon';
 import { CryptoCardPropType } from '../../types';

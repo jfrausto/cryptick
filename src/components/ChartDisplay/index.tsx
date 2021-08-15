@@ -23,7 +23,7 @@ const ChartDisplay = () => {
       if (results.length===0){
         return;
       }
-      console.table(results);
+      // console.table(results);
       for (const bucket of results){
         // bucket[0] contains x-axis Time data in Number ISO 8601 format
         // take the average of the high and low of that time interval to get y-axis: price
