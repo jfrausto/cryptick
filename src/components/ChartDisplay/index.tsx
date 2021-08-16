@@ -5,9 +5,9 @@ import { CryptoContext, DispatchContext } from '../CryptoContext';
 import { SET_GRAN } from '../helpers/reducer/actions';
 import { CandleStickData } from '../../types';
 import { timeIntervalArray } from './time';
-import { bgColor, candleColorPos, candleColorNeg, wickColor } from './colors';
+import { bgColor, candleColorPos, candleColorNeg, axisLabelColor } from './colors';
 
-const ChartDisplay = () => {
+const ChartDisplay: React.FC = () => {
 
   const { context } = useContext(CryptoContext);
   const { dispatch } = useContext(DispatchContext);
@@ -37,8 +37,7 @@ const ChartDisplay = () => {
       }
       // remember to reverse!
       // removing 90% of retrieved data so candle stick chart looks good
-      let removedExtractedInfo = extractedInfo.reverse().splice(0, Math.round(extractedInfo.length*9/10));
-      // update state of our line chart data
+      extractedInfo.reverse().splice(0, Math.round(extractedInfo.length*9/10));
       setCandleData(extractedInfo);
     }
     // execute
@@ -74,11 +73,15 @@ const ChartDisplay = () => {
             animate={{ duration: 200 }}
           >
             <VictoryCandlestick
-              candleColors={{ positive: candleColorPos[colorMode], negative: candleColorNeg[colorMode]}}
+              candleColors={{ 
+                positive: candleColorPos[colorMode], 
+                negative: candleColorNeg[colorMode]
+              }}
               data={candleData}
               style={{ 
                 data: {
-                  stroke: wickColor[colorMode]
+                  stroke: ({datum}) => (datum.close > datum.open ? 
+                    candleColorPos[colorMode] : candleColorNeg[colorMode])
                 }
               }}
             />
@@ -94,7 +97,7 @@ const ChartDisplay = () => {
                   strokeWidth: 1
                 },
                 axis: {
-                  stroke: wickColor[colorMode],
+                  stroke: axisLabelColor[colorMode],
                   strokeWidth: 2
                 } 
               }}

@@ -5,14 +5,14 @@ export const bgColor = {
 
 export const candleColorPos = {
   light: "#276749",
-  dark: "#276749",
+  dark: "#49fc03",
 }
 export const candleColorNeg = {
   light: "#9B2C2C",
   dark: "#E53E3E",
 }
 
-export const wickColor = {
+export const axisLabelColor = {
   light: "black",
   dark: "#e6e6e6"
 }
