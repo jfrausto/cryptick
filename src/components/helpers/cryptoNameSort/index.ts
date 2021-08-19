@@ -1,4 +1,6 @@
-export const compareCryptoNames = (a:any, b:any) => {
+import { CryptoNames } from "../../../types";
+
+export const compareCryptoNames = (a:CryptoNames, b:CryptoNames) => {
   if(a.tickerName < b.tickerName){
     return -1;
   }

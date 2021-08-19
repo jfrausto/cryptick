@@ -3,7 +3,7 @@ import { EditIcon } from '@chakra-ui/icons';
 import { IconButton } from '@chakra-ui/react';
 import { useRouter } from "next/router";
 
-const EditButton = () => {
+const EditButton: React.FC = () => {
   const router = useRouter();
   return (
     <>

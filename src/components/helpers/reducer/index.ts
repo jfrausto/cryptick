@@ -1,4 +1,4 @@
-import { CryptoContextType } from '../../CryptoContext';
+import { CryptoContextType, CryptoAction } from '../../../types';
 import {
   SET_ALL_CHOSEN_PAIRS,
   SET_CURRENT_PAIR,
@@ -7,7 +7,6 @@ import {
   SWIPE_THRU,
   ON_DRAG,
   CLEAN_UP,
-  CryptoAction,
   SET_GRAN
  } from './actions';
 

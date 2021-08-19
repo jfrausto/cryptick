@@ -1,4 +1,4 @@
-import { CryptoNames } from "../buildCryptoCard";
+import { CryptoNames } from "../../../types";
 
 export const useRemoveElementFromArray = ( elem: CryptoNames, arr: CryptoNames[]) : CryptoNames[] => {
   console.table(elem);

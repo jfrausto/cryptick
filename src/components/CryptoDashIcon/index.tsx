@@ -34,14 +34,10 @@ const CryptoDashIcon: React.FC = () => {
       <motion.div 
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 5 }}
-        // height="100px" 
-        // width="100px"
       > 
         <Center>
           <Image 
             src={cryptoIcon}
-            // blurDataURL={Img}
-            // placeholder="blur"
             width="100px"
             height="100px"
           />

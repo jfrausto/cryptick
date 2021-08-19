@@ -1,4 +1,7 @@
 export const variants = {
+  // three animations for draggable div
+  // entering, centered position, exiting after passing swipe threshold
+  // direction param is able to be accessed by CUSTOM prop on motion component
   enter: (direction: number) => {
     return {
       x: direction > 0 ? 500 : -500,

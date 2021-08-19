@@ -33,6 +33,7 @@ const ChooseCryptoCard: React.FC<CryptoCardPropType> = ( {tickerName, fullName, 
 
     // onclick of crypto card
     const handleAddCrypto = (e: BaseSyntheticEvent) => {
+      e.preventDefault();
       setSelected((priorClick) => !priorClick );
       const chosenPair:CryptoNames = {
         tickerName: tickerName,

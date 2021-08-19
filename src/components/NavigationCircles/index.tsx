@@ -3,7 +3,7 @@ import { Box, Skeleton, HStack } from '@chakra-ui/react';
 import { PageContext, CryptoContext } from '../CryptoContext';
 import SwipeIndexCircle from '../SwipeIndexCircle';
 
-const NavigationCircles = () => {
+const NavigationCircles: React.FC = () => {
 
   const { context } = useContext(CryptoContext);
   const { pageContext } = useContext(PageContext);

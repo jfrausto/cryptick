@@ -18,7 +18,10 @@ const Display24Hr:React.FC = () => {
     <>
       {
         context.price !== 0.00 && !context.isSwiping ? 
-          <Stat as={Center}>
+          <Stat 
+            as={Center}
+            fontFamily="monospace"
+          >
             <StatHelpText
             fontWeight="bold"
               color={context.dayChangePercentage >= 0 ? 

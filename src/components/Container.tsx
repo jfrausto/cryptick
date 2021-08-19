@@ -1,11 +1,10 @@
 import React, {useState, useMemo} from 'react';
 import { Flex, useColorMode, FlexProps, VStack} from '@chakra-ui/react';
-
 import { PageContext, startPage } from './CryptoContext';
 import DarkModeSwitch from './DarkModeSwitch';
 import EditButton from './EditButton';
 
-const Container = (props: FlexProps) => {
+const Container: React.FC = (props: FlexProps) => {
   const { colorMode } = useColorMode();
   const [pageContext, setPageContext] = useState(startPage);
   // const providerValue = useMemo(() => ({ context, dispatch}), [context, dispatch])
