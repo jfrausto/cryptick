@@ -18,9 +18,7 @@ _\*You cannot buy or trade cryptos with this application. Prices are in USD. Lis
 
 ## Demo
 
-![CrypTick Dashboard](/screenshots/cryptick_demo_1.PNG?raw=true "CrypTick Dashboard")
-
-<!-- ![Vibee Homepage](./client/public/assets/images/README/Vibee1.PNG) -->
+![CrypTick Dashboard](/screenshots/cryptick_demo_2.PNG?raw=true "CrypTick Dashboard")
 
 ## Installation-&-Resources
 
