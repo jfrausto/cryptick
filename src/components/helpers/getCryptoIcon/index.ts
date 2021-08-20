@@ -62,7 +62,6 @@ import GENERIC from 'cryptocurrency-icons/32/color/generic.png';
 const getCryptoIcon = (tickerName: string) => {
   // let icon;
   try{
-    console.log(`inside the TRY just before ICONS switch statement:  (${tickerName})`);
     switch (tickerName) {
       case "ada":
         return ADA;
@@ -213,7 +212,6 @@ const getCryptoIcon = (tickerName: string) => {
         break;
     }
   } catch (err) {
-    // console.error("lmao"); 
     return GENERIC;
   }
 };

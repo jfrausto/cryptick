@@ -16,7 +16,6 @@ export const  PriceDisplay:React.FC = () => {
         <SkeletonCircle size="9"/>
         }
       </VStack>
-      {/* onChange? something to change the state..... */}
       <Box fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
         {context.price !== 0.00 && !context.isSwiping ? `${Number(context.price).toLocaleString(undefined, 
           {

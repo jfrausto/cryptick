@@ -4,7 +4,6 @@
 const getCryptoPng = async (tickerName: string) => {
   let icon;
   try{
-    console.log(`inside the TRY just before SWITCH (${tickerName})`)
     switch (tickerName) {
       case "ada":
         icon = (await import(`cryptocurrency-icons/128/color/ada.png`)).default

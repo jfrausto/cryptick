@@ -15,11 +15,9 @@ const TickerDisplay:React.FC = () => {
   const webSocket = useRef<null | WebSocket >(null);
   const priceRef = useRef<number>(0.00);
 
-  // const url = "https://api.pro.coinbase.com";
 
   const messageHandler = (e: { data: string; }) => {
     let data = JSON.parse(e.data);
-    // console.log(data);
     //sets price and 24h percent change
     dispatch({ 
       type: "set_price", 
@@ -38,10 +36,8 @@ const TickerDisplay:React.FC = () => {
   useEffect(() => {
 
       webSocket.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-      console.log("opening Websocket...")
       // when it opens start the stream
-      webSocket.current.onopen = (e) => {
-        console.log("Websocket opened!")
+      webSocket.current.onopen = () => {
         dispatch({type: ON_DRAG, isSwiping: false})
         startStream();
     }
@@ -49,7 +45,6 @@ const TickerDisplay:React.FC = () => {
       // cleanup/close websocket
       webSocket.current!.close();
       throttledMessageHandler.cancel();
-      // ! reset price context here???
       dispatch({ type: CLEAN_UP, price: 0.00});
     }
   }, [context.userCurrentPair]);
@@ -68,7 +63,6 @@ const TickerDisplay:React.FC = () => {
   }, [context.price])
 
   const startStream = () => {
-    // console.log(`starting stream with ${context.userCurrentPair[0]}...`);
     let msg = {
       type: "subscribe",
       product_ids: [context.userCurrentPair[0].tickerName+"-USD"],

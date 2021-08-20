@@ -12,6 +12,5 @@ export const matchCryptoInfo = (arr1: any, arr2: any) => {
       }
     }
   }
-  console.table(cryptoInfo);
   return cryptoInfo;
 }

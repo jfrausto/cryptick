@@ -18,48 +18,17 @@ const ChooseCrypto: React.FC = () => {
   const { pageContext, setPageContext } = useContext(PageContext);
   const router = useRouter();
 
-
-
   useEffect(() => {
     const getApiData = async () => {
       const cryptoProductsList = await fetchCryptoProducts();
-      // ! import all the icons and map add them to the matching crypto object 
-      // for loop
-      // create a new array that 
-      // iterate through the crypto products list;
-      // import the appropriate icon that matches this product
-      // add the icon, along with the ticker name and full name to the new array
-      // set this newly built array as the apiData.
-      // ! then you can pass the props to the crypto card component
-      // const appendIconArray:any  = [];
-      // // using newArray as the appended array makes it into type Promise.
-      // const newArray = cryptoProductsList.map( (tickerInfo) => {
-      //   const icon = getCryptoIcon(tickerInfo.tickerName.toLowerCase());
-      //   console.table({
-      //     tickerName: tickerInfo.tickerName,
-      //     fullName: tickerInfo.fullName,
-      //     iconSrc: icon
-      //   });
-      //   appendIconArray.push({
-      //     tickerName: tickerInfo.tickerName,
-      //     fullName: tickerInfo.fullName,
-      //     iconSrc: icon
-      //   })
-      // });
-      // console.table(appendIconArray);
       setApiData(cryptoProductsList);
     }
-
     getApiData();
-
+    // grab storage and load user saved pairs
     if(localStorage.getItem("savedPairs")){
       const localStore = JSON.parse(localStorage.getItem("savedPairs")!)
-      console.table(localStore);
-
       setPageContext!({ ...pageContext, allUserPairs: localStore });
     }
-
-    //Occurs on mount
   }, []);
 
   const handleDone = (): void => {
@@ -68,19 +37,20 @@ const ChooseCrypto: React.FC = () => {
     router.push("/cryptoDashboard");
   };
 
+  // reset favorites
   const handleReset = (): void => {
-    console.log("reset");
     setPageContext!({ ...pageContext, allUserPairs: [] });
   };
 
+  // preload selected cryptos state
   const hasBeenSelected = (tName: string): boolean => {
-    let result = false;
+    let selected: boolean = false;
     for (const cryptoName of pageContext.allUserPairs){
       if (cryptoName.tickerName === tName){
-        result = true;
+        selected = true;
       }
     }
-    return result;
+    return selected;
   };
 
   // Should fetch the product information from coinbase
@@ -93,23 +63,14 @@ const ChooseCrypto: React.FC = () => {
     return matchCryptoInfo(cryptoUSD, dataCurr);
 
   }
-  //   const checkForUserName = () => {
-  //   const userName = localStorage.getItem("userName");
-
-  //   return userName;
-  // }
 
   return (
     <>
       <VStack
         pb={20}
-        // bg="red"
-        // w="375px"
-        
       >
         <Heading
           size="md"
-          // alignSelf="center"
           pt="13px"
           >
           choose favorites
@@ -120,16 +81,9 @@ const ChooseCrypto: React.FC = () => {
           justifyContent="space-evenly"
           alignItems="center"
           alignContent="space-around"
-          // w="375px"
           w={["375px", "100%", "100%", "100%"]}
           maxW={["375px", "600px", "600px", "600px"]}
-          // maxWidth="375px"
-          // overflowY="auto"
-          // marginX="auto"
-          // py={3}
-          // pt={2}
-          // px={1}
-          >
+        >
           {
             apiData.sort(compareCryptoNames).map( data => (
               hasBeenSelected(data.tickerName) ?
@@ -138,16 +92,12 @@ const ChooseCrypto: React.FC = () => {
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={true}
-                // iconSrc={data.iconSrc}
-
               /> :
               <ChooseCryptoCard
                 key={data.tickerName}
                 tickerName={data.tickerName}
                 fullName={data.fullName}
                 prevSelected={false}
-                // iconSrc={data.iconSrc}
-
               />
             ))
           }

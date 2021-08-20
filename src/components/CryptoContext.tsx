@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-// import { CryptoNames } from './helpers/buildCryptoCard';
 import { 
   CryptoContextType, 
   PageContextType ,
@@ -36,9 +35,5 @@ const startDispatch: DispatchState = {
 
 // this initial context needs to match types with useState/useReducer
 export const CryptoContext = createContext(startContext);
-
 export const DispatchContext = createContext(startDispatch);
-
 export const PageContext = createContext(startPageContext);
-
-// <{context: CryptoContextType | null, setContext: Dispatch<SetStateAction<any>>} | null>(null);
