@@ -1,59 +1,47 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# CrypTick
 
-## Available Scripts
+![GitHub](https://img.shields.io/github/license/JOCECODE/PucMan_Chase?style=plastic)
 
-In the project directory, you can run:
+## Table Of Contents
 
-### `npm start`
+- [Description](#Description)
+- [Demo](#Demo)
+- [Installation & Resources](#Installation-&-Resources)
+- [License](#License)
+- [Questions](#Questions)
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Description
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+A minimalistic web application built using [Next.js](https://nextjs.org/), [Chakra UI](https://github.com/chakra-ui/chakra-ui), and TypeScript. Save and follow your favorite crypto currency's activity in the market like you are looking up the weather. This was built to present a simpler, more de-cluttered interface than most crypto currency apps. Designed for beginners in the crypto currency space and for people that want to quickly get a glance at the market.
 
-### `npm test`
+_\*You cannot buy or trade cryptos with this application. Prices are in USD. Listed cryptos are from [Coinbase's](https://www.coinbase.com/) current listings._
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+## Demo
 
-### `npm run build`
+![CrypTick Dashboard](/screenshots/cryptick_demo_2.PNG?raw=true "CrypTick Dashboard")
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+## Installation-&-Resources
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+Developed using Next.js, a [React](https://reactjs.org/) framework, on the [Node.js](https://nodejs.org/) environment. After you clone this repository you must run `npm install` in `bash` to make sure all the dependencies, such as the crypto icon images, work properly.
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+Some resources used to build this app include:
 
-### `npm run eject`
+- [Coinbase Pro API](https://docs.pro.coinbase.com/)
+  - Current list of their supported crypto currencies
+  - Websocket API to access the real-time price ticker of each crypto
+  - Historical data to display on a chart
+- [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons)
+  - npm package providing icons of varying styles and sizes for almost 500 crypto currencies
+- [Framer Motion](https://www.framer.com/motion/)
+  - open source motion library for React. Allows you to swipe!
+- [Victory](https://formidable.com/open-source/victory/)
+  - React component library for data visualization. Displays price information in customizable ways
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## License
 
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+This project is covered under the **MIT** license -- see more info [here](https://opensource.org/licenses/MIT).
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
+## Questions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- GitHub: [jfrausto](https://github.com/jfrausto)
+- If you have any further questions, you can reach me at _fraustojesse24@gmail.com_
