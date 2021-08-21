@@ -7,8 +7,6 @@ import EditButton from './EditButton';
 const Container: React.FC = (props: FlexProps) => {
   const { colorMode } = useColorMode();
   const [pageContext, setPageContext] = useState(startPage);
-  // const providerValue = useMemo(() => ({ context, dispatch}), [context, dispatch])
-
   const providerValue = useMemo(() => ({ pageContext, setPageContext}), [pageContext, setPageContext])
 
   const bgColor={
@@ -19,18 +17,20 @@ const Container: React.FC = (props: FlexProps) => {
     light: 'black', 
     dark: 'white' 
   }
+
   return (
     <Flex
       direction="column"
       alignItems="center"
       justifyContent="flex-start"
+      p={1}
+      height="100vh"
+      overflowY="scroll"
+      overflowX="clip"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
-      {...props}
       >
-      <PageContext.Provider value={providerValue}>
-
-
+        <PageContext.Provider value={providerValue}>
           <VStack
             position="relative"
             w={["375px", "100%", "100%", "100%"]}
@@ -38,14 +38,11 @@ const Container: React.FC = (props: FlexProps) => {
           >
             {/* each page goes here */}
             {props.children}
-
             {/* absolutely positioned buttons fitted to this VStack */}
             <DarkModeSwitch/>
             <EditButton/>
-
           </VStack>
-
-      </PageContext.Provider>
+        </PageContext.Provider>
       </Flex>
   )
 }

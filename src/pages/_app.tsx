@@ -12,12 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Cryptick</title>
           <meta name="keywords" content="Crypto-Watcher" ></meta>
       </Head>
-            <Container
-              p={1}
-              height="100vh"
-              overflowY="scroll"
-              overflowX="clip"
-            >
+            <Container>
                   <Component {...pageProps} />
             </Container>
     </ChakraProvider>
