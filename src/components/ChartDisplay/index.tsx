@@ -61,7 +61,7 @@ const ChartDisplay: React.FC = () => {
   return (
     <>
         <VStack
-          maxW="375px"
+          maxW={["350px", "350px", "375px", "375px"]}
           bg={bgColor[colorMode]}
           borderRadius="lg"
           boxShadow="lg"
@@ -91,7 +91,7 @@ const ChartDisplay: React.FC = () => {
               offsetX={46}
               style={{ 
                 tickLabels: {
-                  fontSize: 14, 
+                  fontSize: 15, 
                   padding: 3,
                   stroke: "gray",
                   strokeWidth: 1

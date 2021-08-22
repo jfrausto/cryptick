@@ -82,7 +82,7 @@ const ChooseCrypto: React.FC = () => {
           alignItems="center"
           alignContent="space-around"
           w={["375px", "100%", "100%", "100%"]}
-          maxW={["375px", "600px", "600px", "600px"]}
+          maxW={["375px", "600px", "750px", "750px"]}
         >
           {
             apiData.sort(compareCryptoNames).map( data => (

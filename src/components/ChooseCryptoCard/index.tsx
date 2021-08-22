@@ -52,9 +52,9 @@ const ChooseCryptoCard: React.FC<CryptoCardPropType> = ( {tickerName, fullName, 
       <Box
         w="135px"
         height="150px"
-        py={1}
+        py={2}
         px="5px"
-        m={1}
+        m={1.5}
         userSelect="none"
         onClick={(e) => handleAddCrypto(e)}
         borderRadius="xl"

@@ -34,7 +34,7 @@ const Container: React.FC = (props: FlexProps) => {
           <VStack
             position="relative"
             w={["375px", "100%", "100%", "100%"]}
-            maxW={["375px", "600px", "600px", "600px"]}
+            maxW={["375px", "750px", "750px", "750px"]}
           >
             {/* each page goes here */}
             {props.children}
