@@ -15,10 +15,6 @@ const CryptoDashIcon: React.FC = () => {
     const dynamicImport = async () => {
       // send current tickerName to grab the png
       const icon = await getCryptoPng(context.userCurrentPair[0].tickerName.toLowerCase());
-      if (icon === "generic") {
-        setCryptoIcon(Generic);
-        return;
-      }
       setCryptoIcon(icon);
     };
 

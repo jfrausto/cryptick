@@ -222,14 +222,12 @@ const getCryptoPng = async (tickerName: string) => {
         icon = (await import(`cryptocurrency-icons/128/color/zrx.png`)).default
         return icon;
       default:
-        icon = "generic"
-        break;
+        icon = (await import(`cryptocurrency-icons/128/color/generic.png`)).default
+        return icon;
     }
   } catch (err) {
-    console.error("lmao"); 
     return "generic";
   }
-  console.log("falling back..........")
 };
 
 export default getCryptoPng;
