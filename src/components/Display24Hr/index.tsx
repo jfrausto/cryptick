@@ -5,7 +5,6 @@ import {
   StatArrow,
   useColorMode,
   Center,
-  Skeleton,
 } from '@chakra-ui/react';
 import NumberScrollAnimate from '../NumberScrollAnimate';
 import { CryptoContext } from '../CryptoContext';
