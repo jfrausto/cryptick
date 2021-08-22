@@ -10,7 +10,9 @@ export const  PriceDisplay:React.FC = () => {
   
   return (
     <>
-      <VStack>
+      <VStack
+      spacing={1}
+      >
         <PriceArrows/>
       </VStack>
       <Box fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >

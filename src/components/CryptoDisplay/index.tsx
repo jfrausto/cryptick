@@ -69,7 +69,7 @@ const CryptoDisplay: React.FC = () => {
         >
           <VStack 
             mt="5vh"
-            spacing={2}
+            spacing={3}
             _hover={{ 
               cursor: "grab"
             }}

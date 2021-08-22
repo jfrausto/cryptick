@@ -19,27 +19,27 @@ const PriceArrows:React.FC = () => {
               y: 3,
               color: useColorModeValue("rgb(0,0,0)", "rgb(255,255,255)")
             }}
-            to={{  }}
             transition={{ 
-              from: 0,
+              from: -1,
               color: "rgb(0,180,0)",
               ease: "easeOut",
               type: "tween",
               duration: 0.9,
               }}
-          /> : <TriangleUpIcon mt="2px"/> }
+          /> : <TriangleUpIcon mt="5px"/> }
         {context.isGoingUp?
-          <TriangleDownIcon mb="2px"/> : 
+          <TriangleDownIcon /> : 
           <MotionTriangleDown
             color="rgb(180,0,0)"
             animate={{ 
-              y: 0,
+              y: -2,
               color: useColorModeValue("rgb(0,0,0)", "rgb(255,255,255)")
             }}
             transition={{ 
-              from: 3,
+              from: 4,
               color: "rgb(180,0,0)",
               ease: "easeOut",
+              type: "tween",
               duration: 0.9
             }}
           />

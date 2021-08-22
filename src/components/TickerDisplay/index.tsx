@@ -1,6 +1,6 @@
   
 import React, {useContext, useRef, useEffect, useMemo} from 'react';
-import { Center} from '@chakra-ui/react';
+import { Center, Box} from '@chakra-ui/react';
 import { PriceDisplay } from '../PriceDisplay';
 import { CryptoContext, DispatchContext } from '../CryptoContext';
 import Display24Hr from '../Display24Hr';
@@ -81,14 +81,16 @@ const TickerDisplay:React.FC = () => {
     webSocket.current!.onmessage = throttledMessageHandler;
   };
   return (
-    <div>
+    <Box
+      p={1}
+    >
       <Center>
         <PriceDisplay />
       </Center>
       <Center>
         <Display24Hr/>
       </Center>
-    </div>
+    </Box>
   )
 }
 
