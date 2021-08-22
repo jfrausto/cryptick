@@ -22,7 +22,7 @@ export const  PriceDisplay:React.FC = () => {
             maximumFractionDigits: 3
           }
           )}` : 
-          <span>$<NumberScrollAnimate from={0} to={1000} /></span>
+          <span>$<NumberScrollAnimate from={0} to={9999} /></span>
           }
       </Box>
     </>

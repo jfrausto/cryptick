@@ -8,7 +8,7 @@ const NumberScrollAnimate: React.FC<NumberScrollAnimateProps> = ({ from, to }) =
 
   useEffect(() => {
     const controls = animate(from, to, {
-      duration: 1,
+      duration: 1.4,
       onUpdate(value) {
         if(ref && ref.current) {
           ref.current.textContent = value.toFixed(1);
