@@ -40,6 +40,7 @@ const CryptoDashIcon: React.FC = () => {
             src={cryptoIcon}
             width="100px"
             height="100px"
+            draggable={false}
           />
         </Center>
       </motion.div>

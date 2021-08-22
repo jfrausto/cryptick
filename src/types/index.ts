@@ -56,6 +56,11 @@ export interface DoneCardProps {
   handleReset: () => void
 };
 
+export interface NumberScrollAnimateProps {
+  from: number,
+  to: number
+}
+
 export interface PageContextType {
   allUserPairs: CryptoNames[],
 };

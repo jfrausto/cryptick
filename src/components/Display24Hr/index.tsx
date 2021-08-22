@@ -7,6 +7,7 @@ import {
   Center,
   Skeleton,
 } from '@chakra-ui/react';
+import NumberScrollAnimate from '../NumberScrollAnimate';
 import { CryptoContext } from '../CryptoContext';
 import { statTextGreen, statTextRed, statArrowGreen, statArrowRed } from './colors';
 
@@ -40,13 +41,28 @@ const Display24Hr:React.FC = () => {
                 `+${context.dayChangePercentage}% 24h` : 
                 `${context.dayChangePercentage}% 24h`}
             </StatHelpText>
-          </Stat> : <Skeleton 
-              minWidth="173px" 
-              height="36px" 
-              borderRadius="2xl"
-              // startColor="red.500" 
-              // endColor="green.500" 
+          </Stat> : 
+          <Stat 
+            as={Center}
+            fontFamily="monospace"
+          >
+            <StatHelpText
+              fontWeight="bold"
+              color={context.dayChangePercentage >= 0 ? 
+                statTextGreen[colorMode] : 
+                statTextRed[colorMode]}
+            >
+              <StatArrow 
+                color={context.dayChangePercentage >= 0 ? 
+                  statArrowGreen[colorMode] : 
+                  statArrowRed[colorMode]}
+                type={context.dayChangePercentage >= 0 ? 
+                "increase" : 
+                "decrease"}
               />
+              <span>&#177;</span><NumberScrollAnimate from={0} to={100} />% 24h
+            </StatHelpText>
+          </Stat>
       }
     </>
   )

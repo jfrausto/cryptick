@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { VStack, Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import { CryptoContext } from '../CryptoContext';
 import PriceArrows from '../PriceArrows';
+import NumberScrollAnimate from '../NumberScrollAnimate';
 
 export const  PriceDisplay:React.FC = () => {
   
@@ -10,11 +11,7 @@ export const  PriceDisplay:React.FC = () => {
   return (
     <>
       <VStack>
-        {
-        context.price !== 0.00 && !context.isSwiping ? 
-        <PriceArrows/> :
-        <SkeletonCircle size="9"/>
-        }
+        <PriceArrows/>
       </VStack>
       <Box fontFamily="monospace" pt={1} fontSize="3xl" ml="0.33rem" >
         {context.price !== 0.00 && !context.isSwiping ? `${Number(context.price).toLocaleString(undefined, 
@@ -24,7 +21,9 @@ export const  PriceDisplay:React.FC = () => {
             minimumFractionDigits: 3,
             maximumFractionDigits: 3
           }
-          )}` : <Skeleton minW="230px" height="54px" mb="10px" borderRadius="2xl" />}
+          )}` : 
+          <span>$<NumberScrollAnimate from={0} to={1000} /></span>
+          }
       </Box>
     </>
   )
