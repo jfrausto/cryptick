@@ -36,7 +36,7 @@ const PriceArrows:React.FC = () => {
               color: useColorModeValue("rgb(0,0,0)", "rgb(255,255,255)")
             }}
             transition={{ 
-              from: 4,
+              from: 2,
               color: "rgb(180,0,0)",
               ease: "easeOut",
               type: "tween",
